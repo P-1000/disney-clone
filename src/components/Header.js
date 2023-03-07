@@ -42,17 +42,24 @@ function Header() {
 export default Header
 
 const Nav = styled.nav`
-    height: 70px;
-    background: #090b13;
-    display : flex;
-    align-items: center;
-    padding : 0 34px;
-    `;
+  height: 70px;
+  width: 96%;
+  background-color: #090b13;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 36px;
+  letter-spacing: 16px;
+  z-index: 3;
+  overflow:hidden;
+
+  `
  const Logo = styled.img`
         width: 80px;
  `;
 
  const NavMenu = styled.div`
+
     display : flex;
     flex : 1;
     margin-left :  25px;
