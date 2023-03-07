@@ -43,7 +43,7 @@ export default Header
 
 const Nav = styled.nav`
   height: 70px;
-  width: 96%;
+  width: 100%;
   background-color: #090b13;
   display: flex;
   justify-content: space-between;
