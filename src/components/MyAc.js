@@ -13,6 +13,8 @@ function MyAc() {
     const dispatch = useDispatch()
     const userName = useSelector(selectUserName);   
     const userPhoto = useSelector(selectUserPhoto);
+    const history = useHistory();
+
   return (
     <>
           <Center h="100vh" >
