@@ -20,12 +20,18 @@ function Movie_Details() {
                 <span>TRAILER</span>
             </TrailerButton>
             <AddButton>
-
+                    <span>+</span>
             </AddButton>
             <GroupWatchButton>
-                 
+                <img src='./images/group-icon.png' />
             </GroupWatchButton>
         </Controls>
+        <SubTitle>
+            2018 * 7m * Family, Fantasy, Kids, Animation
+        </SubTitle>
+        <Description>
+        Marvel Studios’ “The Falcon and The Winter Soldier” stars Anthony Mackie as Sam Wilson aka The Falcon, and Sebastian Stan as Bucky Barnes aka The Winter Soldier. The pair, who came together in the final moments of “Avengers: Endgame,” team up on a global adventure that tests their abilities—and their patience.
+        </Description>
     </Container>
   )
 }
@@ -70,6 +76,8 @@ const TitleImage = styled.div`
 
 const Controls = styled.div `
         display:flex;
+        align-items:center;
+
 `
 
 const PlayButton = styled.button`
@@ -79,26 +87,62 @@ const PlayButton = styled.button`
         margin-right:22px;
         display:flex;
         align-items:center;
-        height:5 6px;
-        background:rbg(249,249,249);
+        height:56px;
+        background:rgb(249,249,249);
         border:none;
         letter-spacing:1.8px;
-        cursor :pointer;
+        pointer:cursor;
         
         &:hover{
-            background: rbg(198,198,198);
+            background:rgb(198,198,198);
         }
 
 `
 
-const TrailerButton = styled.button`
-
-`
-
-const GroupWatchButton = styled.button`
-
+const TrailerButton = styled(PlayButton)`
+    border:1px solid rbg(249,249,249);
+    background:rgba(0,0,0,0.3);
+    color:rgb(249,249,249);
+    text-transform:uppercase;
 `
 
 const AddButton = styled.button`
+        margin-right:16px;
+        width:44px;
+        height:44px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:50%;
+        border:2px solid white;
+        background-color:rgba(0,0,0,0.6);
+        cursor:pointer;
+        margin-right:16px;
+        span{
+            font-size:30px;
+            color:white;
+        }
+        
+`
 
+const GroupWatchButton = styled(AddButton)`
+        background:rgb(0,0,0);
+
+`
+
+const SubTitle = styled.div`
+        margin-top:26px;
+        color:rgb(249,249,249);
+        font-size:15px;
+        min-height:20px;
+        
+
+`
+
+const Description = styled.div`
+        line-height:1.4;
+        font-size:20px;
+        margin-top:16px;
+        color:rgb(249,249,249);
+        
 `
