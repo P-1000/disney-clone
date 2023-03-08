@@ -3,8 +3,24 @@ import styled from 'styled-components'
 import ImgSlider from './HeroSlider';
 import Movies from './Movies';
 import Viewer from './Viewer';
+import { useEffect } from 'react';
+import db from '../features/firebase';
+import { useDispatch } from 'react-redux';
+import { setMovies } from '../features/movie/movieSlice';
 
 function Home() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      db.collection('movies').onSnapshot((snapshot)=>{
+        let tempMovies = snapshot.docs.map((doc)=>{
+          return {id: doc.id , ...doc.data()}
+        })
+        dispatch(setMovies(tempMovies));
+      })
+  }
+  ,[])
+
   return (
     <Container>
       <ImgSlider/> 
