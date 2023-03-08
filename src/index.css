@@ -35,6 +35,21 @@ a{
   }
 }
 
+.cont{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  place-content: center;
+  place-items: center;
+}
 
 
-
+.cards11{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 20px;
+  align-items: center;
+}
