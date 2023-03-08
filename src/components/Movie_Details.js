@@ -1,14 +1,38 @@
-import React from 'react'
+import React , {useEffect , useState} from 'react'
 import styled from 'styled-components'
+import { useParams } from 'react-router-dom'
+import db from '../features/firebase'
+import movieSlice from '../features/movie/movieSlice';
 
-function Movie_Details() {
+function Movie_Details(props) {
+    const {id} = useParams();
+    const [Movie, setMovie] = useState({});
+        console.log(id);
+
+   
+    useEffect(() => {
+
+        db.collection('movies').doc(id).get().then((doc)=>{
+            if(doc.exists){
+                setMovie(doc.data());
+            }
+            else{
+                console.log("no such document in firebase");
+            }
+        })
+
+    },[id])
+
+    console.log("movie is " ,Movie );
+
+
   return (
     <Container>
         <Background>
-         <img src='https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/456A711C19899C881600F6247705E5253EB18C2471D75E5281E1FF6ACB6D2FBA/scale?width=1440&aspectRatio=1.78&format=jpeg ' />
+         <img src={Movie.backgroundImg} />
         </Background>
         <TitleImage>
-            <img src='https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4A67A42FB16607DAE7E22266D3F00181965178ED1884047C2D982EE7D89D3554/scale?width=1440&aspectRatio=1.78' />
+            <img src={Movie.titleImg} />
         </TitleImage>
         <Controls>
             <PlayButton>
@@ -23,14 +47,14 @@ function Movie_Details() {
                     <span>+</span>
             </AddButton>
             <GroupWatchButton>
-                <img src='./images/group-icon.png' />
+                <img src='https://disney-clone-woad.vercel.app/images/images/group-icon.png' />
             </GroupWatchButton>
         </Controls>
         <SubTitle>
-            2018 * 7m * Family, Fantasy, Kids, Animation
+            {Movie.subTitle}
         </SubTitle>
         <Description>
-        Marvel Studios’ “The Falcon and The Winter Soldier” stars Anthony Mackie as Sam Wilson aka The Falcon, and Sebastian Stan as Bucky Barnes aka The Winter Soldier. The pair, who came together in the final moments of “Avengers: Endgame,” team up on a global adventure that tests their abilities—and their patience.
+            {Movie.description}
         </Description>
     </Container>
   )

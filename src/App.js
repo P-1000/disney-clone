@@ -1,7 +1,8 @@
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Link
 } from "react-router-dom";
 import React from 'react';
 import { Counter } from './features/counter/Counter';
@@ -11,6 +12,7 @@ import Home from './components/Home';
 import Movie_Details from "./components/Movie_Details";
 import HeroSlider from './components/HeroSlider';
 import Login from './components/Login';
+import MyAc from "./components/MyAc";
 
 function App() {
   return (
@@ -19,12 +21,15 @@ function App() {
         <Router>
         <Header/>
         <Switch>
-          <Route path="/movie_details">
+          <Route path="/movie_details/:id">
                    <Movie_Details />
           </Route>
           <Route path="/login">
                     <Login />
           </Route>
+          <Route path="/profile" > 
+                    <MyAc />
+         </Route>
           <Route path="/" > 
                     <Home/>
          </Route>
