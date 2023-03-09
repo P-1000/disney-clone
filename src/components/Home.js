@@ -33,7 +33,9 @@ function Home() {
     console.log("movie data", mov1)
     };
     const movData = fetchData();
-       red(setApi(movData));
+       red(setApi({
+          results : movData,
+       }));
   },[])
 
     console.log("use" ,movies)
