@@ -5,11 +5,16 @@ import Movies from './Movies';
 import Viewer from './Viewer';
 import { useEffect } from 'react';
 import db from '../features/firebase';
-import { useDispatch } from 'react-redux';
 import { setMovies } from '../features/movie/movieSlice';
+import { selectResults } from '../features/apiSlice/apiSlice';
+import { setApi } from '../features/apiSlice/apiSlice';
+import { useDispatch, useSelector } from 'react-redux' 
+
 
 function Home() {
+  const movies = useSelector(selectResults);
   const dispatch = useDispatch();
+  const red = useDispatch();
 
   useEffect(() => {
       db.collection('movies').onSnapshot((snapshot)=>{
@@ -21,6 +26,17 @@ function Home() {
   }
   ,[])
 
+  useEffect(()=>{
+    async function fetchData(){
+      let mov = await fetch('https://api.themoviedb.org/3/trending/all/day?api_key=21958744bdcd83994642863edf06f583');
+    let mov1 = await mov.json();
+    console.log("movie data", mov1)
+    };
+    const movData = fetchData();
+       red(setApi(movData));
+  },[])
+
+    console.log("use" ,movies)
   return (
     <Container>
       <ImgSlider/> 
