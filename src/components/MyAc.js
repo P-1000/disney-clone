@@ -14,22 +14,35 @@ function MyAc() {
     const userName = useSelector(selectUserName);   
     const userPhoto = useSelector(selectUserPhoto);
     const history = useHistory();
+    const breakpoints = {
+      sm: '30em',
+      md: '48em',
+      lg: '62em',
+      xl: '80em',
+      '2xl': '96em',
+    }
 
   return (
+
+
     <>
           <Center h="100vh" >
-          <Container>
+          <Container   height={{
+      base: '100%', // 0-48em
+      md: '50%', // 48em-80em,
+      xl: '25%', // 80em+
+    }}>
           <Center>
           <Box>
-            <Image src={userPhoto}  alt="Avatar" borderRadius="50%" boxSize="120px" />
+            <Image src={userPhoto} ml="36px"  alt="Avatar" borderRadius="50%" boxSize="120px" />
             <Center>
             <Text fontSize="1.4em" textTransform="uppercase"  fontWeight="bold">{userName}</Text>
             </Center>
           </Box>
           </Center>
-        <Box className='cont'>
-          <Box  className='cards112' d="flex "  rowGap="5" alignItems="center" background="#192133" p="10px 10px 12px 12px" maxW="520px" mb="12px" w="980px">
-        <Box>
+        <Box className='cont' >
+          <Box  className='cards112' d="flex "  rowGap="5" alignItems="center" background="#192133" p="10px 10px 12px 12px" w="340px"  maxW="540px" mb="12px">
+        <Box  wwidth={[1, 1 / 2, 1 / 4]}>
           <Text fontSize="xl" fontWeight="semibold" >
           Get more with Disney+ Hotstar Premium
           <span d="block">Only ₹399/year</span>
@@ -50,13 +63,13 @@ function MyAc() {
 
       
       <Box p="12" >
-        <Box  className='cards11' d="flex "  rowGap="5" alignItems="center" background="#192133" p="10px 10px 12px 12px" maxW="520px" mb="12px" w="980px">
+        <Box  className='cards11' d="flex "  rowGap="5" alignItems="center" background="#192133" p="10px 10px 12px 12px" maxW="340px" mb="12px" w="980px">
           <Text fontSize="xl" fontWeight="semibold" >
           View Transactions
           </Text>
           <img src="https://img.icons8.com/sf-ultralight-filled/25/000000/chevron-right.png"/>    
         </Box>
-                     <Box  className='cards11' d="flex "  rowGap="5" alignItems="center" background="#192133" p="10px 10px 12px 12px" maxW="520px" mb="12px" w="980px">
+                     <Box  className='cards11' d="flex "  rowGap="5" alignItems="center" background="#192133" p="10px 10px 12px 12px" maxW="340px" mb="12px" w="980px">
         <Text fontSize="xl" fontWeight="semibold" color="teal.600">       
                  Account Settings 
           </Text>
@@ -69,7 +82,7 @@ function MyAc() {
             history.push('/login')
         })
        }}
-          className='cards11' d="flex "  rowGap="5" alignItems="center" background="#192133" p="10px 10px 12px 12px" maxW="520px" mb="12px" w="980px">
+          className='cards11' d="flex "  rowGap="5" alignItems="center" background="#192133" p="10px 10px 12px 12px" maxW="340px" mb="12px" w="980px">
         <Text fontSize="xl" fontWeight="semibold" color="teal.600">
                 Log Out   
          </Text>

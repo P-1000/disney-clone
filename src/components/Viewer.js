@@ -16,9 +16,11 @@ function Viewer() {
       <Warp>
             <img src='./images/viewers-starwars.png'/>
       </Warp>
+      <Sprd>
       <Warp>
             <img src='./images/viewers-national.png'/>
       </Warp>
+      </Sprd>
     </Container>
   )
 }
@@ -31,7 +33,22 @@ const Container = styled.div`
     grid-template-columns: repeat(5,minmax(0,1fr));
     gap:25px;
     padding:30px 0 26px;
+    @media only screen and (max-width: 479px){
+  grid-template-columns: repeat(1,minmax(0,1fr));
+
+  
+}
+
+@media only screen and (min-width: 480px) and (max-width: 768px){
+      grid-template-columns: repeat(2,minmax(0,2fr));
+}
 `
+const Sprd = styled.div`
+       @media only screen and (min-width: 480px) and (max-width: 768px){
+     grid-column:span 2;
+}
+`
+
 const Warp = styled.div`
     border:3px solid rgba(249,249,249,0.1);
     border-radius:10px;

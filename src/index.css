@@ -33,6 +33,7 @@ a{
   body{
     font-size: 14px;
   }
+
 }
 
 .cont{
@@ -41,15 +42,23 @@ a{
   align-items: center;
   place-content: center;
   place-items: center;
+  max-width: 340px;
+
 }
 
+@media only screen and (max-width: 479px){
+  cont{
+    max-width: 80px;
+  }
+
+}
 
 .cards11{
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 369px;
   padding: 0 20px;
   align-items: center;
 }

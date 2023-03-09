@@ -36,6 +36,15 @@ const Content = styled.div`
         display:grid;
         gap:25px;
         grid-template-columns: repeat(4, minmax(0px, 1fr));
+
+        @media only screen and (max-width: 479px){
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  
+}
+
+@media only screen and (min-width: 480px) and (max-width: 768px){
+      grid-template-columns: repeat(3,minmax(0,2fr));
+}
 `
  const Wrap = styled.div`
         border-radius:10px;

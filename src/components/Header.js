@@ -66,7 +66,9 @@ function Header() {
         </Login> ) : 
         <>
         <NavMenu>
-            <a>
+            <a onClick={()=>{
+                 history.push('/')
+            }}>
                 <img src = './images/home-icon.svg'/>
                 <span>HOME</span>
             </a>
@@ -148,8 +150,7 @@ const child = {
 const parent1 = {
     backgroundColor: "#090b13",
     color: "white",
-    backgroundColor: "Transparent",
-    backgroundRepeat:"no-repeat",
+        backgroundRepeat:"no-repeat",
     border: "none"
 };
 
@@ -176,6 +177,32 @@ const Nav = styled.nav`
     flex : 1;
     margin-left :  25px;
     align-items : center;
+    {/* small screen : */}
+    @media only screen and (max-width: 479px){
+  a{
+    display:none;
+  }
+  img{
+    display:none;
+  }
+  span{
+    display:none;
+  }
+}
+    {/* md screen :  */}
+
+    @media only screen and (min-width: 480px) and (max-width: 768px){
+        a{
+    display:none;
+  }
+  img{
+    display:none;
+  }
+  span{
+    display:none;
+  }
+}
+
     a{
         display:flex;
         align-items : center;
