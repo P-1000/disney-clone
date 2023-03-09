@@ -9,6 +9,7 @@ import { setMovies } from '../features/movie/movieSlice';
 import { selectResults } from '../features/apiSlice/apiSlice';
 import { setApi } from '../features/apiSlice/apiSlice';
 import { useDispatch, useSelector } from 'react-redux' 
+import Upcoming_Movies from './Upcoming_Movies';
 
 
 function Home() {
@@ -16,34 +17,27 @@ function Home() {
   const dispatch = useDispatch();
   const red = useDispatch();
 
-  useEffect(() => {
-      db.collection('movies').onSnapshot((snapshot)=>{
-        let tempMovies = snapshot.docs.map((doc)=>{
-          return {id: doc.id , ...doc.data()}
-        })
-        dispatch(setMovies(tempMovies));
-      })
-  }
-  ,[])
+ 
 
   useEffect(()=>{
     async function fetchData(){
       let mov = await fetch('https://api.themoviedb.org/3/trending/all/day?api_key=21958744bdcd83994642863edf06f583');
     let mov1 = await mov.json();
     console.log("movie data", mov1)
+    red(setApi({
+      results : mov1.results,
+   }));
     };
     const movData = fetchData();
-       red(setApi({
-          results : movData,
-       }));
+      
   },[])
 
-    console.log("use" ,movies)
   return (
     <Container>
       <ImgSlider/> 
       <Viewer/>
       <Movies/>
+      <Upcoming_Movies/>
     </Container>
   )
 }

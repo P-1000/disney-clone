@@ -21,7 +21,7 @@ function App() {
         <Router>
         <Header/>
         <Switch>
-          <Route path="/movie_details/:id">
+          <Route path="/movie_details/:id/:media_type">
                    <Movie_Details />
           </Route>
           <Route path="/login">

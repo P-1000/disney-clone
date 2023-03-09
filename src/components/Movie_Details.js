@@ -1,38 +1,68 @@
-import React , {useEffect , useState} from 'react'
+import React , {useEffect , useState , Component} from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import db from '../features/firebase'
 import movieSlice from '../features/movie/movieSlice';
+import { selectResults } from '../features/apiSlice/apiSlice';
+import { useSelector } from "react-redux";
+import { setApi } from '../features/apiSlice/apiSlice';
+import axios from 'axios';
+
 
 function Movie_Details(props) {
-    const {id} = useParams();
+    const Back_Url = "https://image.tmdb.org/t/p/original";
+    const {id , media_type } = useParams();
     const [Movie, setMovie] = useState({});
-        console.log(id);
+    const tmdb_detail = useSelector(selectResults);
+    console.log(props.key)
+    //calling api
+    console.log(media_type)
+    const [data, setData] = useState([]);
 
-   
-    useEffect(() => {
 
-        db.collection('movies').doc(id).get().then((doc)=>{
-            if(doc.exists){
-                setMovie(doc.data());
-            }
-            else{
-                console.log("no such document in firebase");
-            }
-        })
+  useEffect(() => {
+    const fetchData = async () => {
+        if(media_type == 'movie'){
+      const result = await axios(
+        `https://api.themoviedb.org/3/movie/${id}/images?api_key=21958744bdcd83994642863edf06f583`,
+      )
+      setData(result.data.logos[3]);
+        }
+        else{
+            const result = await axios(
+                `https://api.themoviedb.org/3/tv/${id}/images?api_key=21958744bdcd83994642863edf06f583`,
+              );
+              setData(result.data.logos[3]);
+        }
+    };
 
-    },[id])
+    fetchData();
+  }, []);
+const lp = data.file_path;
+const logo_path = Back_Url + lp;
+console.log(logo_path)
+//  console.log(Back_Url +  data.logos[4].file_path)
 
-    console.log("movie is " ,Movie );
 
+     
+
+
+
+   useEffect(()=>{
+    for(let i=0;i<tmdb_detail.length ; i++){
+        if(tmdb_detail[i].id == id){
+            setMovie(tmdb_detail[i])
+        }
+    }
+});
 
   return (
     <Container>
         <Background>
-         <img src={Movie.backgroundImg} />
+         <img src={Back_Url + Movie.backdrop_path }/>
         </Background>
         <TitleImage>
-            <img src={Movie.titleImg} />
+            <img src={logo_path} />
         </TitleImage>
         <Controls>
             <PlayButton>
@@ -54,7 +84,7 @@ function Movie_Details(props) {
             {Movie.subTitle}
         </SubTitle>
         <Description>
-            {Movie.description}
+            {Movie.overview}
         </Description>
     </Container>
   )
@@ -170,4 +200,6 @@ const Description = styled.div`
         margin-top:16px;
         color:rgb(249,249,249);
         max-width:760px;
+        
+
 `

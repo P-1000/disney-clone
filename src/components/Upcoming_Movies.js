@@ -2,12 +2,20 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectResults } from "../features/apiSlice/apiSlice";
+import { selectResults , selectNewResults } from "../features/apiSlice/apiSlice";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { setApi } from '../features/apiSlice/apiSlice';
+import { useDispatch } from 'react-redux' 
 
-const Movies = (props) => {
+
+
+const Upcoming_Movies = (props) => {
+    const {id , media_type } = useParams();
   let settings = {
     infinite: true,
     speed: 900,
@@ -15,9 +23,27 @@ const Movies = (props) => {
     slidesToScroll: 3,
     autoplay: true,
   };
+  const [data, setData] = useState([]);
+  const movies = useSelector(selectNewResults);
+  const dispatch = useDispatch();
+  const red = useDispatch();
 
-  const tmdb = useSelector(selectResults);
-  const poster_url = "https://image.tmdb.org/t/p/original";
+  useEffect(()=>{
+    async function fetchData(){
+      let req = await fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=21958744bdcd83994642863edf06f583');
+    let res = await res.json();
+    console.log("movie data", res)
+    red(setApi({
+      newResults : res.newResults,
+   }));
+    };
+    const movData = fetchData();
+      
+  },[])
+
+  console.log("upcomeing : " + data)
+  const tmdb = useSelector(selectNewResults);
+  const poster_url = "https://api.themoviedb.org/3/movie/upcoming";
   
   return (
     <>
@@ -86,4 +112,4 @@ const Wrap = styled.div`
   }
 `;
 
-export default Movies;
+export default Upcoming_Movies;
