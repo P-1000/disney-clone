@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
    results : "",
    newResults : "",
+   sResults : "",
 }
 
 const apiSlice = createSlice({
@@ -13,6 +14,7 @@ const apiSlice = createSlice({
         setApi : (state , action) =>{
             state.results = action.payload.results;
             state.newResults = action.payload.newResults;
+            state.sResults = action.payload.sResults;
         },
 
     }
@@ -21,4 +23,5 @@ const apiSlice = createSlice({
 export const {setApi} = apiSlice.actions;
 export const selectNewResults = (state) => state.api.newResults;
 export const selectResults = (state) => state.api.results;
+export const selectSearch = (state) => state.api.sResults;
 export default apiSlice.reducer;

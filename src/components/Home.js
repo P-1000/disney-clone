@@ -8,13 +8,16 @@ import db from '../features/firebase';
 import { setMovies } from '../features/movie/movieSlice';
 import { selectResults } from '../features/apiSlice/apiSlice';
 import { setApi } from '../features/apiSlice/apiSlice';
+import { selectSearch } from '../features/apiSlice/apiSlice';
 import { useDispatch, useSelector } from 'react-redux' 
 import Upcoming_Movies from './Upcoming_Movies';
 import UpMovies from './Upcoming_Movies';
 
 
+
 function Home() {
   const movies = useSelector(selectResults);
+
   const dispatch = useDispatch();
   const red = useDispatch();
 

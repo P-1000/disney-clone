@@ -13,6 +13,7 @@ import Movie_Details from "./components/Movie_Details";
 import HeroSlider from './components/HeroSlider';
 import Login from './components/Login';
 import MyAc from "./components/MyAc";
+import SearchResults from "./components/SearchResults";
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/profile" > 
                     <MyAc />
+         </Route>
+         <Route path="/search/:query">
+              <SearchResults/>
          </Route>
           <Route path="/" > 
                     <Home/>

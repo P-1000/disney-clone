@@ -7,6 +7,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
+
+
+
 const Movies = (props) => {
   let settings = {
     infinite: true,
@@ -18,6 +21,7 @@ const Movies = (props) => {
 
   const tmdb = useSelector(selectResults);
   const poster_url = "https://image.tmdb.org/t/p/original";
+
   
   return (
     <>
