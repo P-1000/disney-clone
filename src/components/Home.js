@@ -10,6 +10,7 @@ import { selectResults } from '../features/apiSlice/apiSlice';
 import { setApi } from '../features/apiSlice/apiSlice';
 import { useDispatch, useSelector } from 'react-redux' 
 import Upcoming_Movies from './Upcoming_Movies';
+import UpMovies from './Upcoming_Movies';
 
 
 function Home() {
@@ -22,22 +23,26 @@ function Home() {
   useEffect(()=>{
     async function fetchData(){
       let mov = await fetch('https://api.themoviedb.org/3/trending/all/day?api_key=21958744bdcd83994642863edf06f583');
-    let mov1 = await mov.json();
-    console.log("movie data", mov1)
+      let UpMov = await fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=21958744bdcd83994642863edf06f583')
+      let UpMov1 = await UpMov.json();
+      let mov1 = await mov.json();
     red(setApi({
       results : mov1.results,
+      newResults : UpMov1.results,
    }));
     };
     const movData = fetchData();
       
   },[])
 
+  
+
   return (
     <Container>
       <ImgSlider/> 
       <Viewer/>
       <Movies/>
-      <Upcoming_Movies/>
+      <UpMovies/>
     </Container>
   )
 }

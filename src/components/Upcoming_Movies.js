@@ -2,20 +2,12 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectResults , selectNewResults } from "../features/apiSlice/apiSlice";
+import { selectNewResults } from "../features/apiSlice/apiSlice";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { setApi } from '../features/apiSlice/apiSlice';
-import { useDispatch } from 'react-redux' 
 
-
-
-const Upcoming_Movies = (props) => {
-    const {id , media_type } = useParams();
+const UpMovies = (props) => {
   let settings = {
     infinite: true,
     speed: 900,
@@ -23,37 +15,18 @@ const Upcoming_Movies = (props) => {
     slidesToScroll: 3,
     autoplay: true,
   };
-  const [data, setData] = useState([]);
-  const movies = useSelector(selectNewResults);
-  const dispatch = useDispatch();
-  const red = useDispatch();
 
-  useEffect(()=>{
-    async function fetchData(){
-      let req = await fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=21958744bdcd83994642863edf06f583');
-    let res = await res.json();
-    console.log("movie data", res)
-    red(setApi({
-      newResults : res.newResults,
-   }));
-    };
-    const movData = fetchData();
-      
-  },[])
-
-  console.log("upcomeing : " + data)
   const tmdb = useSelector(selectNewResults);
-  const poster_url = "https://api.themoviedb.org/3/movie/upcoming";
+  const poster_url = "https://image.tmdb.org/t/p/original";
   
   return (
     <>
-      <h2>Trending</h2>
+      <h2>Upcoming Movies</h2>
  
     <Carousel {...settings} dots={true}>
       {tmdb &&
         tmdb.map((movie) => (
-
-          <Wrap >
+          <Wrap key={movie.id} >
             <Link to={`/movie_details/${movie.id}/${movie.media_type}`}>
               <img src={poster_url + movie.poster_path}  alt={movie.title} />
             </Link>
@@ -112,4 +85,4 @@ const Wrap = styled.div`
   }
 `;
 
-export default Upcoming_Movies;
+export default UpMovies;

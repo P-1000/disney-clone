@@ -1,4 +1,6 @@
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html{
   scroll-behavior: smooth;
@@ -10,7 +12,7 @@ html{
 }
 
 body{
-  background-color: #040714;
+  background:#0d111b;
   color: #f9f9f9;
   font-family: poppins;
   margin: 0;
@@ -41,7 +43,7 @@ a{
 }
 
 
-.cont{
+/* .cont{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,7 +51,7 @@ a{
   place-items: center;
   max-width: 340px;
 
-}
+} */
 
 @media only screen and (max-width: 479px){
   cont{
@@ -67,3 +69,4 @@ a{
   padding: 0 20px;
   align-items: center;
 }
+
