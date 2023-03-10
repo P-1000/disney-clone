@@ -23,7 +23,7 @@ function Home() {
   useEffect(()=>{
     async function fetchData(){
       let mov = await fetch('https://api.themoviedb.org/3/trending/all/day?api_key=21958744bdcd83994642863edf06f583');
-      let UpMov = await fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=21958744bdcd83994642863edf06f583')
+      let UpMov = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=21958744bdcd83994642863edf06f583&language=en-US&sort_by=popularity.desc&include=meida_type&include_video=false&page=1&primary_release_date.gte=1990-01-01&primary_release_date.lte=2020-12-31&vote_average.gte=6&with_genres=action')
       let UpMov1 = await UpMov.json();
       let mov1 = await mov.json();
     red(setApi({

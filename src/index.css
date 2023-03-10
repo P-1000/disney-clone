@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 html{
   scroll-behavior: smooth;
 }
@@ -14,7 +16,7 @@ html{
 body{
   background:#0d111b;
   color: #f9f9f9;
-  font-family: poppins;
+  font-family: Gothic A1;
   margin: 0;
   padding: 0;
 

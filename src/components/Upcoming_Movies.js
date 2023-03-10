@@ -16,9 +16,11 @@ const UpMovies = (props) => {
     autoplay: true,
   };
 
+  const media_type = "movie"
+
   const tmdb = useSelector(selectNewResults);
   const poster_url = "https://image.tmdb.org/t/p/original";
-  
+  // &vote_average.gte=60.0&with_genres=Action
   return (
     <>
       <h2>Upcoming Movies</h2>
