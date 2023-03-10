@@ -23,7 +23,7 @@ const Movies = (props) => {
     <>
       <h2>Trending</h2>
  
-    <Carousel {...settings} dots={true}>
+    <Carousel {...settings}>
       {tmdb &&
         tmdb.map((movie) => (
 
