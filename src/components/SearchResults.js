@@ -30,7 +30,7 @@ useEffect(()=>{
   const movData = fetchData();
   
 
-},[])
+},[query])
 
 
 
