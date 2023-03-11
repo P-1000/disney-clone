@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import db from '../features/firebase'
 import movieSlice from '../features/movie/movieSlice';
-import { selectNewResults , selectResults } from '../features/apiSlice/apiSlice';
+import { selectNewResults , selectResults , selectSearch} from '../features/apiSlice/apiSlice';
 import { useSelector } from "react-redux";
 import { setApi } from '../features/apiSlice/apiSlice';
 import axios from 'axios';
@@ -21,11 +21,11 @@ function Movie_Details(props) {
     const [UpcomingMovie, setUpcomingMovie] = useState({});
     const trending_detail = useSelector(selectResults);
     const upComing_details = useSelector(selectNewResults);
-
+    const searched_details = useSelector(selectSearch)
 
     const [data, setData] = useState([]);
-
-
+  const [MovData , setMovData] = useState([])
+const [MovieName , setMovieName] = useState("TITLE")
   // ###---- to fetch logos from separe api call ----- ###
 
   useEffect(() => {
@@ -52,19 +52,63 @@ const logo_path = Back_Url + lp;
 
 // ## ---- setting movies details to state from redux --- ##
    useEffect(()=>{
-    for(let i=0;i<trending_detail.length ; i++){
-        if(trending_detail[i].id == id){
-            setMovie(trending_detail[i])
-        }
-    }
-    for(let i=0;i<upComing_details.length ; i++){
-        if(upComing_details[i].id == id){
-            setMovie(upComing_details[i])
-        }
-    }
-});
+  
+    // for(let i=0;i<trending_detail.length ; i++){
+    //     if(trending_detail[i].id == id){
+    //         setMovie(trending_detail[i])
+    //     }
+    // }
 
-const over = Movie.overview;
+    // for(let i=0;i<upComing_details.length ; i++){
+    //     if(upComing_details[i].id == id){
+    //         setMovie(upComing_details[i])
+    //    }}
+ 
+
+    // for(let i=0;i<searched_details.length;i++){
+    //   if(searched_details[i].id == id){
+    //     setMovie(searched_details[i])
+    // }
+    // }
+  
+    async function getMovieDetail(props){
+      if(media_type == 'movie' || media_type== 'undefined'){
+      const movieRequest = await axios(`https://api.themoviedb.org/3/movie/${id}?api_key=21958744bdcd83994642863edf06f583`);
+      const {data} = movieRequest;
+      setMovData(data)
+      setMovieName(data.title)
+
+      }else if(media_type == 'tv'){
+        const movieRequest = await axios(`https://api.themoviedb.org/3/tv/${id}?api_key=21958744bdcd83994642863edf06f583`);
+      const {data} = movieRequest;
+      setMovData(data)
+      setMovieName(data.name)
+      }
+    
+    }
+    getMovieDetail()
+    console.log(MovData + "form md")
+},[id]);
+
+// useEffect(()=>{
+  
+
+//   for(let i=0;i<upComing_details.length ; i++){
+//       if(upComing_details[i].id == id){
+//           setMovie(upComing_details[i])
+//       }}
+
+
+//   for(let i=0;i<searched_details.length;i++){
+//     if(searched_details[i].id == id){
+//       setMovie(searched_details[i])
+//   }
+//   }
+
+  
+// },[id]);
+
+const over = MovData.overview;
 
 
 {/* <img src={Back_Url + Movie.backdrop_path }/> */}
@@ -93,7 +137,7 @@ const over = Movie.overview;
             
                     {/* ----- movie details on hero image  ----- */}
                     <div >
-                         <h1 className='text-5xl mt-20 ml-10'>{Movie.title}</h1>
+                         <h1 className='text-5xl mt-20 ml-10'>{MovieName}</h1>
                         <p className='text-lg pt-2 ml-10'>2hr1min &#8226; Action &#8226; U/A &#8226; Star Wars</p>
                         <p className='text-lg pt-2 ml-10 w-2/4  text-ellipsis overflow-hidden' style={{height:"120px"}}>{over}</p>
 
@@ -117,7 +161,7 @@ const over = Movie.overview;
 
           </div>
           <img
-            src={`https://image.tmdb.org/t/p/original${Movie.backdrop_path}`}
+            src={`https://image.tmdb.org/t/p/original${MovData.backdrop_path}`}
             alt="backgrop poster"
             className="w-full h-full  object-contain object-center rounded-lg absolute"
             style={{left:"310px"}}

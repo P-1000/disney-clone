@@ -15,6 +15,7 @@ import Login from './components/Login';
 import MyAc from "./components/MyAc";
 import SearchResults from "./components/SearchResults";
 
+
 function App() {
   return (
     <div className="App">
@@ -36,6 +37,7 @@ function App() {
          </Route>
           <Route path="/" > 
                     <Home/>
+
          </Route>
         </Switch>
       </Router>

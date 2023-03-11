@@ -38,22 +38,23 @@ useEffect(()=>{
 const poster_url = "https://image.tmdb.org/t/p/original";
 
   return (
-    <div>
 
+    <>
+<h1 className='text-grey-700'>Showing all results for <span className='text-white-800'>{query}</span></h1>
+<div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 px-8 mt-8'>
 {bs &&
-        bs.map((bs) => (
-           <Wrap >
-            <Link to={`/movie_details/${bs.id}/"movie"`}>
-              <img src={poster_url + bs.poster_path}  alt={bs.title} />
+        bs.map((movie) => (
+
+           <div className=''>
+            <Link to={`/movie_details/${movie.id}/movie`} >
+              <img className='h-full w-full rounded-lg object-cover' src={poster_url + movie.backdrop_path}  alt={movie.title} />
             </Link>
-          </Wrap>
+          </div>
           ))}
     </div>
+    </>
   )
 }
 
 export default SearchResults
 
-const Wrap = styled.div`
-
-`

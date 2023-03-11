@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {Link, useHistory} from 'react-router-dom'
 import { selectUserName  , selectUserPhoto , setUserLogin, setUserLoginDetails , setSignOut} from '../features/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux' 
-
+import {AiOutlineSearch} from 'react-icons/ai'
 import { border, Box, Flex } from "@chakra-ui/react"
 import {
     Popover,
@@ -34,7 +34,7 @@ function Header() {
                         email :user.email,
                         photo :user.photoURL 
                     })))
-                    //  history.push('/')
+                     //  history.push('/')
                 }
 
         })
@@ -47,7 +47,7 @@ function Header() {
                     email : result.user.email,
                     photo : result.user.photoURL 
                 })))
-                history.push('/')
+                 history.push('/')
             })
     }
 
@@ -66,9 +66,10 @@ function Header() {
     function putVal(e){
       setQuery(e.target.value); 
     }
-    function setVal(){
-      setCall(query);
-      console.log(query)
+    function onSubmitHandler(e){
+      setCall(true);
+      console.log(query + "on submit")
+      history.push(`/search/${query}`)
     }
 
   return (
@@ -109,21 +110,23 @@ function Header() {
             
       </NavMenu>
       
-      <div className='user'>
+      <div className='user flex gap-10'>
 
 <div className='search flex w-full'>
 
-<form className="w-full max-w-sm">
-  <div className="flex items-center border-b border-teal-500 py-2">
+<form className="w-full max-w-sm" onSubmit={()=>{
+  onSubmitHandler()
+}}>
+  <div className="flex items-center border-b border-grey-500 py-1" onClick={oc}>
     <input  onChange={putVal}
-    className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Search Movies" aria-label="Query"/>
+    className="appearance-none bg-transparent border-none w-full text-white-700 mr-3 px-2 focus:text-white-700  focus:mr-40 transition-all duration-700 leading-tight focus:outline-none outline-none " type="text" placeholder="Search" aria-label="Query"/>
     <Link to={`/search/${query}`}>
     <button
     onClick={()=>{
-                 setVal()
+                 onSubmitHandler()
                     }}
-     className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="button">
-      SEARCH
+     className="flex-shrink-0   text-md  text-white py-1 px-2 rounded" type="submit">
+      <AiOutlineSearch/>
     </button>
     </Link>
   </div>
@@ -176,6 +179,10 @@ const PO = styled.div`
     margin-right: 32px;
     pointer:cursor;
     border-radius: 10px;
+`
+
+const oc = styled.div`
+  border-bottom:blue;
 `
 
 const child = {
