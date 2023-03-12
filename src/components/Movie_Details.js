@@ -13,6 +13,7 @@ import Videos from './Trailers';
 import { useDispatch } from 'react-redux';
 import { setTrailer } from '../features/apiSlice/apiSlice';
 
+
 function Movie_Details(props) {
     const Back_Url = "https://image.tmdb.org/t/p/original";
     const {id , media_type } = useParams();
@@ -23,7 +24,7 @@ function Movie_Details(props) {
     const trending_detail = useSelector(selectResults);
     const upComing_details = useSelector(selectNewResults);
     const searched_details = useSelector(selectSearch)
-
+   
     const red = useDispatch();
 
     const [data, setData] = useState([]);
@@ -167,7 +168,7 @@ const over = MovData.overview;
         </div>
 </div>
 
-<div className='m-10'>
+<div className='m-10 '>
   <Videos/>
 </div>
 
@@ -175,7 +176,11 @@ const over = MovData.overview;
               <UpMovies />
 </div>
 
+
+
 </div>
+
+
     </>
   )
 }

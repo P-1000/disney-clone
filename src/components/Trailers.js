@@ -7,29 +7,36 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import axios from "axios";
+import Modal from "./Modal";
+import { Button } from "@chakra-ui/react";
+
+import {useParams} from 'react-router-dom'
 
 const Videos = (props) => {
   let settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 4,
+    slidesToShow: 4,
+    slidesToScroll: 2,
     autoplay: true,
   };
 
-
-
-  const media_type = "movie"
-
+// modal state: 
+   const [isOpen, setisOpen] = useState(false);
+// video url state :
+  const params = useParams();
   const tmdb = useSelector(selectVideos);
   const poster_url = "https://image.tmdb.org/t/p/original";
-  
-  const [vidKey , setVidKey] = useState("")
+  const [v,setv] = useState("")
+   const [vidKey , setVidKey] = useState("")
   const [traiData , settraiData] = useState([])
+  const {id, media_type}  = params;
+  
 
   useEffect(()=>{
     async function getVideos(props){
-    const apiR = await fetch(`https://api.themoviedb.org/3/movie/${tmdb}/videos?api_key=21958744bdcd83994642863edf06f583`)
+    
+    const apiR = await fetch(`https://api.themoviedb.org/3/${media_type !== "undefined" ? media_type : "movie"}/${tmdb}/videos?api_key=21958744bdcd83994642863edf06f583`)
     const res = await apiR.json();
     settraiData(res.results)
     console.log(res)
@@ -44,37 +51,40 @@ const Videos = (props) => {
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>
-      <h2>Trailer </h2>
+      <h2 className="text-2xl mt-6 pt-2">Trailers & Extras</h2>
  
     <Carousel {...settings} dots={true}>
-      
-    {/* {traiData &&
-        traiData.map((movie) => (
-          <Wrap key={movie.id} >
-            <Link to={`/movie_details/${movie.id}/${movie.media_type}`}>
-              <img src={poster_url + movie.poster_path}  alt={movie.title} />
-            </Link>
-          </Wrap>
-        ))} */}
 
          {
           traiData && 
              traiData.map((trailer) =>{
              return  <div className="w-full h-full"> 
-             <a 
+             <Button key={trailer.key}
+             onClick={() => { setisOpen(true); setv(trailer.key);}}
              className="w-full h-full  mt-4"
               href={`https://www.youtube.com/watch?v=${trailer.key}`}>
               <img 
-              className="w-full h-ful object-cover px-2 hover:scale-150 transition-all "
+              className="w-full h-ful object-cover px-2 hover:scale-110 transition-all "
               src={`https://img.youtube.com/vi/${trailer.key}/hqdefault.jpg`}/>
-             </a>
+             </Button>
+
+           
              </div> 
          })
         } 
-
-        
-       
     </Carousel>
+
+    <Modal open={isOpen}
+    onClose={()=>setisOpen(false)}
+              className="inset-0 z-10 m-10 p-10">
+              <div className="px-10 mt-10 mr-10">
+              <iframe width="760" height="515" 
+              src={`https://www.youtube.com/embed/${v}`}
+              title="YouTube video player" frameborder="0" allow="accelerometer; 
+              autoplay; clipboard-write; encrypted-media; gyroscope; 
+              picture-in-picture; web-share" allowfullscreen></iframe>
+              </div>
+             </Modal>
     </>
   );
 };

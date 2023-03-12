@@ -37,7 +37,7 @@ const apiSlice = createSlice({
 export const {setApi,setsearch , setTrailer , setImages } = apiSlice.actions;
 //
 export const selectImages = (state)=> state.api.Images;
-//video id in movie detail page 
+//video id in movie detail page  
 export const selectVideos = (state) => state.api.vidId;
 //upcoming movies 
 export const selectNewResults = (state) => state.api.newResults;
