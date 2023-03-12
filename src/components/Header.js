@@ -2,7 +2,7 @@ import React , {useEffect , useState} from 'react'
 import {auth , provider} from '../features/firebase'
 import styled from 'styled-components'
 import {Link, useHistory} from 'react-router-dom'
-import { selectUserName  , selectUserPhoto , setUserLogin, setUserLoginDetails , setSignOut} from '../features/user/userSlice'
+import { selectUserName  , selectUserPhoto , setUserLogin, setUserLoginDetails , setSignOut , sui} from '../features/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux' 
 import {AiOutlineSearch} from 'react-icons/ai'
 import { border, Box, Flex } from "@chakra-ui/react"
@@ -19,6 +19,9 @@ import {
     PopoverCloseButton,
     PopoverAnchor,
   } from '@chakra-ui/react'
+  import firebase from "firebase/compat/app";
+  import { selectUser } from '../features/apiSlice/apiSlice'
+  import {setUser } from '../features/apiSlice/apiSlice'
 
 function Header() {
     const dispatch = useDispatch()
@@ -26,27 +29,66 @@ function Header() {
     const userName = useSelector(selectUserName);
     const userPhoto = useSelector(selectUserPhoto);
 
+    const [currentUser, setCurrentUser] = useState(null);
+
+const ui = useSelector(sui)
+    // useEffect(() => {
+    //   const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+    //     if (user) {
+    //       // User is signed in.
+    //       setCurrentUser(user);
+    //     } else {
+    //       // User is signed out.
+    //       setCurrentUser(null);
+    //     }
+    //   },[])
+
+    //getting id user :: ---- watchlist 
+
+    // useEffect(()=>{
+    //   const unsubscribe = auth.onAuthStateChanged((user)=>{
+    //     if(user){
+    //       setCurrentUser(user)
+    //       dispatch((setUser({
+    //         um : JSON.stringify(currentUser),
+    //       })))
+    //     }
+    //     else{
+    //       setCurrentUser(null)
+    //     }
+    //   })
+    // },[])
+
+
+
+
     useEffect(()=>{
         auth.onAuthStateChanged(async (user)=>{
                 if(user){
                     dispatch((setUserLoginDetails({
                         name : user.displayName,
                         email :user.email,
-                        photo :user.photoURL 
+                        photo :user.photoURL ,
+                        useri : user.uid
                     })))
-                      history.push('/')
+             
+                 //     history.push('/')
                 }
 
         })
     },[])
+
+   console.log(ui)
 
     const signIn = () => {
             auth.signInWithPopup(provider).then((result)=>{
                 dispatch((setUserLoginDetails({
                     name : result.user.displayName,
                     email : result.user.email,
-                    photo : result.user.photoURL 
+                    photo : result.user.photoURL ,
+                    uid : result.user.uid
                 })))
+            
                  history.push('/')
             })
     }
@@ -69,7 +111,6 @@ function Header() {
     function onSubmitHandler(e){
       e.preventDefault();
       setCall(true);
-      console.log(query + "on submit")
     history.push(`/search/${query}`)
     //history.push("/login")
     }

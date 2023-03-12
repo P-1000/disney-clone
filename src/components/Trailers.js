@@ -68,7 +68,6 @@ const Videos = (props) => {
     const apiR = await fetch(`https://api.themoviedb.org/3/${media_type !== "undefined" ? media_type : "movie"}/${tmdb}/videos?api_key=21958744bdcd83994642863edf06f583`)
     const res = await apiR.json();
     settraiData(res.results)
-    console.log(res)
     
   }
       getVideos()
@@ -91,7 +90,7 @@ const Videos = (props) => {
           traiData && 
              traiData.map((trailer) =>{
              return  <div className="w-full h-full"> 
-             <Button key={trailer.key}
+             <Button key={trailer.key} id={trailer.id}
              onClick={() => { setisOpen(true); setv(trailer.key);}}
              className="w-full h-full  mt-4"
               href={`https://www.youtube.com/watch?v=${trailer.key}`}>

@@ -14,6 +14,7 @@ import HeroSlider from './components/HeroSlider';
 import Login from './components/Login';
 import MyAc from "./components/MyAc";
 import SearchResults from "./components/SearchResults";
+import Watchlist from "./components/Watchlist";
 
 
 function App() {
@@ -34,6 +35,9 @@ function App() {
          </Route>
          <Route path="/search/:query">
               <SearchResults/>
+         </Route>
+         <Route path="/myWatchlist">
+            <Watchlist/>
          </Route>
           <Route path="/" > 
                     <Home/>

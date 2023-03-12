@@ -3,6 +3,7 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/storage";
 import { getDatabase } from "firebase/database";
+import 'firebase/compat/database'
 
 
 const firebaseConfig = {
@@ -16,8 +17,13 @@ const firebaseConfig = {
   };
 
   const firebaseApp = firebase.initializeApp(firebaseConfig);
-  const db = firebaseApp.firestore();
-  const auth = firebase.auth();
+  export const dataRef = firebase.database
+
+
+  //// 👆👆👆👆 watchlist ////
+  const db = firebaseApp.firestore()
+  const auth = firebase.auth()
+
   const provider = new firebase.auth.GoogleAuthProvider();
   const storage = firebase.storage();
 

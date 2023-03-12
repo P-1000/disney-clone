@@ -7,6 +7,8 @@ const initialState = {
    sResults : "",
    vidId : "",
    Images : "",
+   um:"",
+   watchlist:[],
 }
 
 const apiSlice = createSlice({
@@ -27,13 +29,21 @@ const apiSlice = createSlice({
         ,
         setImages:(state,action)=>{
             state.Images=action.payload.vidId;
+        },
+        setUser : (state,action) =>{
+            state.um = action.payload.uid;
+        },
+        setWatchlist:(state,action)=>{
+            state.sResults=action.payload.watchlist;
         }
 
     }
 })
 
-export const {setApi,setsearch , setTrailer , setImages } = apiSlice.actions;
+export const {setApi,setsearch , setTrailer , setImages ,setUser  , setWatchlist} = apiSlice.actions;
 //
+export const selectWatch = (state)=> state.api.watchlist;
+export const selectUser = (state)=> state.api.um;
 export const selectImages = (state)=> state.api.Images;
 //video id in movie detail page  
 export const selectVideos = (state) => state.api.vidId;

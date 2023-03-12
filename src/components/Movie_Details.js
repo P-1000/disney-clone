@@ -1,7 +1,7 @@
 import React , {useEffect , useState , Component} from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
-import db from '../features/firebase'
+
 import movieSlice from '../features/movie/movieSlice';
 import { selectNewResults , selectResults , selectSearch , setImages} from '../features/apiSlice/apiSlice';
 import { useSelector } from "react-redux";
@@ -12,8 +12,13 @@ import UpMovies from './Upcoming_Movies';
 import Videos from './Trailers';
 import { useDispatch } from 'react-redux';
 import { setTrailer } from '../features/apiSlice/apiSlice';
-
-
+import { dataRef } from '../features/firebase';
+import { useHistory } from 'react-router-dom';
+import {auth , provider ,wl} from '../features/firebase'
+import db from '../features/firebase';
+import { serverTimestamp, set } from 'firebase/database';
+import 'firebase/firestore';
+import firebase from "firebase/compat/app";
 function Movie_Details(props) {
     const Back_Url = "https://image.tmdb.org/t/p/original";
     const {id , media_type } = useParams();
@@ -89,6 +94,8 @@ function Movie_Details(props) {
     getMovieDetail()
 },[id]);
 
+const wid = id;
+
 // useEffect(()=>{
   
 
@@ -108,6 +115,89 @@ function Movie_Details(props) {
 // },[id]);
 
 const over = MovData.overview;
+
+
+//firebase : ----
+
+// const handleFir =() =>{
+//   dataRef.ref().child("movie_ID").push(id)
+//   console.log(id)
+// }
+let things;
+
+const handleFir = () =>{  auth.onAuthStateChanged(async (user)=>{
+          if(user){
+             things =db.collection('watchlist')
+             
+                things.add({
+                  uid : user.uid,
+                  id : wid,
+                  cretedAt:serverTimestamp()
+
+                })
+          }
+
+  })
+
+}
+
+// let currentUser;
+// firebase.auth().onAuthStateChanged(user => {
+//   currentUser = user;
+// });
+
+// const [wids , setWids] =useState([])
+// useEffect(() => {
+//   async function fetchWids() {
+//     const watchlistRef = firebase.firestore().collection('watchlist');
+//     const currentUser = firebase.auth().currentUser;
+
+//     if (currentUser) {
+//       const querySnapshot = await watchlistRef.where('userid', '==', currentUser.uid).get();
+//       querySnapshot.forEach(doc => {
+//         wids.push(doc.data().wid);
+//       });
+//       setWids(wids);
+//     } else {
+//       console.log('No user is currently logged in.');
+//     }
+//   }
+// console.log(wids)
+//   fetchWids();
+// }, [firebase.auth().currentUser]);
+
+const [currentUser, setCurrentUser] = useState(null);
+const [wids, setWids] = useState([]);
+
+useEffect(() => {
+  async function fetchWids() {
+    const watchlistRef = firebase.firestore().collection('watchlist');
+
+    if (currentUser) {
+      const querySnapshot = await watchlistRef.where('userid', '==', currentUser.uid).get();
+      const wids = [];
+      querySnapshot.forEach(doc => {
+        wids.push(doc.data().wid);
+      });
+      setWids(wids);
+    } else {
+      console.log('No user is currently logged in.');
+    }
+  }
+
+  fetchWids();
+}, [currentUser]);
+
+useEffect(() => {
+  const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+    setCurrentUser(user);
+  });
+  return unsubscribe;
+}, []);
+
+
+
+
 
 
 {/* <img src={Back_Url + Movie.backdrop_path }/> */}
@@ -211,8 +301,15 @@ const over = MovData.overview;
 <div className='m-10'>
               <UpMovies />
 </div>
+{/* firebase */}
+<div className='firebase'>
 
-
+              <button className=' p-10 m-10' value={id}
+               style={{border : "2px solid blue"}}
+               onClick={()=>handleFir()}
+               >ADD TO FIRE BASE
+               </button>
+</div>  
 
 </div>
 
