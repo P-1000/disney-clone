@@ -167,16 +167,12 @@ const over = MovData.overview;
         </div>
 </div>
 
-<div>
+<div className='m-10'>
   <Videos/>
 </div>
 
 <div className='m-10'>
               <UpMovies />
-</div>
-
-<div>
-<iframe width="600" height="355" src="https://www.youtube-nocookie.com/embed/87gmvp8lOjE" title={MovieName} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 </div>

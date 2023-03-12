@@ -11,9 +11,9 @@ import axios from "axios";
 const Videos = (props) => {
   let settings = {
     infinite: true,
-    speed: 900,
-    slidesToShow: 7,
-    slidesToScroll: 3,
+    speed: 500,
+    slidesToShow: 6,
+    slidesToScroll: 4,
     autoplay: true,
   };
 
@@ -60,9 +60,15 @@ const Videos = (props) => {
          {
           traiData && 
              traiData.map((trailer) =>{
-             return   <a href={`https://www.youtube.com/watch?v=${trailer.key}`}>
-              <img src={`https://img.youtube.com/vi/${trailer.key}/hqdefault.jpg`}/>
+             return  <div className="w-full h-full"> 
+             <a 
+             className="w-full h-full  mt-4"
+              href={`https://www.youtube.com/watch?v=${trailer.key}`}>
+              <img 
+              className="w-full h-ful object-cover px-2 hover:scale-150 transition-all "
+              src={`https://img.youtube.com/vi/${trailer.key}/hqdefault.jpg`}/>
              </a>
+             </div> 
          })
         } 
 
