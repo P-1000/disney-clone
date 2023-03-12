@@ -34,7 +34,7 @@ function Header() {
                         email :user.email,
                         photo :user.photoURL 
                     })))
-                     //  history.push('/')
+                      history.push('/')
                 }
 
         })
@@ -67,9 +67,11 @@ function Header() {
       setQuery(e.target.value); 
     }
     function onSubmitHandler(e){
+      e.preventDefault();
       setCall(true);
       console.log(query + "on submit")
-      history.push(`/search/${query}`)
+    history.push(`/search/${query}`)
+    //history.push("/login")
     }
 
   return (
@@ -114,21 +116,15 @@ function Header() {
 
 <div className='search flex w-full'>
 
-<form className="w-full max-w-sm" onSubmit={()=>{
-  onSubmitHandler()
-}}>
-  <div className="flex items-center border-b border-grey-500 py-1" onClick={oc}>
+<form className="w-full max-w-sm" onSubmit={onSubmitHandler}>
+  <div className="flex items-center border-b border-grey-500 py-1" >
     <input  onChange={putVal}
     className="appearance-none bg-transparent border-none w-full text-white-700 mr-3 px-2 focus:text-white-700  focus:mr-40 transition-all duration-700 leading-tight focus:outline-none outline-none " type="text" placeholder="Search" aria-label="Query"/>
-    <Link to={`/search/${query}`}>
-    <button
-    onClick={()=>{
-                 onSubmitHandler()
-                    }}
+    <button 
+  
      className="flex-shrink-0   text-md  text-white py-1 px-2 rounded" type="submit">
       <AiOutlineSearch/>
     </button>
-    </Link>
   </div>
 </form>
 

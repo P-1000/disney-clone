@@ -1,13 +1,14 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useEffect ,useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectNewResults } from "../features/apiSlice/apiSlice";
+import { selectVideos } from "../features/apiSlice/apiSlice";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import axios from "axios";
 
-const UpMovies = (props) => {
+const Videos = (props) => {
   let settings = {
     infinite: true,
     speed: 900,
@@ -20,26 +21,51 @@ const UpMovies = (props) => {
 
   const media_type = "movie"
 
-  const tmdb = useSelector(selectNewResults);
+  const tmdb = useSelector(selectVideos);
   const poster_url = "https://image.tmdb.org/t/p/original";
+  
+  const [vidKey , setVidKey] = useState("")
+  const [traiData , settraiData] = useState([])
+
   useEffect(()=>{
+    async function getVideos(props){
+    const apiR = await fetch(`https://api.themoviedb.org/3/movie/${tmdb}/videos?api_key=21958744bdcd83994642863edf06f583`)
+    const res = await apiR.json();
+    settraiData(res.results)
+    console.log(res)
     
-  },[])
+  }
+      getVideos()
+      
+      
+  },[tmdb])
+ 
 
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>
-      <h2>Upcoming Movies</h2>
+      <h2>Trailer </h2>
  
     <Carousel {...settings} dots={true}>
-      {tmdb &&
-        tmdb.map((movie) => (
+      
+    {/* {traiData &&
+        traiData.map((movie) => (
           <Wrap key={movie.id} >
             <Link to={`/movie_details/${movie.id}/${movie.media_type}`}>
               <img src={poster_url + movie.poster_path}  alt={movie.title} />
             </Link>
           </Wrap>
-        ))}
+        ))} */}
+
+         {
+          traiData && 
+             traiData.map((trailer) =>{
+             return   <a href={`https://www.youtube.com/watch?v=${trailer.key}`}>Trailer 8</a>
+         })
+        } 
+
+        
+       
     </Carousel>
     </>
   );
@@ -93,4 +119,4 @@ const Wrap = styled.div`
   }
 `;
 
-export default UpMovies;
+export default Videos;

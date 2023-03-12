@@ -9,8 +9,9 @@ import { setApi } from '../features/apiSlice/apiSlice';
 import axios from 'axios';
 import { FaPlay} from "react-icons/fa";
 import UpMovies from './Upcoming_Movies';
-
-
+import Videos from './Trailers';
+import { useDispatch } from 'react-redux';
+import { setTrailer } from '../features/apiSlice/apiSlice';
 
 function Movie_Details(props) {
     const Back_Url = "https://image.tmdb.org/t/p/original";
@@ -23,9 +24,11 @@ function Movie_Details(props) {
     const upComing_details = useSelector(selectNewResults);
     const searched_details = useSelector(selectSearch)
 
+    const red = useDispatch();
+
     const [data, setData] = useState([]);
-  const [MovData , setMovData] = useState([])
-const [MovieName , setMovieName] = useState("TITLE")
+    const [MovData , setMovData] = useState([])
+   const [MovieName , setMovieName] = useState("TITLE")
   // ###---- to fetch logos from separe api call ----- ###
 
   useEffect(() => {
@@ -47,29 +50,11 @@ const [MovieName , setMovieName] = useState("TITLE")
     fetchData();
   }, []);
 
-const lp = data.file_path;
-const logo_path = Back_Url + lp;
+//const lp = data.file_path;
+//const logo_path = Back_Url + lp;
 
 // ## ---- setting movies details to state from redux --- ##
    useEffect(()=>{
-  
-    // for(let i=0;i<trending_detail.length ; i++){
-    //     if(trending_detail[i].id == id){
-    //         setMovie(trending_detail[i])
-    //     }
-    // }
-
-    // for(let i=0;i<upComing_details.length ; i++){
-    //     if(upComing_details[i].id == id){
-    //         setMovie(upComing_details[i])
-    //    }}
- 
-
-    // for(let i=0;i<searched_details.length;i++){
-    //   if(searched_details[i].id == id){
-    //     setMovie(searched_details[i])
-    // }
-    // }
   
     async function getMovieDetail(props){
       if(media_type == 'movie' || media_type== 'undefined'){
@@ -77,17 +62,22 @@ const logo_path = Back_Url + lp;
       const {data} = movieRequest;
       setMovData(data)
       setMovieName(data.title)
+      red(setTrailer({
+        vidId: data.id,
+      }))
 
       }else if(media_type == 'tv'){
         const movieRequest = await axios(`https://api.themoviedb.org/3/tv/${id}?api_key=21958744bdcd83994642863edf06f583`);
       const {data} = movieRequest;
       setMovData(data)
       setMovieName(data.name)
+      red(setTrailer({
+        vidId: data.id,
+      }))
       }
     
     }
     getMovieDetail()
-    console.log(MovData + "form md")
 },[id]);
 
 // useEffect(()=>{
@@ -169,8 +159,16 @@ const over = MovData.overview;
         </div>
 </div>
 
+<div>
+  <Videos/>
+</div>
+
 <div className='m-10'>
               <UpMovies />
+</div>
+
+<div>
+<iframe width="600" height="355" src="https://www.youtube-nocookie.com/embed/87gmvp8lOjE" title={MovieName} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 </div>

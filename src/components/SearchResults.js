@@ -3,9 +3,10 @@ import { useParams } from 'react-router-dom'
 import { useState , useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux' ;
-import {apiSlice , setApi  , selectSearch} from '../features/apiSlice/apiSlice'
+import {apiSlice , setApi  , selectSearch, setsearch} from '../features/apiSlice/apiSlice'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { selectNewResults } from '../features/apiSlice/apiSlice';
 
 function SearchResults(props) {
     const{query} = useParams();
@@ -23,7 +24,7 @@ useEffect(()=>{
   async function fetchData(){
    let mov = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=21958744bdcd83994642863edf06f583&query=${query}`);
     let mov1 = await mov.json();
-  red(setApi({
+  red(setsearch({
     sResults : mov1.results,
  }));
   };
