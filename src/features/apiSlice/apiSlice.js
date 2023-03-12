@@ -1,6 +1,5 @@
 import React from 'react'
 import { createSlice } from "@reduxjs/toolkit";
-import e from 'cors';
 
 const initialState = {
    results : "",
@@ -17,7 +16,6 @@ const apiSlice = createSlice({
         setApi : (state , action) =>{
             state.results = action.payload.results;
             state.newResults = action.payload.newResults;
-            //state.sResults = action.payload.sResults;
         },
         setsearch:(state,action)=>{
             state.sResults=action.payload.sResults;
