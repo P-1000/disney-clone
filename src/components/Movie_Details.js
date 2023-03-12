@@ -114,30 +114,36 @@ const over = MovData.overview;
   return (
     <>
 
- <div className='  w-full lg:hidden relative '>
 
- <div className='flex absolute top-20 left-10'>   
-                            <FaPlay className='text-3xl' />
-                            <div className='flex flex-col'>
-                                <p>AVAILBLE ON </p>
-                                <p>NETFLIX</p>
-                            </div>
-             </div>
-       <img
-            src={`https://image.tmdb.org/t/p/original${MovData.backdrop_path}`}
-            alt="backgrop poster"
-            className=" inset-0 absolute mb-12 w-full"
-          />
-
-      </div>
     
-    <div className='divide-y divide-blue-200'>
+    <div className=' '>
 
     {/* ------ for small screeen  ----- */}
 <div>
-     
+     {/* for small screen  */}
     
+  <div className='lg:hidden'>
+  
+  <div  className='relative'>
+                         {/* <h1 className='text-xl w-70 mt-10 ml-8'>{MovieName}</h1>
+                        <p className='text-lg pt-2 ml-8'>2hr1min &#8226; Action &#8226; U/A &#8226; Star Wars</p>
+                        <p className='text-lg pt-2 ml-8 w-2/4  text-ellipsis overflow-hidden' style={{height:"120px"}}>{over}</p> */}
 
+                        <div className='flex  gap-5 ml-10 mt-20 top-12 mb-32 absolute'>   
+                            <FaPlay className='text-2xl' />
+                            <div className='flex flex-col'>
+                                <p>AVAILBLE ON </p>
+                                <p>2hr 50min</p>
+                            </div>
+                        </div>
+                      
+                 </div>
+                 <img
+            src={`https://image.tmdb.org/t/p/original${MovData.backdrop_path}`}
+            alt="backgrop poster"
+            className="w-full h-90  object-center object-cover rounded-lg absolute top-16 -z-10"
+          />
+  </div>
 
         {/* -------- for large screen ------- */}
         <div className="mx-9 mb-10">
@@ -194,9 +200,13 @@ const over = MovData.overview;
         </div>
 </div>
 </div>
-<div className='m-10  sm:mt-10 sm:pt-10'>
-  <Videos className="sm:mt-10"/>
+
+
+<div className=' red m-10  top-0'>
+{/* <h2 className="text-2x sm:hidden">Trailers & Extras</h2> */}
+  <Videos/>
 </div>
+
 
 <div className='m-10'>
               <UpMovies />

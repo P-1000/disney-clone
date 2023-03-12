@@ -80,9 +80,12 @@ const Videos = (props) => {
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>
-      <h2 className="text-2xl">Trailers & Extras</h2>
+    <div className="red">
+
+
+      <h2 className="text-2xl hidden lg:block">Trailers & Extras</h2>
  
-    <Carousel {...settings} dots={true}>
+    <Carousel  {...settings} dots={true}>
 
          {
           traiData && 
@@ -102,16 +105,27 @@ const Videos = (props) => {
          })
         } 
     </Carousel>
-
+    </div>
     <Modal open={isOpen}
     onClose={()=>setisOpen(false)}
-              className="inset-0 z-10 m-10 p-10">
-              <div className="px-10 mt-10 mr-10">
-              <iframe width="760" height="515" 
+              className="inset-0 z-10 lg:m-10 p-10 m:p-1">
+              <div className="px-10 mt-1 mr-10">
+              <div className="hidden lg:block">
+              <iframe width="1060" height="720" 
               src={`https://www.youtube.com/embed/${v}`}
               title="YouTube video player" frameborder="0" allow="accelerometer; 
               autoplay; clipboard-write; encrypted-media; gyroscope; 
-              picture-in-picture; web-share" allowfullscreen></iframe>
+              picture-in-picture; web-share" allowfullscreen>
+              </iframe>
+              </div>
+              <div className="lg:hidden sm:block left-0 right-0 mr-10">
+              <iframe width="660" height="215" 
+              src={`https://www.youtube.com/embed/${v}`}
+              title="YouTube video player" frameborder="0" allow="accelerometer; 
+              autoplay; clipboard-write; encrypted-media; gyroscope; 
+              picture-in-picture; web-share" allowfullscreen>
+              </iframe>
+              </div>
               </div>
              </Modal>
     </>

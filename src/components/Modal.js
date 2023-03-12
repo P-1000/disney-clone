@@ -9,7 +9,7 @@ export default function Modal({open , children ,onClose}) {
     onClick={onClose}>
     <MdOutlineClose size={56} className="transition-all" />
     </button>
-    <div className='ml-10 p-10 '>
+    <div className='ml-10 p-10'>
       {children}
       </div>
     </div> 

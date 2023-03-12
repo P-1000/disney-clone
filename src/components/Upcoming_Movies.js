@@ -54,9 +54,9 @@ const UpMovies = (props) => {
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>
-      <h2>Upcoming Movies</h2>
+      <h2 className="hidden lg:block">Upcoming Movies</h2>
  
-    <Carousel className="sm:mx-0 sm:mt-32" {...settings} dots={true}>
+    <Carousel className="sm:mx-0 sm:mt-32 " {...settings} dots={true}>
       {tmdb &&
         tmdb.map((movie) => (
           <Wrap key={movie.id} >
