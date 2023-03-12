@@ -113,9 +113,35 @@ const over = MovData.overview;
 {/* <img src={Back_Url + Movie.backdrop_path }/> */}
   return (
     <>
+
+ <div className='  w-full lg:hidden relative '>
+
+ <div className='flex absolute top-20 left-10'>   
+                            <FaPlay className='text-3xl' />
+                            <div className='flex flex-col'>
+                                <p>AVAILBLE ON </p>
+                                <p>NETFLIX</p>
+                            </div>
+             </div>
+       <img
+            src={`https://image.tmdb.org/t/p/original${MovData.backdrop_path}`}
+            alt="backgrop poster"
+            className=" inset-0 absolute mb-12 w-full"
+          />
+
+      </div>
+    
     <div className='divide-y divide-blue-200'>
-        {/* for large screen  */}
+
+    {/* ------ for small screeen  ----- */}
+<div>
+     
+    
+
+
+        {/* -------- for large screen ------- */}
         <div className="mx-9 mb-10">
+
         <div
           className="relative hidden w-full lg:block mr-9 lf-9 mt-8 overflow-hidden rounded-lg divide-black"
           style={{ height: "28rem" }}
@@ -167,9 +193,9 @@ const over = MovData.overview;
           />
         </div>
 </div>
-
-<div className='m-10 '>
-  <Videos/>
+</div>
+<div className='m-10  sm:mt-10 sm:pt-10'>
+  <Videos className="sm:mt-10"/>
 </div>
 
 <div className='m-10'>

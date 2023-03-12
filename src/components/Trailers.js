@@ -14,11 +14,40 @@ import {useParams} from 'react-router-dom'
 
 const Videos = (props) => {
   let settings = {
+    
     infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 2,
     autoplay: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 3,
+          infinite: true,
+          dots:false,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+          initialSlide: 2,
+          dots:false,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          dots:false,
+        }
+      }
+    ]
   };
 
 // modal state: 
@@ -51,7 +80,7 @@ const Videos = (props) => {
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>
-      <h2 className="text-2xl mt-6 pt-2">Trailers & Extras</h2>
+      <h2 className="text-2xl">Trailers & Extras</h2>
  
     <Carousel {...settings} dots={true}>
 
