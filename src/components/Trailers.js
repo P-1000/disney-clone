@@ -2,7 +2,7 @@ import React, { Component, useEffect ,useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectVideos } from "../features/apiSlice/apiSlice";
+import { selectVideos , } from "../features/apiSlice/apiSlice";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -60,7 +60,9 @@ const Videos = (props) => {
          {
           traiData && 
              traiData.map((trailer) =>{
-             return   <a href={`https://www.youtube.com/watch?v=${trailer.key}`}>Trailer 8</a>
+             return   <a href={`https://www.youtube.com/watch?v=${trailer.key}`}>
+              <img src={`https://img.youtube.com/vi/${trailer.key}/hqdefault.jpg`}/>
+             </a>
          })
         } 
 

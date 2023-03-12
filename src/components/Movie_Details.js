@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import db from '../features/firebase'
 import movieSlice from '../features/movie/movieSlice';
-import { selectNewResults , selectResults , selectSearch} from '../features/apiSlice/apiSlice';
+import { selectNewResults , selectResults , selectSearch , setImages} from '../features/apiSlice/apiSlice';
 import { useSelector } from "react-redux";
 import { setApi } from '../features/apiSlice/apiSlice';
 import axios from 'axios';
@@ -29,7 +29,9 @@ function Movie_Details(props) {
     const [data, setData] = useState([]);
     const [MovData , setMovData] = useState([])
    const [MovieName , setMovieName] = useState("TITLE")
-  // ###---- to fetch logos from separe api call ----- ###
+
+
+  // ###---- to fetch logos from separate api call ----- ###
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,13 +39,19 @@ function Movie_Details(props) {
       const result = await axios(
         `https://api.themoviedb.org/3/${media_type}/${id}/images?api_key=21958744bdcd83994642863edf06f583`,
       )
-      setData(result.data.logos[0]);
+      setData(result.data);
+      red(setTrailer({
+        Images: data,
+      }))
       }
         else{
             const result = await axios(
                 `https://api.themoviedb.org/3/movie/${id}/images?api_key=21958744bdcd83994642863edf06f583`,
               );
               setData(result.data.logos[0]);
+              red(setTrailer({
+                Images: data,
+              }))
         }
     };
 
