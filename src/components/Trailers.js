@@ -17,7 +17,7 @@ const Videos = (props) => {
     
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 2,
     autoplay: true,
     responsive: [

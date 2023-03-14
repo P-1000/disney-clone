@@ -20,6 +20,7 @@ import { serverTimestamp, set } from 'firebase/database';
 import 'firebase/firestore';
 import firebase from "firebase/compat/app";
 import { icons } from 'react-icons';
+import Seasons from './Seasons';
 function Movie_Details(props) {
     const Back_Url = "https://image.tmdb.org/t/p/original";
     const {id , media_type } = useParams();
@@ -125,7 +126,7 @@ const over = MovData.overview;
 //   console.log(id)
 // }
 let things;
-
+// push movie id to firebase
 const handleFir = () =>{  auth.onAuthStateChanged(async (user)=>{
           if(user){
              things =db.collection('watchlist')
@@ -207,7 +208,7 @@ useEffect(() => {
 
 
     
-    <div className='divide-y-2 divide-solid divide-yellow-500 '>
+    <div className=' '>
 
     {/* ------ for small screeen  ----- */}
 <div>
@@ -305,6 +306,11 @@ useEffect(() => {
 </div>
 </div>
 
+{/* ------ tv season and tv thing --------  */}
+
+<div className='m-10 text-white text-xl'>
+  <Seasons id={wid}/>
+</div>
 
 <div className=' red m-10  top-0 hidden lg:block'>
 {/* <h2 className="text-2x sm:hidden">Trailers & Extras</h2> */}
@@ -336,8 +342,13 @@ useEffect(() => {
       <h3>2022  &#8226; U/A 13+ </h3>
       </div>
 </div>
-                  
+    <div className='h-16 mt-2 text-ellipsis overflow-hidden'>
+            <p>{over}</p>
+    </div>              
                   </div>
+
+
+
 
 <div className='lg:hidden'>
 <Videos/>
