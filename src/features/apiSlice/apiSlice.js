@@ -9,6 +9,8 @@ const initialState = {
    Images : "",
    um:"",
    watchlist:[],
+   watchId:[],
+   reduxList:[]
 }
 
 const apiSlice = createSlice({
@@ -34,14 +36,25 @@ const apiSlice = createSlice({
             state.um = action.payload.uid;
         },
         setWatchlist:(state,action)=>{
-            state.sResults=action.payload.watchlist;
-        }
+            state.watchlist=action.payload.watchlist;
+        },
+        sWatchIds:(state,action)=>{
+            state.watchId="";
+            state.watchId=action.payload.watchId;
+        },
+        setReduxList:(state,action)=>{
+            state.watchlist=action.payload.reduxList;
+        },
 
     }
 })
 
-export const {setApi,setsearch , setTrailer , setImages ,setUser  , setWatchlist} = apiSlice.actions;
+export const {setApi,setsearch , setTrailer , setImages ,setUser  , setWatchlist , sWatchIds , setReduxList} = apiSlice.actions;
 //
+export const rid = (state) => state.api.reduxList;
+
+export const selectListId = (state) => state.api.watchId;
+
 export const selectWatch = (state)=> state.api.watchlist;
 export const selectUser = (state)=> state.api.um;
 export const selectImages = (state)=> state.api.Images;

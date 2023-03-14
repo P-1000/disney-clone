@@ -6,77 +6,76 @@ import { sui } from '../features/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux' 
 import { selectWatch } from '../features/apiSlice/apiSlice';
 import { setWatchlist } from '../features/apiSlice/apiSlice';
+import { sWatchIds } from '../features/apiSlice/apiSlice';
+// import { sWatchIds } from '../features/apiSlice/apiSlice';
+import { selectListId } from '../features/apiSlice/apiSlice';
+import { rid } from '../features/apiSlice/apiSlice';
+import { setReduxList } from '../features/apiSlice/apiSlice';
+
 
 function Watchlist() {
-    const [w , setW ] = useState()
+  const [w , setW ] = useState()
   const umd = useSelector(sui)
+  const reduxId = useSelector(selectListId);
   const dispatch = useDispatch();
-  console.log(umd)
-    // useEffect(() => {
-    //             db.collection('watchlist')
-    //     //   .orderBy('timestamp', 'asc') // optional
-    //     // .where('uid', '==' , user.id)
-    //       .onSnapshot((snapshot) => {
-
-    //       let watch = snapshot.docs.map((doc)=>{
-    //       //  console.log(doc.data())
-    //       })
-    //     })
-    // }, []);
+  const u = umd;
+  const robj = useSelector(rid)
+  
     const [arr , setArr] = useState([])
     const user = auth.currentUser;
-    console.log(user)
+    //for fetching data from firebase with matching current userid with uid in the collection docs field : 
     useEffect(()=>{
         auth.onAuthStateChanged(async (user)=>{
                 if(user){
-                    db.collection('watchlist')
-                    //   .orderBy('timestamp', 'asc') // optional
-                 //   .where(uid == user.id)
-                      .onSnapshot((snapshot) => {
-                   let watch = snapshot.docs.map((doc)=>{
-                        // console.log(doc.data().id)
-                        // setArr([...arr, doc.data().id)]);
-                        setArr(arr.concat(doc.data().id))
-                      })
-                    })
-                
-             
-
+                    db.collection('watchlist').where('uid', '==', u ).onSnapshot((snapshot) => {
+                   let watch = snapshot.docs.forEach((doc)=>{
+                    const id = doc.data().id;
+                     setArr((prev)=>{
+                       return [...prev , id];
+                     })
+                   })
+                  })
+                  dispatch(sWatchIds({
+                    watchId : arr,
+                  }))
                 }
-             
         })
-    },[])
+   console.log(arr)
+      },[umd])
+
+
+
+    
 
 // calling api for watchlist movies :: ---
 const [wlist , setWlist] = useState([])
+const uniq = [...new Set(reduxId)];
+
 
 useEffect(()=>{
   async function fetchData(){
-  for(let i =0 ; i<arr.length;i++){
-    let mov = await fetch(`https://api.themoviedb.org/3/movie/76600?api_key=21958744bdcd83994642863edf06f583`);
+  for(let i =0 ; i<uniq.length;i++){
+    let mov = await fetch(`https://api.themoviedb.org/3/movie/${uniq[i]}?api_key=21958744bdcd83994642863edf06f583`);
     let mov1 = await mov.json();
-    console.log(mov1)
-   arr.forEach(element => {
-	 setWlist(arr.concat(mov1))
-});
-  }
-//   dispatch(setWatchlist({
-//     Watchlist : mov1,
-//  }));
-  };
-  const movData = fetchData();
-  
-
-},[])
-
-
-    wlist.map((wi)=>{
-      console.log(wi + "from map")
+    setWlist((prev)=>{
+      return [...prev , mov1];
     })
+  }
+  dispatch(setReduxList({
+    reduxList : wlist,
+  }))
+  }
+  console.log(wlist)
+  const movData = fetchData();
+},[])
 
   return (
     <div>
-      watchlist
+      {wlist && wlist.map((movie)=>{
+        <div>
+          <h1>{movie.title}</h1>
+        </div>
+      })}
     </div>
   )
 }
