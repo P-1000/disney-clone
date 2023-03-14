@@ -1,7 +1,7 @@
 import React , {useEffect , useState , Component} from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
-
+import {CgMathPlus} from 'react-icons/cg'
 import movieSlice from '../features/movie/movieSlice';
 import { selectNewResults , selectResults , selectSearch , setImages} from '../features/apiSlice/apiSlice';
 import { useSelector } from "react-redux";
@@ -19,6 +19,7 @@ import db from '../features/firebase';
 import { serverTimestamp, set } from 'firebase/database';
 import 'firebase/firestore';
 import firebase from "firebase/compat/app";
+import { icons } from 'react-icons';
 function Movie_Details(props) {
     const Back_Url = "https://image.tmdb.org/t/p/original";
     const {id , media_type } = useParams();
@@ -206,7 +207,7 @@ useEffect(() => {
 
 
     
-    <div className=' '>
+    <div className='divide-y-2 divide-solid divide-yellow-500 '>
 
     {/* ------ for small screeen  ----- */}
 <div>
@@ -262,13 +263,25 @@ useEffect(() => {
                         <p className='text-lg pt-2 ml-10'>2hr1min &#8226; Action &#8226; U/A &#8226; Star Wars</p>
                         <p className='text-lg pt-2 ml-10 w-2/4  text-ellipsis overflow-hidden' style={{height:"120px"}}>{over}</p>
 
-                        <div className='flex  gap-5 ml-10 mt-20'>   
+                        <div className='flex justify-between mt-12 mx-12 flex-row'> 
+                        <div className='flex'>
                             <FaPlay className='text-3xl' />
                             <div className='flex flex-col'>
                                 <p>AVAILBLE ON </p>
                                 <p>NETFLIX</p>
                             </div>
+                            </div>
+                            <div className='basis-1/2'>
+                        <div className='firebase'>
+                          <button className='ml-3' value={id}
+                            onClick={()=>handleFir()}
+                                  ><CgMathPlus size={26}/>
+                              </button>
+                              <p className='' style={{fontSize:"12px"}}>WATCHLIST</p>
+                            </div> 
+                        </div>  
                         </div>
+                    
                  </div>
 
               {/* <img
@@ -287,32 +300,52 @@ useEffect(() => {
             className="w-full h-full  object-contain object-center rounded-lg absolute"
             style={{left:"310px"}}
           />
+        
         </div>
 </div>
 </div>
 
 
-<div className=' red m-10  top-0'>
+<div className=' red m-10  top-0 hidden lg:block'>
 {/* <h2 className="text-2x sm:hidden">Trailers & Extras</h2> */}
   <Videos/>
 </div>
 
 
-<div className='m-10'>
+
+<div className='m-10 hidden lg:block'>
               <UpMovies />
 </div>
-{/* firebase */}
-<div className='firebase'>
-
-              <button className=' p-10 m-10' value={id}
-               style={{border : "2px solid blue"}}
-               onClick={()=>handleFir()}
-               >ADD TO FIRE BASE
-               </button>
-</div>  
+{/* firebase */} 
 
 </div>
+{/* -------------  small screen details section ----------:  */}
 
+
+<div className='lg:hidden mt-56 p-4'>
+<div className='w-full h-full m-0 p-0 flex justify-items-stretch relative' >
+<img
+            src={`https://image.tmdb.org/t/p/original${MovData.poster_path}`}
+            alt="backgrop poster"
+            className="w-full h-full  object-contain object-center rounded-lg"
+            style={{width:"88px",height:"92px"}}
+          />
+      <div className='flex-col w-full ml-2'>
+      <h1 className='text-xl '>{MovieName}</h1>
+      <h3>Action &#8226; SuperHero </h3>
+      <h3>2022  &#8226; U/A 13+ </h3>
+      </div>
+</div>
+                  
+                  </div>
+
+<div className='lg:hidden'>
+<Videos/>
+</div>
+
+<div className='lg:hidden'>
+<UpMovies />
+</div>
 
     </>
   )
