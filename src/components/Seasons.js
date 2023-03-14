@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Slider from 'react-slick';
+import { setsearch } from '../features/apiSlice/apiSlice';
 
 function Seasons(props) {
     let settings = {
         infinite: true,
         speed: 900,
-        slidesToShow: 4,
+        slidesToShow: 7,
         slidesToScroll: 3,
         autoplay: true,
         responsive: [
@@ -51,12 +52,42 @@ const [season, setSeason] = useState([]);
             fetchData()
         },[])
 
-console.log(season)
+let ms = []
+if(season.length<3 || season.length<5){
+  season.map((e)=>{
+   ms.push(e)
+  })
+  season.map((e)=>{
+    ms.push(e)
+   })
+   season.map((e)=>{
+    ms.push(e)
+   })
+   season.map((e)=>{
+    ms.push(e)
+   })
+   season.map((e)=>{
+    ms.push(e)
+   })
+   season.map((e)=>{
+    ms.push(e)
+   })
+   season.map((e)=>{
+    ms.push(e)
+   })
+
+}else{
+  season.map((e)=>{
+    ms.push(e)
+  })
+}
+
+console.log(ms)
 
   return (
     <div>
       <h1>Seasons</h1>
-      <Carousel className="sm:mx-0 sm:mt-32 " {...settings} dots={true}>
+      <Carousel className=" " {...settings}  dots={true}>
       {/* {season &&
         season.map((movie) => (
           <Wrap key={movie.id} >
@@ -67,9 +98,9 @@ console.log(season)
         ))} */}
 
         {
-          season && 
-             season.map((sea) =>{
-             return  <div className="w-full h-full"> 
+          ms && 
+             ms.map((sea) =>{
+             return  <div className="w-full h-full p-2 mx-4 px-4"> 
              <img src={poster_url + sea.poster_path}  alt={sea.title} />
              </div> 
          })
@@ -83,13 +114,12 @@ export default Seasons
 
 
 const Carousel = styled(Slider)`
-  margin-top: 20px;
   width: 100%;
   height: 100%;
   & > button {
     opacity: 0;
     height: 100%;
-    width: 5vw;
+    ${'' /* width: 5vw; */}
     z-index: 1;
     &:hover {
       opacity: 1;

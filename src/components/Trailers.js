@@ -75,6 +75,9 @@ const Videos = (props) => {
       
   },[tmdb])
  
+// duplicating trailer data to provide for slider : 
+
+
 
   // &vote_average.gte=60.0&with_genres=Action
   return (

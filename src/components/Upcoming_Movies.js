@@ -51,7 +51,6 @@ const UpMovies = (props) => {
     
   },[])
 
-  console.log(tmdb)
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>
