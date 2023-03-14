@@ -144,7 +144,9 @@ const ui = useSelector(sui)
                 <img src = './images/original-icon.svg'/>
                 <span>ORIGINALS</span>
             </a>
-            <a>
+            <a onClick={()=>{
+                 history.push('/MOVIES')
+            }}>
                 <img src = './images/movie-icon.svg'/>
                 <span>MOVIES</span>
             </a>

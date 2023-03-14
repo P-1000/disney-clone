@@ -53,7 +53,7 @@ const [season, setSeason] = useState([]);
         },[])
 
 let ms = []
-if(season.length<3 || season.length<5){
+if(season.length<3 || season.length<5 || season.length==4){
   season.map((e)=>{
    ms.push(e)
   })
@@ -75,6 +75,8 @@ if(season.length<3 || season.length<5){
    season.map((e)=>{
     ms.push(e)
    })
+   console.log("helo"
+   )
 
 }else{
   season.map((e)=>{
@@ -101,7 +103,9 @@ console.log(ms)
           ms && 
              ms.map((sea) =>{
              return  <div className="w-full h-full p-2 mx-4 px-4"> 
+             <Link to={`/movie_details/${sea.id}/${sea.media_type}`}>
              <img src={poster_url + sea.poster_path}  alt={sea.title} />
+             </Link>
              </div> 
          })
         } 

@@ -15,7 +15,7 @@ import Login from './components/Login';
 import MyAc from "./components/MyAc";
 import SearchResults from "./components/SearchResults";
 import Watchlist from "./components/Watchlist";
-
+import MoviePage from "./components/MoviePage";
 
 function App() {
   return (
@@ -38,6 +38,9 @@ function App() {
          </Route>
          <Route path="/myWatchlist">
             <Watchlist/>
+         </Route>
+         <Route path="/MOVIES">
+            <MoviePage/>
          </Route>
           <Route path="/" > 
                     <Home/>
