@@ -76,9 +76,9 @@ const ui = useSelector(sui)
                 }
 
         })
-    },[])
+    },[ui])
 
-   console.log(ui)
+  
 
     const signIn = () => {
             auth.signInWithPopup(provider).then((result)=>{
@@ -175,7 +175,7 @@ const ui = useSelector(sui)
 
 </div>
 
-            <Profile>
+            <Profile className=''>
            <Popover>
                 <PopoverTrigger>
                           <Button style={child}>    
@@ -185,11 +185,11 @@ const ui = useSelector(sui)
                             <Portal>
                          <PopoverContent>
                         <PO>
-                    <Button p={8} style={parent1} onClick={()=>{
+                    <Button className='z-30' p={8} style={parent1} onClick={()=>{
                         history.push('/profile')
                     }}>PROFILE</Button>
                      <PopoverBody>
-                   <Button  onClick={signOut} style={parent1} p={8}>SIGN OUT</Button>
+                   <Button className='z-30'  onClick={signOut} style={parent1} p={8}>SIGN OUT</Button>
                       </PopoverBody>
                      <Button p={8} style={parent1}>HELP</Button>
                      </PO>

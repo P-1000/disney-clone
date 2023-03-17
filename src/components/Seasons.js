@@ -76,8 +76,9 @@ if(season.length<3 || season.length<5 || season.length==4){
    season.map((e)=>{
     ms.push(e)
    })
-   console.log("helo"
-   )
+   season.map((e)=>{
+    ms.push(e)
+   })
 
 }else{
   season.map((e)=>{
