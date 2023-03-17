@@ -73,7 +73,7 @@ const Videos = (props) => {
       getVideos()
       
       
-  },[tmdb])
+  },[tmdb,id])
  
 // duplicating trailer data to provide for slider : 
 

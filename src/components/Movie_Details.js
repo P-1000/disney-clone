@@ -354,9 +354,11 @@ useEffect(() => {
 <Videos/>
 </div>
 
-<div className='lg:hidden'>
-<UpMovies />
-</div>
+  <div className='lg:hidden'>
+    <UpMovies />
+  </div>
+
+
 
     </>
   )

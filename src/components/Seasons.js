@@ -50,11 +50,12 @@ const [season, setSeason] = useState([]);
                 setTv(result)
             }
             fetchData()
-        },[])
+        },[tv_id])
 
 let ms = []
+
 if(season){
-if(season.length<3 || season.length<5 || season.length==4){
+if(season.length<3 || season.length<=5 || season.length==4){
   season.map((e)=>{
    ms.push(e)
   })
