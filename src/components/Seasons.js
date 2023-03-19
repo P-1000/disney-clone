@@ -7,6 +7,7 @@ import { setsearch } from '../features/apiSlice/apiSlice';
 function Seasons(props) {
     let settings = {
         infinite: true,
+        dots:false,
         speed: 900,
         slidesToShow: 7,
         slidesToScroll: 3,
@@ -92,8 +93,8 @@ console.log(ms)
 
   return (
     <div>
-      <h1>Seasons</h1>
-      <Carousel className=" " {...settings}  dots={true}>
+      <h1 className='p-2'>Seasons</h1>
+      <Carousel className=" " {...settings}  dots={false}>
       {/* {season &&
         season.map((movie) => (
           <Wrap key={movie.id} >

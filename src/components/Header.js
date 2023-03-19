@@ -117,7 +117,7 @@ const ui = useSelector(sui)
 
   return (
     <Nav>
-      <Logo src='./images/logo.svg'/>
+      <Logo src='https://disney-clone-woad.vercel.app/images/images/logo.svg' />
       {
         !userName ?  (<Login onClick={signIn}>
             Login 
@@ -157,7 +157,7 @@ const ui = useSelector(sui)
             
       </NavMenu>
       
-      <div className='user flex gap-10'>
+      <div className='user flex gap-4'>
 
 <div className='search flex w-full'>
 
@@ -179,7 +179,7 @@ const ui = useSelector(sui)
            <Popover>
                 <PopoverTrigger>
                           <Button style={child}>    
-                                  <Userimg src={userPhoto } />
+                                  <Userimg  src={userPhoto } />
                           </Button>
                          </PopoverTrigger>
                             <Portal>

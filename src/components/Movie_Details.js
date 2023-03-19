@@ -118,7 +118,13 @@ const wid = id;
 
 const over = MovData.overview;
 
+let md = media_type;
 
+
+if(md == 'undefined'){
+  md = 'movie'
+}
+console.log(md)
 //firebase : ----
 
 // const handleFir =() =>{
@@ -130,12 +136,14 @@ let things;
 const handleFir = () =>{  auth.onAuthStateChanged(async (user)=>{
           if(user){
              things =db.collection('watchlist')
-             
                 things.add({
                   uid : user.uid,
                   id : wid,
-                  cretedAt:serverTimestamp()
-
+                  cretedAt:serverTimestamp(),
+                  media_type:md,
+                  movie_name : MovieName,
+                  backdrop_path :'https://image.tmdb.org/t/p/original' + MovData.backdrop_path,
+                  overview:over,
                 })
           }
 
@@ -208,7 +216,7 @@ useEffect(() => {
 
 
     
-    <div className=' '>
+    <div className='w-full '>
 
     {/* ------ for small screeen  ----- */}
 <div>
@@ -308,7 +316,7 @@ useEffect(() => {
 
 {/* ------ tv season and tv thing --------  */}
 
-<div className='m-10 text-white text-xl'>
+<div className='m-10 text-white text-xl hidden sm:block'>
   <Seasons id={wid}/>
 </div>
 
@@ -317,6 +325,12 @@ useEffect(() => {
   <Videos/>
 </div>
 
+
+<div className='hidden'>
+<div className='m-10  lg:hidden'>
+              <Seasons id={wid}/>
+</div>
+</div>
 
 
 <div className='m-10 hidden lg:block'>
@@ -328,7 +342,12 @@ useEffect(() => {
 {/* -------------  small screen details section ----------:  */}
 
 
-<div className='lg:hidden mt-56 p-4'>
+<div className='lg:hidden mt-56 '>
+
+<div className='mx-4  lg:hidden mb-0 p-0'>
+              <Seasons id={wid}/>
+</div>
+<div className='px-4'>
 <div className='w-full h-full m-0 p-0 flex justify-items-stretch relative' >
 <img
             src={`https://image.tmdb.org/t/p/original${MovData.poster_path}`}
@@ -346,12 +365,13 @@ useEffect(() => {
             <p>{over}</p>
     </div>              
                   </div>
+</div>
 
 
-
-
-<div className='lg:hidden'>
+<div>
+<div className='lg:hidden mt-0'>
 <Videos/>
+</div>
 </div>
 
   <div className='lg:hidden'>

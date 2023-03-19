@@ -26,22 +26,30 @@ function Watchlist() {
   const poster_url = "https://image.tmdb.org/t/p/original";
     const [arr , setArr] = useState([])
     const [ids, setIds] = useState([]);
+    const [typ , setTyp] = useState([]);
 
   async function fetchWatchlist(uid) {
     const watchlistRef = db.collection('watchlist');
     const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
     const ids = [];
     querySnapshot.forEach(doc => {
+      typ.push(doc.data().media_type);
       ids.push(doc.data().id);
+     
+
     });
+ let i =0;
     const movieDataPromises = ids.map(async id => {
-      const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=21958744bdcd83994642863edf06f583`);
+     let m =  typ[i++]
+     console.log(m)
+      const response = await axios.get(`https://api.themoviedb.org/3/${m}/${id}?api_key=21958744bdcd83994642863edf06f583`);
       return response.data;
     });
   
     const movieData = await Promise.all(movieDataPromises);
     return movieData;
   }
+
 
   useEffect(() => {
     async function fetchData() {
@@ -55,7 +63,6 @@ function Watchlist() {
 ids.forEach((e)=>{
         mv.push(e)
 })
-
 const uniq = [...new Set(mv)];
 
 
@@ -107,6 +114,7 @@ const uniq = [...new Set(mv)];
 //   console.log(wlist)
 //   const movData = fetchData();
 // },[])
+let i =0;
 
   return (
     <>
@@ -118,8 +126,8 @@ const uniq = [...new Set(mv)];
        
         uniq.map((movie) => (
           <div className='relative hover:scale-110 transition-all '>
-          <h2 className='absolute lg:top-16 mt-11 w-8/12  text-clip h-10 p-1 top-28 shadow-lg overflow-hidden '>{movie.title}</h2>
-            <Link to={`/movie_details/${movie.id}/${movie.media_type}`}>
+          <h2 className='absolute lg:top-16 mt-11 w-8/12  text-clip h-10 p-1 top-28 shadow-lg overflow-hidden '>{movie.name || movie.title}</h2>
+            <Link to={`/movie_details/${movie.id}/${typ[i++]}/`}>
               <img  className='h-full w-full rounded-lg object-cover' src={poster_url + movie.backdrop_path}  alt={movie.title} />
             </Link>
           </div>

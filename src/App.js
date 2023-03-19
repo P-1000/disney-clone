@@ -16,6 +16,7 @@ import MyAc from "./components/MyAc";
 import SearchResults from "./components/SearchResults";
 import Watchlist from "./components/Watchlist";
 import MoviePage from "./components/MoviePage";
+import Tv from "./components/Tv";
 
 function App() {
   return (
@@ -41,6 +42,9 @@ function App() {
          </Route>
          <Route path="/MOVIES">
             <MoviePage/>
+         </Route>
+         <Route path="/TV">
+          <Tv/>
          </Route>
           <Route path="/" > 
                     <Home/>
