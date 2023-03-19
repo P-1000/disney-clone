@@ -344,9 +344,8 @@ useEffect(() => {
 
 <div className='lg:hidden mt-56 '>
 
-<div className='mx-4  lg:hidden mb-0 p-0'>
-              <Seasons id={wid}/>
-</div>
+
+
 <div className='px-4'>
 <div className='w-full h-full m-0 p-0 flex justify-items-stretch relative' >
 <img
@@ -365,6 +364,17 @@ useEffect(() => {
             <p>{over}</p>
     </div>              
                   </div>
+
+{/* ------------------- watchlist button for small screeen page --------- */}
+<div className='mx-4 mt-3 flex justify-around center'>
+        <button 
+         onClick={()=>handleFir()}
+         className='flex gap-2 shadow-lg rounded-sm pr-16 pl-10  px-8 py-3 ' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>  Watchlist</button>
+        <button className='flex gap-2 shadow-lg rounded-sm pr-16 pl-10  px-8 py-3' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>  Share</button>
+</div>
+                  <div className='mx-4  lg:hidden mb-0 p-0'>
+              <Seasons id={wid}/>
+</div>
 </div>
 
 

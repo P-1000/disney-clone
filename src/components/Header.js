@@ -183,15 +183,17 @@ const ui = useSelector(sui)
                           </Button>
                          </PopoverTrigger>
                             <Portal>
-                         <PopoverContent>
+                         <PopoverContent className='bg-white-200'>
                         <PO>
-                    <Button className='z-30' p={8} style={parent1} onClick={()=>{
+                    <div className='z-100 '>
+                    <Button className='z-30 hover:bg-slate-200' p={8} style={parent1} onClick={()=>{
                         history.push('/profile')
                     }}>PROFILE</Button>
                      <PopoverBody>
                    <Button className='z-30'  onClick={signOut} style={parent1} p={8}>SIGN OUT</Button>
                       </PopoverBody>
-                     <Button p={8} style={parent1}>HELP</Button>
+                     <Button className='hover:bg-slate-200 b0' p={8} style={parent1}>HELP</Button>
+                    </div>
                      </PO>
                  </PopoverContent>
                 </Portal>

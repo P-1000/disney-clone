@@ -7,6 +7,7 @@ import {apiSlice , setApi  , selectSearch, setsearch} from '../features/apiSlice
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { selectNewResults } from '../features/apiSlice/apiSlice';
+import { selectSearch_Tv } from '../features/apiSlice/apiSlice';
 
 function SearchResults(props) {
     const{query} = useParams();
@@ -15,43 +16,85 @@ function SearchResults(props) {
     const [sMovies , setsMovies] = useState();
     const movies = useSelector(selectSearch);
     const bs = useSelector(selectSearch);
-    console.log(bs)
+    const tvResults = useSelector(selectSearch_Tv);
   //--- dispatcher : --
   const red = useDispatch();
 // https://api.themoviedb.org/3/trending/all/day?api_key=21958744bdcd83994642863edf06f583
 
+const [filter , setFilter] = useState('movie')
+
 useEffect(()=>{
   async function fetchData(){
    let mov = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=21958744bdcd83994642863edf06f583&query=${query}`);
-    let mov1 = await mov.json();
+   let tv = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=21958744bdcd83994642863edf06f583&query=${query}`);
+   let tv1 = await tv.json();
+   let mov1 = await mov.json();
+
   red(setsearch({
     sResults : mov1.results,
+    sResults_TV : tv1.results,
  }));
   };
   const movData = fetchData();
-  
-
 },[query])
 
+console.log(tvResults);
 
-
-
+const types = ['movie' , 'tv']
 const poster_url = "https://image.tmdb.org/t/p/original";
 
   return (
 
     <>
-<h1 className='text-grey-700'>Showing all results for <span className='text-white-800'>{query}</span></h1>
-<div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 px-8 mt-8'>
-{bs &&
-        bs.map((movie) => (
 
+<div className='text-black'>
+<label htmlFor='filter'> 
+<select id="breed" name="breed" 
+                value='select' 
+                onChange={e=>setFilter(e.target.value)}>
+               <option className='text-black' value="" />
+                    {types.map(red => (
+                          <option className='text-black' value={red}>{red}</option>
+                      ))}
+                </select>
+                </label>
+</div>
+
+<h1 className='text-grey-700'>Showing all results for <span className='text-white-800'>{query}</span></h1>
+<div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 px-8 mt-8'> 
+
+  {filter == 'movie' && bs ?
+    
+        bs.map((movie) => (
            <div className=''>
             <Link to={`/movie_details/${movie.id}/movie`} >
               <img className='h-full w-full rounded-lg object-cover' src={poster_url + movie.backdrop_path}  alt={movie.title} />
             </Link>
           </div>
-          ))}
+          ))
+  
+         : 
+      (
+         
+
+            tvResults && filter =='tv' ?
+        tvResults.map((movie) => (
+
+           <div className='w-full'>
+            <Link to={`/movie_details/${movie.id}/tv`} >
+              <img className='h-full w-full rounded-lg object-cover' src={poster_url + movie.backdrop_path}  alt={movie.title} />
+            </Link>
+          </div>
+          ))
+         : 
+          null
+          
+      )
+
+          }
+{/* tv search results  */}
+         
+
     </div>
     </>
   )

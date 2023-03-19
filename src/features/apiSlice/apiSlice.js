@@ -1,10 +1,12 @@
 import React from 'react'
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from 'react-dom/test-utils';
 
 const initialState = {
    results : "",
    newResults : "",
    sResults : "",
+   sResults_TV : "",
    vidId : "",
    Images : "",
    um:"",
@@ -23,6 +25,7 @@ const apiSlice = createSlice({
         },
         setsearch:(state,action)=>{
             state.sResults=action.payload.sResults;
+            state.sResults_TV = action.payload.sResults_TV;
         }
         ,
         setTrailer:(state,action)=>{
@@ -52,7 +55,7 @@ const apiSlice = createSlice({
 export const {setApi,setsearch , setTrailer , setImages ,setUser  , setWatchlist , sWatchIds , setReduxList} = apiSlice.actions;
 //
 export const rid = (state) => state.api.reduxList;
-
+export const selectSearch_Tv = (state) => state.api.sResults_TV;
 export const selectListId = (state) => state.api.watchId;
 
 export const selectWatch = (state)=> state.api.watchlist;
