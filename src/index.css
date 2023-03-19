@@ -29,11 +29,19 @@ a{
   body{
     font-size: 16px;
   }
+  .react-multi-carousel-list{
+    height: 360px;
+    width: 960px;
+  }
 }
 @media only screen and (min-width: 480px) and (max-width: 768px){
   body{
     font-size: 15px;
   }
+  /* .react-multi-carousel-list{
+    width: 320px !important;
+    height: 120px;
+  } */
 }
 
 
@@ -44,6 +52,10 @@ a{
  .red{
   top:180px;
  }
+ .react-multi-carousel-list{
+  width: 320px !important;
+  height: 180px;
+}
 
 }
 
@@ -61,6 +73,11 @@ a{
 @media only screen and (max-width: 479px){
   cont{
     max-width: 80px;
+  }
+  .react-multi-carousel-list{
+    width: 340px !important;
+    height: 180px;
+    overflow: hidden;
   }
 
 }
@@ -83,7 +100,3 @@ backdrop-filter: blur(3px);
 -webkit-backdrop-filter: blur(3.2px);
 }
 
-.react-multi-carousel-list{
-  height: 360px;
-  width: 960px;
-}

@@ -27,7 +27,7 @@ function MoviePage() {
     <div className='flex justify-between flex-wrap'>
      <div  className=' mt-2 p-3 mx-4 px-2 basis-1/4' mx-2 style={{height:"200px" , width:"870px"}}>
 
-            <Carousel className='w-full object-cover rounded-3xl' style={{height:"290px"}}
+            <Carousel className='w-full ml-2 object-cover rounded-3xl' style={{height:"290px"}}
       swipeable={true}
       draggable={true}
       showDots={false}
@@ -44,8 +44,7 @@ function MoviePage() {
       dotListClass="custom-dot-list-style"
       itemClass="carousel-item-padding-40-px"
     >
-      <div className='object-cover w-full '>
-       <p className='z-10 top-10'>WAKANDA FOREVER</p>
+      <div className=' '>
         <img src='https://img1.hotstarext.com/image/upload/f_auto,t_web_m_1_5x/sources/r1/cms/prod/4416/674416-h'/>
       </div>
       <div>
@@ -62,20 +61,19 @@ function MoviePage() {
       </div>
       <div>
         <div>
-        <p>AVENGERS END GAME</p>
         <img src='https://img1.hotstarext.com/image/upload/f_auto,t_web_m_1_5x/sources/r1/cms/prod/4298/674298-h'/>
         </div>
       </div>
     </Carousel>
 
      </div>
-     <div>
-     <div>
-        <div className=' ml-14 flex justify-between py-3 mx-10 p-4 mt-2'>
+     <div className=''>
+     <div className='lg:w-11/12 w-10/12 sm:mr-4 rounded-2xl mt-4 mr-24'>
+        <div className='  flex justify-between py-3 mx-10 p-4'>
             <h3 className='float-left '>NEW MOVIES </h3>
             <h5>See All > </h5>
         </div>
-        <div className='mx-10 '>
+        <div className='lg:mx-10 sm:mx-0'>
         <div className='flex w-full gap-8 rounded-3xl px-2 mx-4 mr-10' style={{backgroundColor : "#3343668a"}}>
             <div className='p-3  '>
                 <img className=' rounded-2xl w-28 h-28 object-cover' src='https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg' />
@@ -88,7 +86,7 @@ function MoviePage() {
                   <h3 className='text-blue-500'>Action</h3>
 
            </div>
-            <div className='flex flex-col  justify-between py-3 mx-0'>
+            <div className='flex flex-col  justify-between py-3 '>
                 <div className='mx-4'>
                     <FaStar /> 4.5
                 </div>
@@ -99,7 +97,9 @@ function MoviePage() {
         </div>
      </div>
 
-     <div className='mx-10 mt-8'>
+      {/* ------ card -2 ------- */}
+
+     <div className='lg:mx-10 sm:mx-0 mt-6'>
         <div className='flex w-full gap-8 rounded-3xl px-2 mx-4 mr-10' style={{backgroundColor : "#3343668a"}}>
             <div className='p-3  '>
                 <img className=' rounded-2xl w-28 h-28 object-cover' src='https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg' />
@@ -112,7 +112,7 @@ function MoviePage() {
                   <h3 className='text-blue-500'>Action</h3>
 
            </div>
-            <div className='flex flex-col  justify-between py-3 mx-0'>
+            <div className='flex flex-col  justify-between py-3 '>
                 <div className='mx-4'>
                     <FaStar /> 4.5
                 </div>
@@ -122,6 +122,7 @@ function MoviePage() {
             </div>
         </div>
      </div>
+    
      </div>
      </div>
      </div>
