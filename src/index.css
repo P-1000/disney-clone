@@ -58,7 +58,10 @@ a{
 }
 
 }
-
+.css-16lloyr-MuiBottomNavigation-root{
+  background-color: #030609e2 !important;
+  color: #f9f9f9 !important;
+}
 
 /* .cont{
   display: flex;
