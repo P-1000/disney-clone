@@ -14,9 +14,9 @@ import { setReduxList } from '../features/apiSlice/apiSlice';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import SwipeableEdgeDrawer from './mui'
 
-
-function Watchlist() {
+function Watchlist(props) {
   const [w , setW ] = useState()
   const umd = useSelector(sui)
   const reduxId = useSelector(selectListId);
@@ -121,18 +121,28 @@ let i =0;
     <h1>YOUR WATCHLIST</h1>
     <div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 px-8 mt-8'>
 
-    
        {uniq &&
-       
         uniq.map((movie) => (
           <div className='relative hover:scale-110 transition-all '>
           <h2 className='absolute lg:top-16 mt-11 w-8/12  text-clip h-10 p-1 top-28 shadow-lg overflow-hidden '>{movie.name || movie.title}</h2>
-            <Link to={`/movie_details/${movie.id}/${typ[i++]}/`}>
-              <img  className='h-full w-full rounded-lg object-cover' src={poster_url + movie.backdrop_path}  alt={movie.title} />
-            </Link>
+            {/* <Link to={`/movie_details/${movie.id}/${typ[i++]}/`}> */}
+            <SwipeableEdgeDrawer 
+            poster={poster_url + movie.poster_path} 
+            mid={movie.id}
+            mt={typ[i++]}
+            id={movie.title || movie.name} 
+            src={poster_url + movie.backdrop_path}
+            overview = {movie.overview}
+             />
+              {/* <img  className='h-full w-full rounded-lg object-cover' src={poster_url + movie.backdrop_path}  alt={movie.title} /> */}
+            {/* </Link> */}
           </div>
          
         ))}
+        </div>
+
+        <div>
+          <SwipeableEdgeDrawer />
         </div>
 </>
   )
