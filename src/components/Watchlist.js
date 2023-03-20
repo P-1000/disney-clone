@@ -118,13 +118,13 @@ let i =0;
 
   return (
     <>
-    <h1>YOUR WATCHLIST</h1>
+    <h1 className='text-slate-50 text-xl mt-2 px-4 ml-4 mb-0' >YOUR WATCHLIST</h1>
     <div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 px-8 mt-8'>
 
        {uniq &&
         uniq.map((movie) => (
           <div className='relative hover:scale-110 transition-all '>
-          <h2 className='absolute lg:top-16 mt-11 w-8/12  text-clip h-10 p-1 top-28 shadow-lg overflow-hidden '>{movie.name || movie.title}</h2>
+         
             {/* <Link to={`/movie_details/${movie.id}/${typ[i++]}/`}> */}
             <SwipeableEdgeDrawer 
             poster={poster_url + movie.poster_path} 
@@ -134,6 +134,7 @@ let i =0;
             src={poster_url + movie.backdrop_path}
             overview = {movie.overview}
              />
+              <h2 className='absolute lg:top-16 mt-11 w-8/12 text-slate-50  text-clip h-11 px-4  p-1 top-28 shadow-lg overflow-hidden '>{movie.name || movie.title}</h2>
               {/* <img  className='h-full w-full rounded-lg object-cover' src={poster_url + movie.backdrop_path}  alt={movie.title} /> */}
             {/* </Link> */}
           </div>

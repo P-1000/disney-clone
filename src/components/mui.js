@@ -20,17 +20,17 @@ const pp = 80
 const Root = styled('div')(({ theme }) => ({
   height: '100%',
   backgroundColor:
-    theme.palette.mode === 'light' ? grey[100] : theme.palette.background.default,
+    theme.palette.mode === 'light' ? '#0d111b' : theme.palette.background.default,
 }));
 
 const StyledBox = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#fff' : grey[800],
+  backgroundColor: theme.palette.mode === 'dark' ? '#0d111b' : grey[800],
 }));
 
 const Puller = styled(Box)(({ theme }) => ({
   width: 36,
   height: 6,
-  backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[900],
+  backgroundColor: theme.palette.mode === 'light' ? '#0d111b' : '#0d111b',
   borderRadius: 3,
   position: 'absolute',
   top: 9,
@@ -38,7 +38,7 @@ const Puller = styled(Box)(({ theme }) => ({
 }));
 
 function SwipeableEdgeDrawer(props) {
-  const history = useHistory
+  const history = useHistory()
   const { window,id , src ,poster , overview , mid , mt} = props;
   const params = useParams();
 
@@ -55,7 +55,8 @@ function SwipeableEdgeDrawer(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
   
     const abc = path => {
-      history.push(path);
+       history.push(`/movie_details/${mid}/${mt}`);
+      console.log("clicked")
     }
 
   return (
@@ -102,7 +103,7 @@ function SwipeableEdgeDrawer(props) {
         >
         {/* ----------------content inside drawer --------- */}
           <Puller />
-          <Typography sx={{ p: 2, color: 'text.secondary' }}>media_type</Typography>
+          <Typography className='capitalize text-slate-300' sx={{ p: 2 }}>{mt}</Typography>
           <div className='flex p-2 lg:p-4 mb-0 gap-4 lg:gap-10'>
             <img 
             className=' ml-2 lg:ml-10  h-44 lg:h-52 md:48 rounded-md'
@@ -134,13 +135,15 @@ function SwipeableEdgeDrawer(props) {
         <button 
          className='flex gap-2 shadow-lg rounded-sm   px-8 py-3 ' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>  Watchlist
          </button>
-         <Link to={`/movie_details/${mid}/${mt}/`}>
+         {/* <Link to={`/movie_details/${mid}/${mt}/`}> */}
         <button 
-         onClick={() => abc('/') }
-        className='flex gap-2 shadow-lg rounded-sm cursor-pointer  px-8 py-3' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>
+         onClick={()=>{
+          abc('/')
+         }}
+        className=' flex gap-2 shadow-lg rounded-sm cursor-pointer  px-8 py-3 z-50' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>
           VIEW
         </button>
-        </Link>
+        {/* </Link> */}
         </div>
           </div>
         </StyledBox>

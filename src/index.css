@@ -14,7 +14,7 @@ html{
 }
 
 body{
-  background:#0d111b;
+  background:#0d111b !important;
   color: #f9f9f9;
   font-family: Gothic A1;
   margin: 0;
