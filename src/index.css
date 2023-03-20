@@ -15,7 +15,7 @@ html{
 
 body{
   background:#0d111b !important;
-  color: #f9f9f9;
+  color: #f9f9f9 !important;
   font-family: Gothic A1;
   margin: 0;
   padding: 0;
@@ -100,3 +100,7 @@ backdrop-filter: blur(3px);
 -webkit-backdrop-filter: blur(3.2px);
 }
 
+.css-16lloyr-MuiBottomNavigation-root{
+  background-color: #030609e2 !important;
+  color: #f9f9f9 !important;
+}

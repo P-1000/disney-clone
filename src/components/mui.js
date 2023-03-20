@@ -84,7 +84,7 @@ function SwipeableEdgeDrawer(props) {
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}
         swipeAreaWidth={drawerBleeding}
-        disableSwipeToOpen={false}
+        disableSwipeToOpen={true}
         variant="temporary"
         ModalProps={{
           keepMounted: false,
@@ -118,7 +118,7 @@ function SwipeableEdgeDrawer(props) {
 
                {/*------- button for large screen -------*/}
 
-      <div className=' z-100 mx-0 mt-0  gap-10 center hidden lg:flex'>
+      <div className=' z-10 mx-0 mt-0  gap-10 center hidden lg:flex'>
         <button 
          className='flex gap-2 shadow-lg rounded-sm z-10  px-8 py-3 ' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>  Watchlist</button>
         <button 

@@ -17,6 +17,7 @@ import SearchResults from "./components/SearchResults";
 import Watchlist from "./components/Watchlist";
 import MoviePage from "./components/MoviePage";
 import Tv from "./components/Tv";
+import FixedBottomNavigation from './components/Bnav'
 
 function App() {
   return (
@@ -51,6 +52,9 @@ function App() {
 
          </Route>
         </Switch>
+        <div className="lg:hidden z-50">
+        <FixedBottomNavigation/>
+        </div>
       </Router>
         
     </div>

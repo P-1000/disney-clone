@@ -23,6 +23,23 @@ function SearchResults(props) {
 
 const [filter , setFilter] = useState('movie')
 
+
+useEffect(()=>{
+  async function fetchData(){
+   let mov = await fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=21958744bdcd83994642863edf06f583`);
+   let tv = await fetch(`https://api.themoviedb.org/3/discovertv?api_key=21958744bdcd83994642863edf06f583`);
+   let tv1 = await tv.json();
+   let mov1 = await mov.json();
+
+  red(setsearch({
+    sResults : mov1.results,
+    sResults_TV : tv1.results,
+ }));
+  };
+  const movData = fetchData();
+},[])
+
+
 useEffect(()=>{
   async function fetchData(){
    let mov = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=21958744bdcd83994642863edf06f583&query=${query}`);
@@ -49,7 +66,7 @@ const poster_url = "https://image.tmdb.org/t/p/original";
 
 <div className='text-black'>
 <label htmlFor='filter'> 
-<select id="breed" name="breed" 
+<select id="breed" name="select" 
                 value='select' 
                 onChange={e=>setFilter(e.target.value)}>
                <option className='text-black' value="" />
@@ -95,10 +112,17 @@ const poster_url = "https://image.tmdb.org/t/p/original";
 {/* tv search results  */}
          
 
+
     </div>
     <div>
    
     </div>
+
+    {
+      !tvResults && !bs && <div>
+        nothing to display
+      </div>
+    }
     </>
   )
 }

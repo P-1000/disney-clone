@@ -159,9 +159,9 @@ const ui = useSelector(sui)
       
       <div className='user flex gap-4'>
 
-<div className='search flex w-full'>
+<div className='search hidden lg:flex  w-full'>
 
-<form className="w-full max-w-sm" onSubmit={onSubmitHandler}>
+<form className="w-full max-w-sm " onSubmit={onSubmitHandler}>
   <div className="flex items-center border-b border-grey-500 py-1" >
     <input  onChange={putVal}
     className="appearance-none bg-transparent border-none w-full text-white-700 mr-3 px-2 focus:text-white-700  focus:mr-40 transition-all duration-700 leading-tight focus:outline-none outline-none " type="text" placeholder="Search" aria-label="Query"/>

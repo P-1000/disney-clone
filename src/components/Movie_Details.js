@@ -229,11 +229,11 @@ useEffect(() => {
                         <p className='text-lg pt-2 ml-8'>2hr1min &#8226; Action &#8226; U/A &#8226; Star Wars</p>
                         <p className='text-lg pt-2 ml-8 w-2/4  text-ellipsis overflow-hidden' style={{height:"120px"}}>{over}</p> */}
 
-                        <div className='flex  gap-5 ml-10 mt-20 top-12 mb-32 absolute'>   
-                            <FaPlay className='text-2xl' />
+                        <div className='flex  gap-2 ml-4 mt-28 mb-32 absolute'>   
+                            <FaPlay className='text-xl mt-3' />
                             <div className='flex flex-col'>
-                                <p>AVAILBLE ON </p>
-                                <p>2hr 50min</p>
+                                <p className='text-sm'>AVAILBLE ON </p>
+                                <p className='text-sm'>NETFLIX</p>
                             </div>
                         </div>
                       
