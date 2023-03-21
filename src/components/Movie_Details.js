@@ -270,7 +270,7 @@ useEffect(() => {
                     <div >
                          <h1 className='text-5xl mt-20 ml-10'>{MovieName}</h1>
                         <p className='text-lg pt-2 ml-10'>2hr1min &#8226; Action &#8226; U/A &#8226; Star Wars</p>
-                        <p className='text-lg pt-2 ml-10 w-2/4  text-ellipsis overflow-hidden' style={{height:"120px"}}>{over}</p>
+                        <p className='text-lg pt-2 ml-10 w-2/4  text-ellipsis overflow-hidden' style={{height:"100px"}}>{over}</p>
 
                         <div className='flex justify-between mt-12 mx-12 flex-row'> 
                         <div className='flex'>
@@ -360,13 +360,13 @@ useEffect(() => {
       <h3>2022  &#8226; U/A 13+ </h3>
       </div>
 </div>
-    <div className='h-16 mt-2 text-ellipsis overflow-hidden'>
+    <div className='h-20 mt-2 text-ellipsis overflow-hidden'>
             <p>{over}</p>
     </div>              
                   </div>
 
 {/* ------------------- watchlist button for small screeen page --------- */}
-<div className='mx-4 mt-3 flex justify-around center'>
+<div className='mx-2 mt-3 flex justify-around center'>
         <button 
          onClick={()=>handleFir()}
          className='flex gap-2 shadow-lg rounded-sm pr-16 pl-10  px-8 py-3 ' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>  Watchlist</button>

@@ -185,7 +185,7 @@ const ui = useSelector(sui)
                             <Portal>
                          <PopoverContent className='bg-white-200'>
                         <PO>
-                    <div className='z-100 '>
+                    <div className='z-50 '>
                     <Button className='z-30 hover:bg-slate-200' p={8} style={parent1} onClick={()=>{
                         history.push('/profile')
                     }}>PROFILE</Button>
@@ -221,7 +221,7 @@ const PO = styled.div`
     height: 120px;
     margin-right: 32px;
     pointer:cursor;
-    border-radius: 10px;
+    border-radius: 4px;
 `
 
 const oc = styled.div`
@@ -256,7 +256,7 @@ const Nav = styled.nav`
 
   `
  const Logo = styled.img`
-        width: 80px;
+        width: 68px;
  `;
 
  const NavMenu = styled.div`
@@ -326,8 +326,8 @@ const Nav = styled.nav`
  `
  
  const Userimg = styled.img`
-        width : 42px;
-        height: 42px;
+        width : 34px;
+        height: 34px;
         border-radius : 50%;
         object-fit : cover;
         curosor : pointer;
@@ -352,7 +352,7 @@ const Login = styled.div`
 `
 
 const Profile = styled.div`
-margin-right: 42px !important;
+  margin-left:74px !important;
 
 `
 const UserTab = styled.div`

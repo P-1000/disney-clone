@@ -8,9 +8,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { selectNewResults } from '../features/apiSlice/apiSlice';
 import { selectSearch_Tv } from '../features/apiSlice/apiSlice';
+import e from 'cors';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 function SearchResults(props) {
-    const{query} = useParams();
+    let {query} = useParams();
+    const [q , setq] = useState(query)
     console.log("search page says you searched " + query)
 
     const [sMovies , setsMovies] = useState();
@@ -39,11 +42,17 @@ useEffect(()=>{
   const movData = fetchData();
 },[])
 
+const [input, setInput] = useState('')
+console.log(input)
 
+function submithandler(e){
+  e.preventDefault();
+  setq(input)
+}
 useEffect(()=>{
   async function fetchData(){
-   let mov = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=21958744bdcd83994642863edf06f583&query=${query}`);
-   let tv = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=21958744bdcd83994642863edf06f583&query=${query}`);
+   let mov = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=21958744bdcd83994642863edf06f583&query=${q}`);
+   let tv = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=21958744bdcd83994642863edf06f583&query=${q}`);
    let tv1 = await tv.json();
    let mov1 = await mov.json();
 
@@ -53,18 +62,33 @@ useEffect(()=>{
  }));
   };
   const movData = fetchData();
-},[query])
+},[q,query,input])
 
 console.log(tvResults);
 
 const types = ['movie' , 'tv']
 const poster_url = "https://image.tmdb.org/t/p/original";
 
+
   return (
 
     <>
 
-<div className='text-black'>
+<div className=' lg:hidden mt-4 mb-5'>
+<form onSubmit={submithandler} className='px-4 rounded-lg'>
+  <input type='text' placeholder="SEARCH MOVIES , TV , TRAILERS AND PEOPLE" 
+  className='foucs:outline-none outline-none border-b-1 focus:border-b-2 transition-all rounded-md px-14 py-2 w-10/12 text-slate-50 bg-inherit '
+  value={input} onInput={e => setInput(e.target.value)}
+   />
+  <button 
+  className=' py-2 px-3 bg-slate-500 rounded-sm'
+  type='submit'
+  ><SearchRoundedIcon/></button>
+
+</form>
+</div>
+
+<div className='text-black mx-4 my-1'>
 <label htmlFor='filter'> 
 <select id="breed" name="select" 
                 value='select' 
@@ -77,7 +101,7 @@ const poster_url = "https://image.tmdb.org/t/p/original";
                 </label>
 </div>
 
-<h1 className='text-grey-700'>Showing all results for <span className='text-white-800'>{query}</span></h1>
+<h1 className='text-grey-700 text-xl px-4'>Showing all results for <span className='text-white-800'>{q}</span></h1>
 <div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 px-8 mt-8'> 
 
   {filter == 'movie' && bs ?
