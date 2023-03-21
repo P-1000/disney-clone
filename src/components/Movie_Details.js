@@ -380,7 +380,7 @@ useEffect(() => {
 
 
 <div>
-<Cast id={id}/>
+<Cast id={id} mt={media_type}/>
 <div className='lg:hidden mt-0'>
 <Videos/>
 </div>

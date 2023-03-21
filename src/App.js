@@ -19,6 +19,7 @@ import MoviePage from "./components/MoviePage";
 import Tv from "./components/Tv";
 import FixedBottomNavigation from './components/Bnav'
 import Episodes from "./components/Episodes";
+import Person from "./components/Person";
 
 function App() {
   return (
@@ -50,6 +51,9 @@ function App() {
          </Route>
          <Route path="/Episodes/:id/:sid">
           <Episodes/>
+         </Route>
+         <Route path="/Persons/:id/:name">
+          <Person/>
          </Route>
           <Route path="/" > 
                     <Home/>

@@ -119,6 +119,16 @@ background-size: cover;
 position: relative;
 }
 
+.itemBackdropP{
+  height: 100vh;
+  position: fixed;
+  background-position: 10% 26%;
+  background-attachment: scroll;
+  margin-top: .6rem;
+  background-size: cover;
+  position: relative;
+  }
+
 .detailPageWrapperContainer {
   border-collapse: collapse;
   border-spacing: 0;
