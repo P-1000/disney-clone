@@ -55,7 +55,7 @@ useEffect(()=>{
    let tv = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=21958744bdcd83994642863edf06f583&query=${q}`);
    let tv1 = await tv.json();
    let mov1 = await mov.json();
-
+  
   red(setsearch({
     sResults : mov1.results,
     sResults_TV : tv1.results,

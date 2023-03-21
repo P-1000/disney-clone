@@ -12,7 +12,8 @@ const initialState = {
    um:"",
    watchlist:[],
    watchId:[],
-   reduxList:[]
+   reduxList:[],
+   topTv : [],
 }
 
 const apiSlice = createSlice({
@@ -48,16 +49,19 @@ const apiSlice = createSlice({
         setReduxList:(state,action)=>{
             state.watchlist=action.payload.reduxList;
         },
+        setTopTv:(state,action)=>{
+            state.watchlist=action.payload.topTv;
+        },
 
     }
 })
 
-export const {setApi,setsearch , setTrailer , setImages ,setUser  , setWatchlist , sWatchIds , setReduxList} = apiSlice.actions;
+export const {setApi,setsearch , setTrailer , setImages ,setUser  ,setTopTv, setWatchlist , sWatchIds , setReduxList} = apiSlice.actions;
 //
 export const rid = (state) => state.api.reduxList;
 export const selectSearch_Tv = (state) => state.api.sResults_TV;
 export const selectListId = (state) => state.api.watchId;
-
+export const selectTopTv = (state) => state.api.topTv;
 export const selectWatch = (state)=> state.api.watchlist;
 export const selectUser = (state)=> state.api.um;
 export const selectImages = (state)=> state.api.Images;

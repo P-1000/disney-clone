@@ -21,6 +21,7 @@ import 'firebase/firestore';
 import firebase from "firebase/compat/app";
 import { icons } from 'react-icons';
 import Seasons from './Seasons';
+import Cast from './Cast';
 function Movie_Details(props) {
     const Back_Url = "https://image.tmdb.org/t/p/original";
     const {id , media_type } = useParams();
@@ -255,7 +256,7 @@ useEffect(() => {
           <div
             className="absolute z-10 w-full h-full"
             style={{backgroundImage:
-                "linear-gradient(90deg, rgb(3, 11, 23) 14.95%, rgba(5, 18, 29) 30.3%, rgba(9, 22, 34, 1) 42.3%, rgba(19, 34, 34, 0.79) 58.3% , rgba(19, 34, 34, 0.79) 58.3%, rgba(34, 34, 34, 0.2) 100%)",
+                "linear-gradient(90deg, rgb(3, 11, 23) 18.95%, rgba(5, 18, 29) 30.3%, rgba(9, 22, 34, 1) 42.3%, rgba(19, 34, 34, 0.79) 58.3% , rgba(19, 34, 34, 0.79) 58.3%, rgba(34, 34, 34, 0.2) 100%)",
                 }}
           />
 
@@ -379,6 +380,7 @@ useEffect(() => {
 
 
 <div>
+<Cast id={id}/>
 <div className='lg:hidden mt-0'>
 <Videos/>
 </div>

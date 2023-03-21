@@ -23,7 +23,7 @@ export default function Episodes(props) {
         async function getBackdrops(){
             const getBg = await fetch(`https://api.themoviedb.org/3/tv/${id}/images?api_key=21958744bdcd83994642863edf06f583`);
             const images = await getBg.json()
-            setBackdrop(images.backdrops[1])
+            setBackdrop(images.backdrops[4] || images.backdrops[1] )
         }
         getBackdrops()
     },[])
