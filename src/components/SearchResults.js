@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { selectNewResults } from '../features/apiSlice/apiSlice';
 import { selectSearch_Tv } from '../features/apiSlice/apiSlice';
-import e from 'cors';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 function SearchResults(props) {
