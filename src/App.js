@@ -18,6 +18,7 @@ import Watchlist from "./components/Watchlist";
 import MoviePage from "./components/MoviePage";
 import Tv from "./components/Tv";
 import FixedBottomNavigation from './components/Bnav'
+import Episodes from "./components/Episodes";
 
 function App() {
   return (
@@ -46,6 +47,9 @@ function App() {
          </Route>
          <Route path="/TV">
           <Tv/>
+         </Route>
+         <Route path="/Episodes/:id/:sid">
+          <Episodes/>
          </Route>
           <Route path="/" > 
                     <Home/>
