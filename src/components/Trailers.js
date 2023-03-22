@@ -60,7 +60,6 @@ const Videos = (props) => {
    const [vidKey , setVidKey] = useState("")
   const [traiData , settraiData] = useState([])
   const {id, media_type}  = params;
-  
 
   useEffect(()=>{
     async function getVideos(props){
@@ -68,16 +67,17 @@ const Videos = (props) => {
     const apiR = await fetch(`https://api.themoviedb.org/3/${media_type !== "undefined" ? media_type : "movie"}/${tmdb}/videos?api_key=21958744bdcd83994642863edf06f583`)
     const res = await apiR.json();
     settraiData(res.results)
-    
+  
   }
       getVideos()
       
       
   },[tmdb,id])
- 
-// duplicating trailer data to provide for slider : 
-
-
+  const [t , setT] = useState(traiData)
+// duplicating trailer data to provide for slider 
+useEffect(()=>{
+  setT([...t , traiData])
+},[])
 
   // &vote_average.gte=60.0&with_genres=Action
   return (

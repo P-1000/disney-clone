@@ -34,8 +34,9 @@ const Container = styled.div`
     gap:25px;
     padding:30px 0 26px;
     @media only screen and (max-width: 479px){
-  grid-template-columns: repeat(1,minmax(0,1fr));
-
+  grid-template-columns: repeat(5,minmax(0,1fr));
+  gap:5px;
+  margin-top:10px;
   
 }
 
@@ -54,6 +55,10 @@ const Warp = styled.div`
     border-radius:10px;
     cursor:pointer;
     box-shadow: rgba(0, 0, 0, 0.69) 0px 26px 30px -10px, rgba(0, 0, 0, 0.73) 0px 16px 10px -10px;
+    @media only screen and (max-width: 479px){
+      border-radius:4px;
+  border:1px solid rgba(249,249,249,0.1);
+}
     img{
         width:100%;
         height:100%;

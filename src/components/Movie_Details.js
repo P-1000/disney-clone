@@ -21,6 +21,7 @@ import 'firebase/firestore';
 import firebase from "firebase/compat/app";
 import { icons } from 'react-icons';
 import Seasons from './Seasons';
+import Cast from './Cast';
 function Movie_Details(props) {
     const Back_Url = "https://image.tmdb.org/t/p/original";
     const {id , media_type } = useParams();
@@ -229,11 +230,11 @@ useEffect(() => {
                         <p className='text-lg pt-2 ml-8'>2hr1min &#8226; Action &#8226; U/A &#8226; Star Wars</p>
                         <p className='text-lg pt-2 ml-8 w-2/4  text-ellipsis overflow-hidden' style={{height:"120px"}}>{over}</p> */}
 
-                        <div className='flex  gap-5 ml-10 mt-20 top-12 mb-32 absolute'>   
-                            <FaPlay className='text-2xl' />
+                        <div className='flex  gap-2 ml-4 mt-28 mb-32 absolute'>   
+                            <FaPlay className='text-xl mt-3' />
                             <div className='flex flex-col'>
-                                <p>AVAILBLE ON </p>
-                                <p>2hr 50min</p>
+                                <p className='text-sm'>AVAILBLE ON </p>
+                                <p className='text-sm'>NETFLIX</p>
                             </div>
                         </div>
                       
@@ -255,7 +256,7 @@ useEffect(() => {
           <div
             className="absolute z-10 w-full h-full"
             style={{backgroundImage:
-                "linear-gradient(90deg, rgb(3, 11, 23) 14.95%, rgba(5, 18, 29) 30.3%, rgba(9, 22, 34, 1) 42.3%, rgba(19, 34, 34, 0.79) 58.3% , rgba(19, 34, 34, 0.79) 58.3%, rgba(34, 34, 34, 0.2) 100%)",
+                "linear-gradient(90deg, rgb(3, 11, 23) 18.95%, rgba(5, 18, 29) 30.3%, rgba(9, 22, 34, 1) 42.3%, rgba(19, 34, 34, 0.79) 58.3% , rgba(19, 34, 34, 0.79) 58.3%, rgba(34, 34, 34, 0.2) 100%)",
                 }}
           />
 
@@ -270,7 +271,7 @@ useEffect(() => {
                     <div >
                          <h1 className='text-5xl mt-20 ml-10'>{MovieName}</h1>
                         <p className='text-lg pt-2 ml-10'>2hr1min &#8226; Action &#8226; U/A &#8226; Star Wars</p>
-                        <p className='text-lg pt-2 ml-10 w-2/4  text-ellipsis overflow-hidden' style={{height:"120px"}}>{over}</p>
+                        <p className='text-lg pt-2 ml-10 w-2/4  text-ellipsis overflow-hidden' style={{height:"100px"}}>{over}</p>
 
                         <div className='flex justify-between mt-12 mx-12 flex-row'> 
                         <div className='flex'>
@@ -360,25 +361,26 @@ useEffect(() => {
       <h3>2022  &#8226; U/A 13+ </h3>
       </div>
 </div>
-    <div className='h-16 mt-2 text-ellipsis overflow-hidden'>
+    <div className='h-20 mt-2 text-ellipsis overflow-hidden'>
             <p>{over}</p>
     </div>              
                   </div>
 
 {/* ------------------- watchlist button for small screeen page --------- */}
-<div className='mx-4 mt-3 flex justify-around center'>
+<div className='mx-2 mt-3 flex justify-around center'>
         <button 
          onClick={()=>handleFir()}
          className='flex gap-2 shadow-lg rounded-sm pr-16 pl-10  px-8 py-3 ' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>  Watchlist</button>
         <button className='flex gap-2 shadow-lg rounded-sm pr-16 pl-10  px-8 py-3' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>  Share</button>
 </div>
                   <div className='mx-4  lg:hidden mb-0 p-0'>
-              <Seasons id={wid}/>
+              <Seasons id={wid} backdrop_path = {MovData.poster_path} />
 </div>
 </div>
 
 
 <div>
+<Cast id={id} mt={media_type}/>
 <div className='lg:hidden mt-0'>
 <Videos/>
 </div>

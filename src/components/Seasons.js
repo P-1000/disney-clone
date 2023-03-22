@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import { setsearch } from '../features/apiSlice/apiSlice';
+import Episodes from './Episodes';
 
 function Seasons(props) {
     let settings = {
@@ -39,6 +40,7 @@ function Seasons(props) {
         ]
       };
     const tv_id = props.id
+    const backdrop_path = props.backdrop_path
     //calling api for tv seasons : 
       const poster_url = "https://image.tmdb.org/t/p/original";
 const [tv, setTv] = useState({});
@@ -56,7 +58,7 @@ const [season, setSeason] = useState([]);
 let ms = []
 
 if(season){
-if(season.length<3 || season.length<=5 || season.length==4){
+if(season.length<3 || season.length<=6 || season.length==4){
   season.map((e)=>{
    ms.push(e)
   })
@@ -108,8 +110,10 @@ console.log(ms)
           ms && 
              ms.map((sea) =>{
              return  <div className="w-full h-full p-2 mx-4 px-4"> 
-             <Link to={`/movie_details/${sea.id}/${sea.media_type}`}>
-             <img src={poster_url + sea.poster_path}  alt={sea.title} />
+             <Link to={`/Episodes/${tv_id}/${sea.season_number}`}>
+             <img
+             className='hover:scale-110 transition-all hover:border-slate-100 hover:px-2'
+             src={poster_url + sea.poster_path}  alt={sea.title} />
              </Link>
              </div> 
          })

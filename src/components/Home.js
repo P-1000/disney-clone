@@ -12,8 +12,8 @@ import { selectSearch } from '../features/apiSlice/apiSlice';
 import { useDispatch, useSelector } from 'react-redux' 
 import Upcoming_Movies from './Upcoming_Movies';
 import UpMovies from './Upcoming_Movies';
-
-
+import TvTop from './TvTop';
+import Cast from './Cast';
 
 function Home() {
   const movies = useSelector(selectResults);
@@ -45,7 +45,9 @@ function Home() {
       <ImgSlider/> 
       <Viewer/>
       <Movies/>
+      <TvTop/>
       <UpMovies/>
+      {/* <Cast/> */}
     </Container>
   )
 }
