@@ -9,146 +9,102 @@ import styled from 'styled-components';
 import { selectNewResults } from '../features/apiSlice/apiSlice';
 import { selectSearch_Tv } from '../features/apiSlice/apiSlice';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import SearchBar from './SearchBar';
+import SmallScreenSearchBar from './SmallScreenSearchBar';
+import { useHistory } from 'react-router-dom';
 
+// 
+// let mov = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=21958744bdcd83994642863edf06f583`);
 function SearchResults(props) {
-    let {query} = useParams();
-    const [q , setq] = useState(query)
-    console.log("search page says you searched " + query)
+  const { query } = useParams();
+  const [movieR , setmovieR] = useState()
+  const history = useHistory();
+  const poster_url = "https://image.tmdb.org/t/p/original";
 
-    const [sMovies , setsMovies] = useState();
-    const movies = useSelector(selectSearch);
-    const bs = useSelector(selectSearch);
-    const tvResults = useSelector(selectSearch_Tv);
-  //--- dispatcher : --
-  const red = useDispatch();
-// https://api.themoviedb.org/3/trending/all/day?api_key=21958744bdcd83994642863edf06f583
-
-const [filter , setFilter] = useState('movie')
-
-
-useEffect(()=>{
-  async function fetchData(){
-   let mov = await fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=21958744bdcd83994642863edf06f583`);
-   let tv = await fetch(`https://api.themoviedb.org/3/discovertv?api_key=21958744bdcd83994642863edf06f583`);
-   let tv1 = await tv.json();
-   let mov1 = await mov.json();
-
-  red(setsearch({
-    sResults : mov1.results,
-    sResults_TV : tv1.results,
- }));
+  const handleSearch = (searchQuery) => {
+   // searchQuery.preventDefault()
+    history.push(`/search/${searchQuery}`);
   };
-  const movData = fetchData();
-},[])
 
-const [input, setInput] = useState('')
-console.log(input)
-
-function submithandler(e){
-  e.preventDefault();
-  setq(input)
-}
-useEffect(()=>{
-  async function fetchData(){
-   let mov = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=21958744bdcd83994642863edf06f583&query=${q}`);
-   let tv = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=21958744bdcd83994642863edf06f583&query=${q}`);
-   let tv1 = await tv.json();
-   let mov1 = await mov.json();
-  
-  red(setsearch({
-    sResults : mov1.results,
-    sResults_TV : tv1.results,
- }));
-  };
-  const movData = fetchData();
-},[q,query,input])
-
-console.log(tvResults);
-
-const types = ['movie' , 'tv']
-const poster_url = "https://image.tmdb.org/t/p/original";
-
+  useEffect(() => {
+    const fetchApi = async () => {
+      const url = `https://api.themoviedb.org/3/search/movie?api_key=21958744bdcd83994642863edf06f583&query=${query}`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data.results);
+        setmovieR(data.results)
+        // do something with the data, e.g. update state with the search results
+      } catch (error) {
+        console.log(error);
+        // handle error
+      }
+    };
+    fetchApi();
+  }, [query]);
 
   return (
 
     <>
 
-<div className=' lg:hidden mt-4 mb-5'>
-<form onSubmit={submithandler} className='px-4 rounded-lg'>
-  <input type='text' placeholder="SEARCH MOVIES , TV , TRAILERS AND PEOPLE" 
-  className='foucs:outline-none outline-none border-b-1 focus:border-b-2 transition-all rounded-md px-14 py-2 w-10/12 text-slate-50 bg-inherit '
-  value={input} onInput={e => setInput(e.target.value)}
-   />
-  <button 
-  className=' py-2 px-3 bg-slate-500 rounded-sm'
-  type='submit'
-  ><SearchRoundedIcon/></button>
+ <div>
+ small screen search bar : 
+      <SearchBar handleSearch={handleSearch} />
+    </div>
+    <div className='grid lg:grid-cols-5 grid-cols-1 md:grid-cols-3 px-2 mx-4 gap-8 mt-6 pt-2' >
+{
 
-</form>
-</div>
-
-<div className='text-black mx-4 my-1'>
-<label htmlFor='filter'> 
-<select id="breed" name="select" 
-                value='select' 
-                onChange={e=>setFilter(e.target.value)}>
-               <option className='text-black' value="" />
-                    {types.map(red => (
-                          <option className='text-black' value={red}>{red}</option>
-                      ))}
-                </select>
-                </label>
-</div>
-
-<h1 className='text-grey-700 text-xl px-4'>Showing all results for <span className='text-white-800'>{q}</span></h1>
-<div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 px-8 mt-8'> 
-
-  {filter == 'movie' && bs ?
+movieR &&   movieR.map((movie)=>(
     
-        bs.map((movie) => (
-           <div className=''>
-            <Link to={`/movie_details/${movie.id}/movie`} >
-              <img className='h-full w-full rounded-lg object-cover' src={poster_url + movie.backdrop_path}  alt={movie.title} />
-            </Link>
-          </div>
-          ))
-  
-         : 
-      (
-         
-
-            tvResults && filter =='tv' ?
-        tvResults.map((movie) => (
-
-           <div className='w-full'>
-            <Link to={`/movie_details/${movie.id}/tv`} >
-              <img className='h-full w-full rounded-lg object-cover' src={poster_url + movie.backdrop_path}  alt={movie.title} />
-            </Link>
-          </div>
-          ))
-         : 
-          null
-          
-      )
-
-          }
-{/* tv search results  */}
-         
-
-
-    </div>
-    <div>
-   
-    </div>
-
-    {
-      !tvResults && !bs && <div>
-        nothing to display
-      </div>
-    }
-    </>
-  )
+    <Link to={`/movie_details/${movie.id}/movie`} >
+              <div className="max-w-xs hover:scale-110 duration-300 ease-[cubic-bezier(0.39, 0.58, 0.57, 1)] transition-all  rounded-md shadow-sm hover:shadow-white bg-gray-900 text-gray-100">
+              <img src={poster_url + movie.poster_path} alt="" className="object-cover  object-top w-full rounded-t-md h-72 dark:bg-gray-500" />
+              <div className="flex flex-col justify-between p-6 space-y-8">
+		<div className="space-y-2">
+			<h2 className="text-xl font-semibold tracking-wide">{movie.title}</h2>
+			<p className="dark:text-gray-100 text-sm">Action , Adenventure , Sci-Fi</p>
+		</div>
+		<button
+    onClick={console.log("red")}
+     type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-violet-100 text-gray-900 z-50">Add To Watchlist</button>
+	</div>
+              </div>
+    </Link>
+ 
+  ))
 }
+</div>
+    {/* movie.map((movie) => (
+           <div className='hover:scale-110 transition-all'>
+            <Link to={`/movie_details/${movie.id}/movie`} >
+            <div className='bg-slate-800 group relative hover:z-50 transition-all'>
+            <div class="relative">
+              <img className='h-full w-full  group-hover:scale-105 transition-all rounded-lg object-cover' src={poster_url + movie.poster_path}  alt={movie.title} />
+            </div>
+              </div> 
+               <div className="max-w-xs rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100">
+	<img src={poster_url + movie.poster_path} alt="" className="object-cover  object-top w-full rounded-t-md h-72 dark:bg-gray-500" />
+	<div className="flex flex-col justify-between p-6 space-y-8">
+		<div className="space-y-2">
+			<h2 className="text-xl font-semibold tracking-wide">{movie.title}</h2>
+			<p className="dark:text-gray-100 text-sm">Action , Adenventure , Sci-Fi</p>
+		</div>
+		<button
+    onClick={console.log("red")}
+     type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-violet-100 text-gray-900 z-50">Add To Watchlist</button>
+	</div>
+</div>
+            </Link>  */}
 
+
+
+ 
+
+    </>
+
+
+  )
+
+}
 export default SearchResults
 

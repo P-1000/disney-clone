@@ -118,12 +118,12 @@ function SwipeableEdgeDrawer(props) {
 
                {/*------- button for large screen -------*/}
 
-      <div className=' z-10 mx-0 mt-0  gap-10 center hidden lg:flex'>
+      <div className=' z-10 mx-0 mt-0 mb-10  gap-10 center hidden lg:flex relative'>
         <button 
-         className='flex gap-2 shadow-lg rounded-sm z-10  px-8 py-3 ' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>  Watchlist</button>
+         className='flex gap-2 shadow-lg rounded-sm z-10 -top-10 left-48 absolute  px-8 py-3 ' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>  Watchlist</button>
         <button 
          onClick={() => abc('/') }
-        className='flex gap-2 shadow-lg rounded-sm cursor-help z-10  px-8 py-3' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>
+        className='flex gap-2 shadow-lg rounded-sm cursor-help z-10 -top-10 left-10 absolute  px-8 py-3' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>
         VIEW
         </button>
         </div>

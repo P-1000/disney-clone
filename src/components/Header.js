@@ -6,6 +6,7 @@ import { selectUserName  , selectUserPhoto , setUserLogin, setUserLoginDetails ,
 import { useDispatch, useSelector } from 'react-redux' 
 import {AiOutlineSearch} from 'react-icons/ai'
 import { border, Box, Flex } from "@chakra-ui/react"
+import SearchBar from './SearchBar'
 import {
     Popover,
     PopoverTrigger,
@@ -22,6 +23,7 @@ import {
   import firebase from "firebase/compat/app";
   import { selectUser } from '../features/apiSlice/apiSlice'
   import {setUser } from '../features/apiSlice/apiSlice'
+  import SearchResults from './SearchResults'
 
 function Header() {
     const dispatch = useDispatch()
@@ -59,6 +61,7 @@ const ui = useSelector(sui)
     //   })
     // },[])
 
+    
 
 
 
@@ -102,7 +105,7 @@ const ui = useSelector(sui)
 
     // ---- query searching -----
 
-    const [query , setQuery] = useState(null);
+    const [query1 , setQuery] = useState(null);
     const [call , setCall] = useState(false);
 
     function putVal(e){
@@ -111,7 +114,7 @@ const ui = useSelector(sui)
     function onSubmitHandler(e){
       e.preventDefault();
       setCall(true);
-    history.push(`/search/${query}`)
+    history.push(`/search/${query1}`)
     //history.push("/login")
     }
 
@@ -142,7 +145,7 @@ const ui = useSelector(sui)
             </a>
             <a>
                 <img src = './images/original-icon.svg'/>
-                <span>ORIGINALS</span>
+                <span>STATS</span>
             </a>
             <a onClick={()=>{
                  history.push('/MOVIES')
@@ -162,7 +165,7 @@ const ui = useSelector(sui)
 <div className='search hidden lg:flex  w-full'>
 
 <form className="w-full max-w-sm " onSubmit={onSubmitHandler}>
-  <div className="flex items-center border-b border-grey-500 py-1" >
+  <div className="flex items-center border-b border-white-500 py-1" >
     <input  onChange={putVal}
     className="appearance-none bg-transparent border-none w-full text-white-700 mr-3 px-2 focus:text-white-700  focus:mr-40 transition-all duration-700 leading-tight focus:outline-none outline-none " type="text" placeholder="Search" aria-label="Query"/>
     <button 
@@ -172,6 +175,7 @@ const ui = useSelector(sui)
     </button>
   </div>
 </form>
+{/* <SearchResults onSubmit={handleSearch} /> */}
 
 </div>
 

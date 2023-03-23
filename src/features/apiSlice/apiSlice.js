@@ -14,6 +14,10 @@ const initialState = {
    watchId:[],
    reduxList:[],
    topTv : [],
+   watchtime :"",
+   listwatch : "",
+   MovieCount : "",
+   TvCount : "",
 }
 
 const apiSlice = createSlice({
@@ -47,16 +51,32 @@ const apiSlice = createSlice({
             state.watchId=action.payload.watchId;
         },
         setReduxList:(state,action)=>{
-            state.watchlist=action.payload.reduxList;
+            state.reduxList=action.payload.reduxList;
         },
         setTopTv:(state,action)=>{
-            state.watchlist=action.payload.topTv;
+            state.topTv=action.payload.topTv;
         },
-
+        setWT:(state,action)=>{
+            state.watchtime=action.payload.watchtime;
+        },
+        setWL:(state,action)=>{
+            state.listwatch=action.payload.listwatch;
+        },
+        setMovCount:(state,action)=>{
+            state.MovieCount=action.payload.MovieCount;
+        },
+        setTvCount:(state,action)=>{
+            state.MovieCount=action.payload.MovieCount;
+        },
     }
 })
 
-export const {setApi,setsearch , setTrailer , setImages ,setUser  ,setTopTv, setWatchlist , sWatchIds , setReduxList} = apiSlice.actions;
+export const {setApi,setsearch,setTvCount, setWL, setMovCount , setWT , setTrailer , setImages ,setUser  ,setTopTv, setWatchlist , sWatchIds , setReduxList} = apiSlice.actions;
+//for stats page : 
+export const getWatchTime = (state) => state.api.watchtime;
+export const getWatchList= (state) => state.api.listwatch;
+export const getMovieCount= (state) => state.api.MovieCount;
+export const getTvCount = (state) => state.api.TvCount;
 //
 export const rid = (state) => state.api.reduxList;
 export const selectSearch_Tv = (state) => state.api.sResults_TV;

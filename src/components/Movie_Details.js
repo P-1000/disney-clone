@@ -22,6 +22,8 @@ import firebase from "firebase/compat/app";
 import { icons } from 'react-icons';
 import Seasons from './Seasons';
 import Cast from './Cast';
+
+import Recommendations from './Recommendations';
 function Movie_Details(props) {
     const Back_Url = "https://image.tmdb.org/t/p/original";
     const {id , media_type } = useParams();
@@ -122,7 +124,7 @@ const over = MovData.overview;
 let md = media_type;
 
 
-if(md == 'undefined'){
+if(md == undefined){
   md = 'movie'
 }
 console.log(md)
@@ -136,7 +138,7 @@ let things;
 // push movie id to firebase
 const handleFir = () =>{  auth.onAuthStateChanged(async (user)=>{
           if(user){
-             things =db.collection('watchlist')
+             things =db.collection(`watchlist/${user.uid}/watchlist`)
                 things.add({
                   uid : user.uid,
                   id : wid,
@@ -145,6 +147,8 @@ const handleFir = () =>{  auth.onAuthStateChanged(async (user)=>{
                   movie_name : MovieName,
                   backdrop_path :'https://image.tmdb.org/t/p/original' + MovData.backdrop_path,
                   overview:over,
+                }).then(() => {
+                  alert("Movie added to watchlist!");
                 })
           }
 
@@ -215,7 +219,7 @@ useEffect(() => {
   return (
     <>
 
-
+<div className='page'>
     
     <div className='w-full '>
 
@@ -223,14 +227,14 @@ useEffect(() => {
 <div>
      {/* for small screen  */}
     
-  <div className='lg:hidden'>
+  <div className='lg:hidden '>
   
   <div  className='relative'>
                          {/* <h1 className='text-xl w-70 mt-10 ml-8'>{MovieName}</h1>
                         <p className='text-lg pt-2 ml-8'>2hr1min &#8226; Action &#8226; U/A &#8226; Star Wars</p>
                         <p className='text-lg pt-2 ml-8 w-2/4  text-ellipsis overflow-hidden' style={{height:"120px"}}>{over}</p> */}
 
-                        <div className='flex  gap-2 ml-4 mt-28 mb-32 absolute'>   
+                        <div className='flex  gap-2 ml-4  z-10 -top-14 absolute'>   
                             <FaPlay className='text-xl mt-3' />
                             <div className='flex flex-col'>
                                 <p className='text-sm'>AVAILBLE ON </p>
@@ -332,7 +336,9 @@ useEffect(() => {
               <Seasons id={wid}/>
 </div>
 </div>
-
+<div className='m-10 hidden lg:block'>
+              <Recommendations movie_id = {wid} motv = {media_type} />
+</div>
 
 <div className='m-10 hidden lg:block'>
               <UpMovies />
@@ -391,6 +397,8 @@ useEffect(() => {
   </div>
 
 
+
+</div>
 
     </>
   )
