@@ -22,6 +22,7 @@ import firebase from "firebase/compat/app";
 import { icons } from 'react-icons';
 import Seasons from './Seasons';
 import Cast from './Cast';
+
 import Recommendations from './Recommendations';
 function Movie_Details(props) {
     const Back_Url = "https://image.tmdb.org/t/p/original";
@@ -394,6 +395,8 @@ useEffect(() => {
   <div className='lg:hidden'>
     <UpMovies />
   </div>
+
+
 
 </div>
 
