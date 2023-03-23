@@ -142,7 +142,7 @@ const ui = useSelector(sui)
             </a>
             <a>
                 <img src = './images/original-icon.svg'/>
-                <span>ORIGINALS</span>
+                <span>STATS</span>
             </a>
             <a onClick={()=>{
                  history.push('/MOVIES')

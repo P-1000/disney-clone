@@ -20,6 +20,8 @@ import Tv from "./components/Tv";
 import FixedBottomNavigation from './components/Bnav'
 import Episodes from "./components/Episodes";
 import Person from "./components/Person";
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 
 function App() {
   return (
@@ -27,6 +29,12 @@ function App() {
         
         <Router>
         <Header/>
+        <TransitionGroup>
+        <CSSTransition
+        key={window.location.key}
+        timeout={500}
+        classNames="fade"
+        >
         <Switch>
           <Route path="/movie_details/:id/:media_type">
                    <Movie_Details />
@@ -60,6 +68,8 @@ function App() {
 
          </Route>
         </Switch>
+        </CSSTransition>
+        </TransitionGroup>
         <div className="lg:hidden z-50">
         <FixedBottomNavigation/>
         </div>

@@ -9,7 +9,8 @@ import Slider from "react-slick";
 import { get } from "firebase/database";
 
 const Cast = (props) => {
-    const {id , mt} = props
+    const {id , mt ,motv} = props
+    const [media_type , setMedia_type] = useState(mt)
   let settings = {
     infinite: true,
     speed: 900,
@@ -45,26 +46,36 @@ const Cast = (props) => {
 
 
 
-  const media_type = "movie"
+  // const media_type = "tv"
 
   const [tmdb , setTmdb] = useState([])
   const poster_url = "https://image.tmdb.org/t/p/original";
 
 
-
-
+console.log(media_type)
   useEffect(()=>{
     async function getTv(){
-        const top = await fetch(`https://api.themoviedb.org/3/${mt}/${id}/credits?api_key=21958744bdcd83994642863edf06f583`);
+
+if(mt == 'undefined'){
+  setMedia_type("movie")
+}
+        const top = await fetch(`https://api.themoviedb.org/3/${media_type}/${id}/credits?api_key=21958744bdcd83994642863edf06f583`);
         const toptv = await top.json();
         setTmdb(toptv.cast)
         
     }
     getTv()
-  },[])
+  },[id])
+
+  if(tmdb.length <= 6){
+    tmdb.forEach(element => {
+      setTmdb([...tmdb , element])
+    });
+ 
+  }
+
+
   console.log(tmdb)
-
-
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>

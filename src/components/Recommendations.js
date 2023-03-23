@@ -1,13 +1,15 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectNewResults } from "../features/apiSlice/apiSlice";
+import { selectNewResults, selectTopTv } from "../features/apiSlice/apiSlice";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { get } from "firebase/database";
 
-const UpMovies = (props) => {
+const Recommendations = (props) => {
+    const {movie_id , motv} = props
   let settings = {
     infinite: true,
     speed: 900,
@@ -45,23 +47,36 @@ const UpMovies = (props) => {
 
   const media_type = "movie"
 
-  const tmdb = useSelector(selectNewResults);
+  const [tmdb , setTmdb] = useState([])
   const poster_url = "https://image.tmdb.org/t/p/original";
+
+
+
+
   useEffect(()=>{
-    
-  },[])
+    async function getTv(){
+        const top = await fetch(`https://api.themoviedb.org/3/${motv}/${movie_id}/recommendations?api_key=21958744bdcd83994642863edf06f583`)
+        const toptv = await top.json();
+        setTmdb(toptv.results)
+    }
+    getTv()
+  },[movie_id])
+
+
 
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>
-      <h2 className=" lg:block">Upcoming Movies</h2>
+      <h2 className=" lg:block">Recommendations : </h2>
  
-    <Carousel className="sm:mx-0 sm:mt-32 " {...settings} dots={true}>
+    <Carousel  className="sm:mx-0 sm:mt-32 " {...settings}>
       {tmdb &&
         tmdb.map((movie) => (
           <Wrap key={movie.id} >
-            <Link to={`/movie_details/${movie.id}/movie`}>
-              <img src={poster_url + movie.poster_path}  alt={movie.title} />
+            <Link to={`/movie_details/${movie.id}/${motv}`}>
+              <img 
+              className=" hover:scale-105 hover:rounded-lg hover:border-red-400 transition-all"
+              src={poster_url + movie.poster_path}  alt={movie.title} />
             </Link>
           </Wrap>
         ))}
@@ -94,8 +109,7 @@ const Wrap = styled.div`
   position: relative;
   a {
     border-radius: 5px;
-    box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
-      rgb(0 0 0 / 73%) 0px 16px 10px -10px;
+  
     cursor: pointer;
     display: block;
     position: relative;
@@ -105,17 +119,9 @@ const Wrap = styled.div`
       border-radius: 5px;
       width: 100%;
       height: 100%;
-      box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
-        rgb(0 0 0 / 73%) 0px 16px 10px -10px;
-    }
 
-    &:hover {
-      padding: 0;
-      border: 1px solid rgba(249, 249, 249, 0.8);
-      transition-duration: 350ms;
-      transition-delay:100ms;
     }
   }
 `;
 
-export default UpMovies;
+export default Recommendations;
