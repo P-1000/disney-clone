@@ -21,7 +21,7 @@ import FixedBottomNavigation from './components/Bnav'
 import Episodes from "./components/Episodes";
 import Person from "./components/Person";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
+import Stats from "./components/Stats";
 
 function App() {
   return (
@@ -59,6 +59,9 @@ function App() {
          </Route>
          <Route path="/Episodes/:id/:sid">
           <Episodes/>
+         </Route>
+         <Route path="/Stats">
+          <Stats/>
          </Route>
          <Route path="/Persons/:id/:name">
           <Person/>
