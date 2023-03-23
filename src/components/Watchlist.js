@@ -29,14 +29,12 @@ function Watchlist(props) {
     const [typ , setTyp] = useState([]);
 
   async function fetchWatchlist(uid) {
-    const watchlistRef = db.collection('watchlist');
+    const watchlistRef = db.collection(`watchlist/${u}/watchlist`);
     const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
     const ids = [];
     querySnapshot.forEach(doc => {
       typ.push(doc.data().media_type);
       ids.push(doc.data().id);
-     
-
     });
  let i =0;
     const movieDataPromises = ids.map(async id => {
@@ -50,6 +48,7 @@ function Watchlist(props) {
     return movieData;
   }
 
+  console.log(ids)
 
   useEffect(() => {
     async function fetchData() {
@@ -58,6 +57,7 @@ function Watchlist(props) {
     }
     const watchlistData = fetchData();
   }, [u]);
+
 
   let mv = []
 ids.forEach((e)=>{
