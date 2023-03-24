@@ -112,23 +112,40 @@ if(md == undefined){
   md = 'movie'
 }
 
+const [ids , setids] = useState([]);
+
 let things;
 // push movie id to firebase
 const handleFir = () =>{  auth.onAuthStateChanged(async (user)=>{
-          if(user){
-             things =db.collection(`watchlist/${user.uid}/watchlist`)
-                things.add({
-                  uid : user.uid,
-                  id : wid,
-                  cretedAt:serverTimestamp(),
-                  media_type:md,
-                  movie_name : MovieName,
-                  backdrop_path :'https://image.tmdb.org/t/p/original' + MovData.backdrop_path,
-                  overview:over,
-                }).then(() => {
-                  toast.success(`${MovieName} Added to your watchlist`);
-                })
-          }
+  
+const uid = user.uid
+  const watchlistRef = await db.collection(`watchlist/${user.uid}/watchlist/`);
+  const querySnapshot = await watchlistRef.where('uid', '==', 'wdiAUcpviqUfdvLiihpOjExtzcg1').get();
+  const ids = [];
+  querySnapshot.forEach(doc => {
+    ids.push(doc.data().id);
+  })
+
+    if(ids.includes(wid)){
+      toast.error("Already Exists in your watchlist")
+    }else{
+      if(user){
+        things =db.collection(`watchlist/${user.uid}/watchlist`)
+           things.add({
+             uid : user.uid,
+             id : wid,
+             cretedAt:serverTimestamp(),
+             media_type:md,
+             movie_name : MovieName,
+             backdrop_path :'https://image.tmdb.org/t/p/original' + MovData.backdrop_path,
+             overview:over,
+           }).then(() => {
+             toast.success(`${MovieName} Added to your watchlist`);
+           })
+     }
+    }
+
+        
 
   })
 
