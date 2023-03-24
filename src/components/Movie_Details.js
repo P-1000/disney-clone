@@ -22,6 +22,7 @@ import firebase from "firebase/compat/app";
 import { icons } from 'react-icons';
 import Seasons from './Seasons';
 import Cast from './Cast';
+import {  toast} from 'react-toastify';
 
 import Recommendations from './Recommendations';
 function Movie_Details(props) {
@@ -101,23 +102,6 @@ function Movie_Details(props) {
 
 const wid = id;
 
-// useEffect(()=>{
-  
-
-//   for(let i=0;i<upComing_details.length ; i++){
-//       if(upComing_details[i].id == id){
-//           setMovie(upComing_details[i])
-//       }}
-
-
-//   for(let i=0;i<searched_details.length;i++){
-//     if(searched_details[i].id == id){
-//       setMovie(searched_details[i])
-//   }
-//   }
-
-  
-// },[id]);
 
 const over = MovData.overview;
 
@@ -127,13 +111,7 @@ let md = media_type;
 if(md == undefined){
   md = 'movie'
 }
-console.log(md)
-//firebase : ----
 
-// const handleFir =() =>{
-//   dataRef.ref().child("movie_ID").push(id)
-//   console.log(id)
-// }
 let things;
 // push movie id to firebase
 const handleFir = () =>{  auth.onAuthStateChanged(async (user)=>{
@@ -148,38 +126,13 @@ const handleFir = () =>{  auth.onAuthStateChanged(async (user)=>{
                   backdrop_path :'https://image.tmdb.org/t/p/original' + MovData.backdrop_path,
                   overview:over,
                 }).then(() => {
-                  alert("Movie added to watchlist!");
+                  toast.success(`${MovieName} Added to your watchlist`);
                 })
           }
 
   })
 
 }
-
-// let currentUser;
-// firebase.auth().onAuthStateChanged(user => {
-//   currentUser = user;
-// });
-
-// const [wids , setWids] =useState([])
-// useEffect(() => {
-//   async function fetchWids() {
-//     const watchlistRef = firebase.firestore().collection('watchlist');
-//     const currentUser = firebase.auth().currentUser;
-
-//     if (currentUser) {
-//       const querySnapshot = await watchlistRef.where('userid', '==', currentUser.uid).get();
-//       querySnapshot.forEach(doc => {
-//         wids.push(doc.data().wid);
-//       });
-//       setWids(wids);
-//     } else {
-//       console.log('No user is currently logged in.');
-//     }
-//   }
-// console.log(wids)
-//   fetchWids();
-// }, [firebase.auth().currentUser]);
 
 const [currentUser, setCurrentUser] = useState(null);
 const [wids, setWids] = useState([]);
