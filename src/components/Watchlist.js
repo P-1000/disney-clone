@@ -16,6 +16,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import SwipeableEdgeDrawer from './mui'
 import { setWL } from '../features/apiSlice/apiSlice';
+//toasts : from toastify : 
+import classNames from "classnames";
+import { MdOutlineClose } from "react-icons/md";
+import { HiLightningBolt } from "react-icons/hi";
+import {  toast} from 'react-toastify';
+// import Notify from './Test';
+import Blue from './Notify';
 
 function Watchlist(props) {
   const [w , setW ] = useState()
@@ -28,11 +35,13 @@ function Watchlist(props) {
     const [arr , setArr] = useState([])
     const [ids, setIds] = useState([]);
     const [typ , setTyp] = useState([]);
-
+    const [loading , setLoading] = useState(false)
+  const[deleted , setDeleted] = useState(null)
+    // ---------- fetch watchlist data from firebase : -------
   async function fetchWatchlist(uid) {
     const watchlistRef = db.collection(`watchlist/${u}/watchlist/`);
     const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
-    console.log(querySnapshot.docs)
+    
     const ids = [];
     querySnapshot.forEach(doc => {
       typ.push(doc.data().media_type);
@@ -60,7 +69,8 @@ function Watchlist(props) {
  
 
     const watchlistData = fetchData();
-  }, [u]);
+  }, [u,ids]);
+
 
    dispatch(setWL({
       listwatch:wl_redux,
@@ -71,68 +81,41 @@ ids.forEach((e)=>{
 })
 const uniq = [...new Set(mv)];
 
-async function del(){
-  const watchlistRef = db.collection(`watchlist/${u}/watchlist`);
-  const idToDelete = '545611';
-  const red = await watchlistRef.where('id', '==', idToDelete).get();
-    red.then(querySnapshot => {
-      querySnapshot.forEach(doc => {
-        doc.ref.delete();
-      }).then(() => {
-        alert("Movie added to watchlist!");
-      })
-    });
+
+//-------- function to delete from watch list : ----------------
+
+
+async function del(idToDelete){
+  setLoading(true);
+  const id = await idToDelete;
+
+  //convet id to string:
+  const idString = await id.toString();
+
+  const redCollectionRef = await db.collection('watchlist').doc(u).collection('watchlist');
+
+                    // #delete matching document : 
+
+  const query =  redCollectionRef.where('id', '==', idString);
+ const qs = await query.get().then(querySnapshot => {
+    querySnapshot.forEach(doc => {
+      doc.ref.delete().then(() => {
+        fetchWatchlist(u);
+        setDeleted("deleted")
+        toast.error("Deleted from watchlist");
+        setLoading(false)
+      });
+    })
+  })
+
+  
+
 }
 
-    //for fetching data from firebase with matching current userid with uid in the collection docs field : 
-  //   useEffect(()=>{
-  //       auth.onAuthStateChanged(async (user)=>{
-  //               if(user){
-  //                   db.collection('watchlist').where('uid', '==', u ).onSnapshot((snapshot) => {
-  //                  let watch = snapshot.docs.forEach((doc)=>{
-  //                   const id = doc.data().id;
-  //                    setArr((prev)=>{
-  //                      return [...prev , id];
-  //                    })
-  //                  })
-  //                 })
-  //                 dispatch(sWatchIds({
-  //                   watchId : arr,
-  //                 }))
-  //               }
-  //       })
-  //  console.log(arr)
-  //     },[umd])
-
-
-
-
-
-    
-
-// // calling api for watchlist movies :: ---
-// const [wlist , setWlist] = useState([])
-// const uniq = [...new Set(reduxId)];
-
-
-// useEffect(()=>{
-//   async function fetchData(){
-//   for(let i =0 ; i<uniq.length;i++){
-//     let mov = await fetch(`https://api.themoviedb.org/3/movie/${uniq[i]}?api_key=21958744bdcd83994642863edf06f583`);
-//     let mov1 = await mov.json();
-//     setWlist((prev)=>{
-//       return [...prev , mov1];
-//     })
-//   }
-//   dispatch(setReduxList({
-//     reduxList : wlist,
-//   }))
-//   }
-//   console.log(wlist)
-//   const movData = fetchData();
-// },[])
+const handleDeleteProduct = () => {
+  setDeleted(null)
+};
 let i =0;
-del()
   return (
     <>
     <h1 className='text-slate-50 text-xl mt-2 px-4 ml-4 mb-0' >YOUR WATCHLIST</h1>
@@ -164,12 +147,12 @@ del()
         </div>
 
         {
-          uniq && 
+          uniq  && 
           uniq.map((movie)=>(
             <div>
         <div class="container mx-auto my-2 mt-0 ">
 
-<div class="relative rounded-lg flex  bg-black flex-col md:flex-row items-center md:shadow-xl md:h-72 mx-2">
+<div class="relative rounded-lg transition-all duration-500 flex  bg-black flex-col md:flex-row items-center md:shadow-xl md:h-72 mx-2">
     
     <div class="z-0 order-1 md:order-2 relative w-full md:w-2/5 h-80 md:h-full overflow-hidden rounded-lg md:rounded-none md:rounded-r-lg">
         <div class="absolute inset-0 w-full h-full object-fill object-center bg-blue-400 bg-opacity-30 bg-cover bg-bottom bg-blend-multiply" 
@@ -186,24 +169,33 @@ del()
         </svg>
     </div>
 
+
+
     <div class="z-10 order-2 md:order-1 w-full h-full md:w-3/5 flex items-center -mt-6 md:mt-0">
         <div class="p-8 md:pr-18 md:pl-14 md:py-12 mx-2 md:mx-0 h-full bg-white rounded-lg md:rounded-none md:rounded-l-lg shadow-xl md:shadow-none">
             <h4 class="hidden md:block text-xl text-gray-400">Action : Adventure</h4>
             <h3 class="hidden md:block font-bold text-2xl text-gray-700">{movie.title || movie.name}</h3>
             <p class="text-gray-600 text-justify">{movie.overview}</p>
-            <a class="flex items-baseline mt-3 text-blue-600 hover:text-blue-900 focus:text-blue-900" href="">
+            <button 
+            onClick={()=>del(movie.id)}
+            class="flex items-baseline mt-3 text-blue-600 hover:text-blue-900 focus:text-blue-900" >
                 <span>Remove From WatchList</span>
                 <span class="text-xs ml-1">&#x279c;</span>
-            </a>
+            </button>
         </div>
     </div>
 
 </div>
 </div>
 
+{loading && <h1 className='text-9xl font-bold'>sal;jfkkad;sfaks;l</h1>}
         </div>
           ))
         }
+
+        {/* {
+          deleted && <Notify  message='madda kudu' onDelete={handleDeleteProduct} />
+        } */}
 </>
   )
 }

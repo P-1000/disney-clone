@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 export default function Episodes(props) {
     const Back_Url = "https://image.tmdb.org/t/p/original";
-    const {id , sid } = useParams();
+    const {id , sid , name } = useParams();
     const [episodes , setEpisodes] = useState([]);
     const [season , setSeason] = useState({})
     const [backdrop ,setBackdrop] = useState([])
@@ -31,8 +31,61 @@ export default function Episodes(props) {
     console.log(season)
   return (
     <>
+
+        <div className='bg-white w-full '>
+        <div>
+          <img  
+          className='fixed object-contain w-full'
+          src={Back_Url + backdrop.file_path} />
+        </div>
+        <div className='bg-[#2b2c328f] w-full h-[12%] absolute top-[45%]'>
+        <div className='nameContainer absolute left-80 pt-4'> 
+                              <h1 className='text-xl lg:text-3xl w-full'>{name}</h1>
+                              <h3 className='w-full'>{season.name}</h3>
+                    </div>
+                    <div className='float-right mr-20 pt-4'>
+                      <h2>{season.air_date}</h2>
+                    </div>
+        </div>
+            <div  className='lg:h-[180px] lg:w-[240px] h-auto w-auto rounded-sm  absolute z-40 top-[27%] ml-8 '>
+                <img 
+                className='rounded-lg '
+                src={Back_Url + season.poster_path} />
+            </div>
+            <div className='bg-black w-full h-[300%] absolute top-[55%] z-30 '>
+              <div className='w-[80%] float-right'>
+              {
+            episodes && episodes.map((e)=>{
+             return   <div className='hover:bg-slate-400 py-2'>
+             <div className='flex px-4 gap-10'>
+              <img 
+             className='h-44 object-cover'
+              src={Back_Url + e.still_path} />
+              <div>
+             <h1>{e.episode_number}.{e.name}</h1>
+                           <div>
+             <p className='h-24 py-5 text-ellipsis overflow-hidden'> {e.overview}</p>
+             </div>
+             </div>
+             </div>
+                </div>
+            })
+        }
+              </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
     <div className=''>
-      <div className='layout-mb itemBackdrop' 
+      {/* <div className='layout-mb itemBackdrop' 
       style={{ 
         backgroundImage:`url(${Back_Url + backdrop.file_path})` ,
       }}>
@@ -67,13 +120,13 @@ export default function Episodes(props) {
                     
                     </div>
             </div>
-        </div>              
+        </div>               */}
       </div>
       {/* card wrapper  */}
        
     
-    </div>
-    <div className='w-9/12 hidden lg:block  float-right mt-10 px-10'> 
+    {/* </div> */}
+    {/* <div className='w-9/12 hidden lg:block  float-right mt-10 px-10'> 
         {
             episodes && episodes.map((e)=>{
              return   <div className='hover:bg-slate-400 py-2'>
@@ -91,7 +144,7 @@ export default function Episodes(props) {
                 </div>
             })
         }
-    </div>
+    </div> */}
     </>
   )
 }

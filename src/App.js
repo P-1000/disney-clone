@@ -22,6 +22,8 @@ import Episodes from "./components/Episodes";
 import Person from "./components/Person";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Stats from "./components/Stats";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -57,7 +59,7 @@ function App() {
          <Route path="/TV">
           <Tv/>
          </Route>
-         <Route path="/Episodes/:id/:sid">
+         <Route path="/Episodes/:id/:sid/:name">
           <Episodes/>
          </Route>
          <Route path="/Stats">
@@ -77,6 +79,19 @@ function App() {
         <FixedBottomNavigation/>
         </div>
       </Router>
+
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+/>
         
     </div>
   );

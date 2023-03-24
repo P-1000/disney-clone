@@ -219,7 +219,7 @@ useEffect(() => {
   return (
     <>
 
-<div className='page'>
+<div className='page top-20 static'>
     
     <div className='w-full '>
 

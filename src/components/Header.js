@@ -119,7 +119,7 @@ const ui = useSelector(sui)
     }
 
   return (
-    <Nav>
+    <Nav className='static'>
       <Logo src='https://disney-clone-woad.vercel.app/images/images/logo.svg' />
       {
         !userName ?  (<Login onClick={signIn}>
