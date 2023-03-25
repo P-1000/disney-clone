@@ -44,7 +44,13 @@ function Movie_Details(props) {
    const [MovieName , setMovieName] = useState("TITLE")
 
 
+  // --------------state for video ----------
+
+  const [video , setVideo] = useState(false)
+
   // ###---- to fetch logos from separate api call ----- ###
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -191,7 +197,14 @@ useEffect(() => {
   }
 }, []);
 
-
+function pl(){
+  if(video){
+    setVideo(false)
+  }
+  else{
+    setVideo(true)
+  }
+}
 
 
 {/* <img src={Back_Url + Movie.backdrop_path }/> */}
@@ -258,7 +271,10 @@ useEffect(() => {
 
                         <div className='flex justify-between mt-12 mx-12 flex-row'> 
                         <div className='flex'>
+                            <button 
+                            onClick={pl}>
                             <FaPlay className='text-3xl' />
+                            </button>
                             <div className='flex flex-col'>
                                 <p>AVAILBLE ON </p>
                                 <p>NETFLIX</p>
@@ -294,14 +310,30 @@ useEffect(() => {
             className="w-full h-full  object-contain object-center rounded-lg absolute"
             style={{left:"310px"}}
           /> */}
-          <div className='absolute left-[400px] -z-10'>
+{
+  video ?  <div className='absolute left-[400px] -z-10'>
           <iframe 
           className='left-[350px] '
            width="980" height="475" src="https://www.youtube.com/embed/km-jpcx0xRM?autoplay=1&controls=0" 
            ref={videoRef}
            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         
-          </div>
+          </div> : <img
+            src={`https://image.tmdb.org/t/p/original${MovData.backdrop_path}`}
+            alt="backgrop poster"
+            className="w-full h-full  object-contain object-center rounded-lg absolute"
+            style={{left:"310px"}}
+          />
+}
+
+          {/* <div className='absolute left-[400px] -z-10'>
+          <iframe 
+          className='left-[350px] '
+           width="980" height="475" src="https://www.youtube.com/embed/km-jpcx0xRM?autoplay=1&controls=0" 
+           ref={videoRef}
+           title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        
+          </div> */}
         </div>
      
 </div>
