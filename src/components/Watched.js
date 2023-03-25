@@ -31,10 +31,12 @@ function Watched(props) {
     const [arr , setArr] = useState([])
     const [ids, setIds] = useState([]);
     const [typ , setTyp] = useState([]);
-
+    const [mtime , setMtime] = useState(0);
+    const [ttime , setTtime] = useState(0);
     const [watchTime , setWatchTime] = useState(0);
     const [mv , setMv] = useState({});
 let temp= 0;
+
   async function fetchWatchlist(uid) {
     const watchlistRef = db.collection(`watchlist/${uid}/watchlist`);
     const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
@@ -46,16 +48,28 @@ let temp= 0;
  let i =0;
     const movieDataPromises = ids.map(async id => {
      let m =  typ[i++]
+     if(m === 'movie'){
       const response = await axios.get(`https://api.themoviedb.org/3/${m}/${id}?api_key=21958744bdcd83994642863edf06f583`);
-      temp = temp +  response.data.runtime;
+      temp = temp +  response.data.runtime
       const total = temp;
-      setWatchTime(total)
-      
-      return total;
+      setMtime(total)
+    }else{
+      const response = await axios.get(`https://api.themoviedb.org/3/${m}/${id}?api_key=21958744bdcd83994642863edf06f583`);
+      const pi = parseInt(response.data.episode_run_time)
+      const tmp = pi + ttime;
+      const tot = tmp;
+      setTtime(tot)
+
+    }
+
+    //  console.log(ttime)
+    setWatchTime(ttime + mtime)
+      return watchTime;
     });
+
+
   
     const movieData = await Promise.all(movieDataPromises);
-    console.log(movieData)
     return movieData;
   }
 
@@ -93,7 +107,6 @@ let count1 =0;
     tengen = count1;
     return count1;
   })
-console.log(tengen)
 
   function disWatchTime(){
     dispatch(setWT({

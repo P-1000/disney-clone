@@ -118,7 +118,7 @@ const handleDeleteProduct = () => {
 let i =0;
   return (
     <>
-    <h1 className='text-slate-50 text-xl mt-2 px-4 ml-4 mb-0' >YOUR WATCHLIST</h1>
+    <h1 className='text-slate-50 text-xl mt-2 px-4 ml-4 mb-0 pt-20' >YOUR WATCHLIST</h1>
     <div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 px-8 mt-8'>
 
        {uniq &&

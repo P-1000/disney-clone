@@ -77,13 +77,12 @@ const [tvd, settvd] = useState()
 
 
 
- <div>
- small screen search bar : 
+ <div className='pt-24 px-4'>
       <SearchBar handleSearch={handleSearch} />
     </div>
 
 
-    <div >
+    <div className='px-4'>
       <select className='text-black' value={selectedOption} onChange={handleSelectChange}>
         <option  value="movie">Movie</option>
         <option value="tv">TV</option>

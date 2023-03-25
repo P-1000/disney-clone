@@ -119,7 +119,7 @@ const ui = useSelector(sui)
     }
 
   return (
-    <Nav className='static'>
+    <Nav className='fixed  h-full w-full bg-purple-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10'>
       <Logo src='https://disney-clone-woad.vercel.app/images/images/logo.svg' />
       {
         !userName ?  (<Login onClick={signIn}>
@@ -143,7 +143,10 @@ const ui = useSelector(sui)
                 <img src = './images/watchlist-icon.svg'/>
                 <span>WATCHLIST</span>
             </a>
-            <a>
+            <a onClick={()=>{
+                 history.push('/Stats')
+            }}
+            >
                 <img src = './images/original-icon.svg'/>
                 <span>STATS</span>
             </a>
@@ -249,7 +252,7 @@ const parent1 = {
 const Nav = styled.nav`
   height: 70px;
   width: 100%;
-  background-color: #090b13;
+  ${'' /* background-color: #090b13; */}
   display: flex;
   justify-content: space-between;
   align-items: center;

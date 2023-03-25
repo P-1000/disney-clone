@@ -255,7 +255,7 @@ getTR()
   return (
     <>
 
-<div className='page top-20 static'>
+<div className='page top-20 static pt-14'>
     
     <div className='w-full '>
 

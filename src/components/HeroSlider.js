@@ -13,7 +13,7 @@ const ImgSlider = (props) => {
     autoplay: true,
   };
   return (
-    <Carousel {...settings} dots={true}>
+    <Carousel className="pt-14" {...settings} dots={true}>
       <Wrap>
         <a>
           <img src="https://disney-clone-woad.vercel.app/images/images/slider-scale.jpg" alt="" />

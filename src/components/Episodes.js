@@ -96,33 +96,35 @@ export default function Episodes(props) {
           className='fixed object-contain w-full'
           src={Back_Url + backdrop.file_path} />
         </div>
-        <div className='bg-[#2b2c328f] w-full h-[12%] absolute top-[45%]'>
-        <div className='nameContainer absolute left-80 pt-4'> 
+        <div className='bg-[#2b2c328f] w-full h-20 lg:h-[12%] absolute top-72 lg:top-[45%]'>
+        <div className='nameContainer absolute left-40 lg:left-80 pt-4'> 
                               <h1 className='text-xl lg:text-3xl w-full'>{name}</h1>
                               <h3 className='w-full'>{season.name || <Skeleton/> }</h3>
                     </div>
-                    <div className='float-right mr-20 pt-4'>
+                    <div className='float-right absolute lg:left-0 left-80  lg:mr-32 pt-8 lg:pt-4'>
                       <h2>{season.air_date}</h2>
                     </div>
         </div>
-            <div  className='lg:h-[180px] lg:w-[240px] h-auto w-auto rounded-sm  absolute z-40 top-[27%] ml-8 '>
+            <div  className='lg:h-[180px] lg:w-[240px] h-[80px] w-[120px] rounded-sm  absolute z-40 top-[27%] ml-2 lg:ml-8 '>
                <img 
                 className='rounded-lg '
                 src={Back_Url + season.poster_path} />
             </div>
-            <div className='bg-black w-full h-[300%] absolute top-[55%] z-30 '>
-              <div className='w-[80%] float-right'>
+            <div className='bg-black w-full h-[300%] absolute top-[49%]  lg:top-[60%] z-30 '>
+              <div className='lg:w-[78%] lg:h-[80%] lg:mt-20 mt-2 float-right'>
               {
             episodes && episodes.map((e)=>{
-             return   <div className='hover:bg-slate-400 py-2'>
-             <div className='flex px-4 gap-10'>
+             return   <div className=' border-b lg:border-0 py-2  transition-all
+             hover:bg-blue-900 hover:rounded-md hover:bg-clip-padding hover:backdrop-filter 
+             hover:backdrop-blur-md hover:bg-opacity-20  border-gray-100 '>
+             <div className='flex px-2 lg:px-4 gap-3 lg:gap-10'>
               <img 
-             className='h-44 object-cover'
+             className='lg:h-44 h-20 object-cover'
               src={Back_Url + e.still_path} />
               <div>
              <h1>{e.episode_number}.{e.name}</h1>
                            <div>
-             <p className='h-24 py-5 text-ellipsis overflow-hidden'> {e.overview}</p>
+             <p className='lg:h-24 h-12 py-1 lg:py-5 text-ellipsis overflow-hidden '> {e.overview}</p>
              </div>
              </div>
              </div>
