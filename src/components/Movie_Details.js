@@ -278,15 +278,23 @@ useEffect(() => {
                   
 
           </div>
-          <img
+       
+          {/* <img
             src={`https://image.tmdb.org/t/p/original${MovData.backdrop_path}`}
             alt="backgrop poster"
             className="w-full h-full  object-contain object-center rounded-lg absolute"
             style={{left:"310px"}}
-          />
+          /> */}
+          <div className='absolute left-[700px] '>
+          <iframe 
+          className='left-[500px] '
+           width="780" height="475" src="https://www.youtube.com/embed/km-jpcx0xRM?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         
+          </div>
         </div>
+     
 </div>
+
 </div>
 
 {/* ------ tv season and tv thing --------  */}
