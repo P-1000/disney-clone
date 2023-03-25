@@ -311,10 +311,10 @@ function pl(){
             style={{left:"310px"}}
           /> */}
 {
-  video ?  <div className='absolute left-[400px] -z-10'>
+  video ?  <div className='absolute left-[500px] -top-52 -z-10'>
           <iframe 
           className='left-[350px] '
-           width="980" height="475" src="https://www.youtube.com/embed/km-jpcx0xRM?autoplay=1&controls=0" 
+           width="780" height="866" src="https://www.youtube.com/embed/km-jpcx0xRM?autoplay=1&controls=0" 
            ref={videoRef}
            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         
