@@ -23,6 +23,7 @@ import { icons } from 'react-icons';
 import Seasons from './Seasons';
 import Cast from './Cast';
 import {  toast} from 'react-toastify';
+import { useRef } from 'react';
 
 import Recommendations from './Recommendations';
 function Movie_Details(props) {
@@ -181,6 +182,14 @@ useEffect(() => {
 }, []);
 
 
+const videoRef = useRef(null);
+
+useEffect(() => {
+  // Check if the video has loaded and start autoplay
+  if (videoRef.current && videoRef.current.readyState === 4) {
+    videoRef.current.play();
+  }
+}, []);
 
 
 
@@ -288,7 +297,9 @@ useEffect(() => {
           <div className='absolute left-[400px] -z-10'>
           <iframe 
           className='left-[350px] '
-           width="980" height="475" src="https://www.youtube.com/embed/km-jpcx0xRM?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+           width="980" height="475" src="https://www.youtube.com/embed/km-jpcx0xRM?autoplay=1&controls=0" 
+           ref={videoRef}
+           title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         
           </div>
         </div>
