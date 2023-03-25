@@ -78,7 +78,7 @@ const Videos = (props) => {
 useEffect(()=>{
   setT([...t , traiData])
 },[])
-console.log(traiData)
+// console.log(traiData)
 
   // &vote_average.gte=60.0&with_genres=Action
   return (

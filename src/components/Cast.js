@@ -74,7 +74,7 @@ if(mt == 'undefined'){
   }
 
 
-  console.log(tmdb)
+ // console.log(tmdb)
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>

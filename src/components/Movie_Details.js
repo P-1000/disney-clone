@@ -7,7 +7,7 @@ import { selectNewResults , selectResults , selectSearch , setImages} from '../f
 import { useSelector } from "react-redux";
 import { setApi } from '../features/apiSlice/apiSlice';
 import axios from 'axios';
-import { FaPlay} from "react-icons/fa";
+import { FaPlay ,FaPause } from "react-icons/fa";
 import UpMovies from './Upcoming_Movies';
 import Videos from './Trailers';
 import { useDispatch } from 'react-redux';
@@ -24,9 +24,14 @@ import Seasons from './Seasons';
 import Cast from './Cast';
 import {  toast} from 'react-toastify';
 import { useRef } from 'react';
+import { selectVideos } from '../features/apiSlice/apiSlice';
+
+
 
 import Recommendations from './Recommendations';
+
 function Movie_Details(props) {
+
     const Back_Url = "https://image.tmdb.org/t/p/original";
     const {id , media_type } = useParams();
     //for trending movies : 
@@ -38,11 +43,12 @@ function Movie_Details(props) {
     const searched_details = useSelector(selectSearch)
    
     const red = useDispatch();
-
+  const tmdb = useSelector(selectVideos);
     const [data, setData] = useState([]);
     const [MovData , setMovData] = useState([])
    const [MovieName , setMovieName] = useState("TITLE")
-
+   const [traiData , settraiData] = useState([])
+   const videoRef = useRef(null);
 
   // --------------state for video ----------
 
@@ -106,6 +112,26 @@ function Movie_Details(props) {
     }
     getMovieDetail()
 },[id]);
+
+//trailer ------___-------------@#$%^&*(*&^%$%^&*)
+const [tkey , setTkey] = useState('')
+useEffect(()=>{
+  async function getVideos(props){
+  
+  const apiR = await fetch(`https://api.themoviedb.org/3/${media_type !== "undefined" ? media_type : "movie"}/${tmdb}/videos?api_key=21958744bdcd83994642863edf06f583`)
+  const res = await apiR.json();
+  settraiData(res.results[5] || res.results[4]|| res.results[3] || res.results[2] || res.results[1] || res.results[0]  )
+  const yek = res.results[0]
+  return yek.key
+}
+    getVideos()
+    
+
+},[tmdb,id,traiData])
+
+
+
+
 
 const wid = id;
 
@@ -188,23 +214,41 @@ useEffect(() => {
 }, []);
 
 
-const videoRef = useRef(null);
 
 useEffect(() => {
   // Check if the video has loaded and start autoplay
   if (videoRef.current && videoRef.current.readyState === 4) {
     videoRef.current.play();
   }
+ 
 }, []);
 
+const [isPlaying, setIsPlaying] = useState(false);
+
 function pl(){
+  setIsPlaying(false)
   if(video){
     setVideo(false)
+    setIsPlaying(true)
   }
   else{
     setVideo(true)
+    setIsPlaying(false)
   }
 }
+
+
+
+
+useEffect(() => {
+
+  async function getTR(props){
+    const request = fetch(`https://api.themoviedb.org/3/${media_type !== "undefined" ? media_type : "movie"}/${id}/videos?api_key=21958744bdcd83994642863edf06f583`)
+    const res = await request.json();
+  //  console.log(res.results[0] , "test")
+  }
+getTR()
+},[])
 
 
 {/* <img src={Back_Url + Movie.backdrop_path }/> */}
@@ -273,7 +317,11 @@ function pl(){
                         <div className='flex'>
                             <button 
                             onClick={pl}>
-                            <FaPlay className='text-3xl' />
+                            
+                            {
+                              isPlaying ? <FaPlay className='text-2xl mt-3' /> : <FaPause  className='text-2xl mt-3' />
+                            }
+
                             </button>
                             <div className='flex flex-col'>
                                 <p>AVAILBLE ON </p>
@@ -311,12 +359,13 @@ function pl(){
             style={{left:"310px"}}
           /> */}
 {
-  video ?  <div className='absolute left-[500px] -top-52 -z-10'>
+  video ?  <div className='absolute left-[488px] -top-[440px] -z-10'>
           <iframe 
           className='left-[350px] '
-           width="780" height="866" src="https://www.youtube.com/embed/km-jpcx0xRM?autoplay=1&controls=0" 
+           width="800" height="1330" src={`https://www.youtube.com/embed/${traiData.key}?autoplay=1&controls=0`}
            ref={videoRef}
-           title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+           title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen> 
+           </iframe>
         
           </div> : <img
             src={`https://image.tmdb.org/t/p/original${MovData.backdrop_path}`}
