@@ -285,10 +285,10 @@ useEffect(() => {
             className="w-full h-full  object-contain object-center rounded-lg absolute"
             style={{left:"310px"}}
           /> */}
-          <div className='absolute left-[700px] '>
+          <div className='absolute left-[400px] -z-10'>
           <iframe 
-          className='left-[500px] '
-           width="780" height="475" src="https://www.youtube.com/embed/km-jpcx0xRM?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          className='left-[350px] '
+           width="980" height="475" src="https://www.youtube.com/embed/km-jpcx0xRM?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         
           </div>
         </div>
