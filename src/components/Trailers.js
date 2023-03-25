@@ -78,19 +78,17 @@ const Videos = (props) => {
 useEffect(()=>{
   setT([...t , traiData])
 },[])
+console.log(traiData)
 
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>
-    <div className="red">
-
-
-      <h2 className="text-2xl hidden lg:block">Trailers & Extras</h2>
+    <div className=" hidden lg:block" >
  
     <Carousel  {...settings} dots={true}>
 
          {
-          traiData && 
+         traiData && traiData.length >5 && 
              traiData.map((trailer) =>{
              return  <div className="w-full h-full"> 
              <Button key={trailer.key} id={trailer.id}
@@ -108,22 +106,46 @@ useEffect(()=>{
         } 
     </Carousel>
     </div>
+    <h1 className="lg:hidden">Trailers and Extras</h1>
+    <div className="red lg:hidden sm:block" >
+    <Carousel  {...settings} dots={true}>
+
+{
+ traiData &&
+    traiData.map((trailer) =>{
+    return  <div className="w-full h-full"> 
+    <Button key={trailer.key} id={trailer.id}
+    onClick={() => { setisOpen(true); setv(trailer.key);}}
+    className="w-full h-full  mt-4"
+     href={`https://www.youtube.com/watch?v=${trailer.key}`}>
+     <img 
+     className="w-full h-ful object-cover px-2 hover:scale-110 transition-all "
+     src={`https://img.youtube.com/vi/${trailer.key}/hqdefault.jpg`}/>
+    </Button>
+
+  
+    </div> 
+})
+} 
+</Carousel>
+    </div>
     <Modal open={isOpen}
     onClose={()=>setisOpen(false)}
               className="inset-0 z-10 lg:m-10 p-10 m:p-1">
               <div className="px-10 mt-1 mr-10">
               <div className="hidden lg:block">
-              <iframe width="1060" height="720" 
-              src={`https://www.youtube.com/embed/${v}`}
-              title="YouTube video player" frameborder="0" allow="accelerometer; 
-              autoplay; clipboard-write; encrypted-media; gyroscope; 
+              <iframe   width="560" 
+        height="315"
+              src={`https://www.youtube.com/embed/${v}?autoplay=1&controls=0`}
+              title="YouTube video player" allow="autoplay" muted  frameborder="0" allow="accelerometer; 
+               clipboard-write; encrypted-media; gyroscope;
               picture-in-picture; web-share" allowfullscreen>
               </iframe>
               </div>
               <div className="lg:hidden sm:block left-0 right-0 mr-10">
               <iframe width="660" height="215" 
               src={`https://www.youtube.com/embed/${v}`}
-              title="YouTube video player" frameborder="0" allow="accelerometer; 
+              title="YouTube video player" allow="autoplay" frameborder="0" allow="accelerometer; 
               autoplay; clipboard-write; encrypted-media; gyroscope; 
               picture-in-picture; web-share" allowfullscreen>
               </iframe>

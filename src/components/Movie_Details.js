@@ -292,8 +292,11 @@ useEffect(() => {
 {/* ------ tv season and tv thing --------  */}
 
 <div className='m-10 text-white text-xl hidden sm:block'>
-  <Seasons id={wid}/>
+  <Seasons id={wid} media_type={media_type} backdrop_path = {MovData.poster_path} />
 </div>
+
+
+
 
 <div className=' red m-10  top-0 hidden lg:block'>
 {/* <h2 className="text-2x sm:hidden">Trailers & Extras</h2> */}
@@ -303,11 +306,11 @@ useEffect(() => {
 
 <div className='hidden'>
 <div className='m-10  lg:hidden'>
-              <Seasons id={wid}/>
+              <Seasons id={wid} media_type={media_type}  backdrop_path = {MovData.poster_path}/>
 </div>
 </div>
 <div className='m-10 hidden lg:block'>
-              <Recommendations movie_id = {wid} motv = {media_type} />
+              <Recommendations movie_id = {wid} motv = {media_type}  />
 </div>
 
 <div className='m-10 hidden lg:block'>
@@ -350,7 +353,7 @@ useEffect(() => {
         <button className='flex gap-2 shadow-lg rounded-sm pr-16 pl-10  px-8 py-3' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>  Share</button>
 </div>
                   <div className='mx-4  lg:hidden mb-0 p-0'>
-              <Seasons id={wid} backdrop_path = {MovData.poster_path} />
+              <Seasons id={wid} media_type={media_type} backdrop_path = {MovData.poster_path} />
 </div>
 </div>
 

@@ -2,6 +2,9 @@ import { Search } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components';
+import Skeleton , { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 export default function Episodes(props) {
     const Back_Url = "https://image.tmdb.org/t/p/original";
@@ -9,6 +12,7 @@ export default function Episodes(props) {
     const [episodes , setEpisodes] = useState([]);
     const [season , setSeason] = useState({})
     const [backdrop ,setBackdrop] = useState([])
+    const [loading , setLoading] = useState(true)
 
     useEffect(()=>{
         async function getEpisodes(){
@@ -16,6 +20,10 @@ export default function Episodes(props) {
             const putEp = await getEp.json()
             setEpisodes(putEp.episodes)
             setSeason(putEp)
+            const timeoutId = setTimeout(() => {
+              setLoading(false);
+            }, 400);
+          
         }
         getEpisodes()
     },[])
@@ -31,8 +39,58 @@ export default function Episodes(props) {
     console.log(season)
   return (
     <>
+   {
+    loading &&
 
-        <div className='bg-white w-full '>
+
+<SkeletonTheme backgroundColor='#808080' highlightColor="gray">
+<div className='bg-white w-full'>
+        <div className='-z-30'>
+        <Skeleton height={500} color='blue' />
+        </div>
+        <div className='bg-[#2b2c328f] w-full h-[12%] absolute top-[45%]'>
+        <div className='nameContainer absolute left-80 pt-4'> 
+                              <h1 className='text-xl lg:text-3xl w-full'><Skeleton/></h1>
+                              <h3 className='w-full'><Skeleton/></h3>
+                    </div>
+                    <div className='float-right mr-20 pt-4'>
+                      <h2>{season.air_date}</h2>
+                    </div>
+        </div>
+            <div  className='lg:h-[180px] lg:w-[240px] h-auto w-auto rounded-sm  absolute z-40 top-[27%] ml-8 '>
+             <Skeleton className='p-4' height={395} width={230} />
+            </div>
+            <div className='bg-black w-full h-[300%] absolute top-[55%] z-30 '>
+              <div className='w-[80%] float-right'>
+              {
+            episodes && episodes.map((e)=>{
+             return   <div className='hover:bg-slate-400 py-2'>
+             <div className='flex px-4 gap-10'>
+             <Skeleton height={176} width={280} />
+              <div>
+             <h1 className='px-1 py-6'><Skeleton height={20}   color="rgba(255, 255, 255, 0.5)" 
+  highlightColor="rgba(255, 255, 255, 0.1)"  /> </h1>
+                           <div>
+             <p className=' py-5 text-ellipsis overflow-hidden'> 
+                <Skeleton height={20} width={600}  color="rgba(255, 255, 255, 0.5)" 
+  highlightColor="rgba(255, 255, 255, 0.1)"  count={3} />
+             </p>
+             </div>
+             </div>
+             </div>
+                </div>
+            })
+        }
+              </div>
+            </div>
+        </div>
+</SkeletonTheme>
+
+   }
+
+     {
+      loading === false &&
+       <div className='bg-white w-full '>
         <div>
           <img  
           className='fixed object-contain w-full'
@@ -41,14 +99,14 @@ export default function Episodes(props) {
         <div className='bg-[#2b2c328f] w-full h-[12%] absolute top-[45%]'>
         <div className='nameContainer absolute left-80 pt-4'> 
                               <h1 className='text-xl lg:text-3xl w-full'>{name}</h1>
-                              <h3 className='w-full'>{season.name}</h3>
+                              <h3 className='w-full'>{season.name || <Skeleton/> }</h3>
                     </div>
                     <div className='float-right mr-20 pt-4'>
                       <h2>{season.air_date}</h2>
                     </div>
         </div>
             <div  className='lg:h-[180px] lg:w-[240px] h-auto w-auto rounded-sm  absolute z-40 top-[27%] ml-8 '>
-                <img 
+               <img 
                 className='rounded-lg '
                 src={Back_Url + season.poster_path} />
             </div>
@@ -74,77 +132,7 @@ export default function Episodes(props) {
               </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-    <div className=''>
-      {/* <div className='layout-mb itemBackdrop' 
-      style={{ 
-        backgroundImage:`url(${Back_Url + backdrop.file_path})` ,
-      }}>
- <div 
-                     className=' hidden lg:flex cardImageContainer  w-80 top-28 z-10 '>
-                     <img src={Back_Url + season.poster_path} />
-                     </div>
-                     <div 
-                     className=' lg:hidden ScardImageContainer w-36 z-10 top-32'>
-                     <img src={Back_Url + season.poster_path} />
-                     </div>  
-
-                     <div className=' absolute top-56 w-full  detailPageWrapperContainer padded-bottom-page'>
-            <div className='detailPagePrimaryContainer padded-left padded-right detailRibbon'>
-                    <div className='infoWrapper flex lg:gap-80 gap-40'>
-                    <div className='detailImageContainer padded-left'>
-                    
-                    </div>
-                   
-                    <div className='flex flex-wrap'>
-                    <div className='nameContainer '> 
-                              <h1 className='text-xl w-full'>Game Of Thrones</h1>
-                              <h3 className='w-full'>{season.name}</h3>
-                    </div>
-                    <div className='flex  lg:ml-80'>
-                      <p>paly</p>
-                      <p>paly</p>
-                      <p>paly</p>
-                      <p>paly</p>
-                    </div>
-                    </div>
-                    
-                    </div>
-            </div>
-        </div>               */}
-      </div>
-      {/* card wrapper  */}
-       
-    
-    {/* </div> */}
-    {/* <div className='w-9/12 hidden lg:block  float-right mt-10 px-10'> 
-        {
-            episodes && episodes.map((e)=>{
-             return   <div className='hover:bg-slate-400 py-2'>
-             <div className='flex px-4 gap-10'>
-              <img 
-             className='h-44 object-cover'
-              src={Back_Url + e.still_path} />
-              <div>
-             <h1>{e.episode_number}.{e.name}</h1>
-                           <div>
-             <p className='h-24 py-5 text-ellipsis overflow-hidden'> {e.overview}</p>
-             </div>
-             </div>
-             </div>
-                </div>
-            })
-        }
-    </div> */}
+     }
     </>
   )
 }

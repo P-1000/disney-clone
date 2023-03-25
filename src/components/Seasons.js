@@ -40,6 +40,7 @@ function Seasons(props) {
         ]
       };
     const tv_id = props.id
+    const media_type = props.media_type;
     const backdrop_path = props.backdrop_path
     //calling api for tv seasons : 
       const poster_url = "https://image.tmdb.org/t/p/original";
@@ -47,10 +48,12 @@ const [tv, setTv] = useState({});
 const [season, setSeason] = useState([]);
         useEffect(()=>{
             async function fetchData(){
-                const data = await fetch(`https://api.themoviedb.org/3/tv/${tv_id}?api_key=21958744bdcd83994642863edf06f583&language=en-US`)
+
+                const data = await fetch(`https://api.themoviedb.org/3/${media_type}/${tv_id}?api_key=21958744bdcd83994642863edf06f583&language=en-US`)
                 const result =  await data.json()
                 setSeason(result.seasons)
                 setTv(result)
+             
             }
             fetchData()
         },[tv_id])
@@ -94,7 +97,9 @@ if(season.length<3 || season.length<=6 || season.length==4){
 
   return (
     <div>
-      <h1 className='p-2'>Seasons</h1>
+     {media_type == 'tv' && 
+     <h1>Seasons</h1>
+     }
       <Carousel className=" " {...settings}  dots={false}>
       {/* {season &&
         season.map((movie) => (

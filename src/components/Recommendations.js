@@ -59,6 +59,10 @@ const Recommendations = (props) => {
         const toptv = await top.json();
         setTmdb(toptv.results)
     }
+    if(tmdb.length <5){
+      setTmdb([])
+    }
+
     getTv()
   },[movie_id])
 
@@ -67,10 +71,12 @@ const Recommendations = (props) => {
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>
-      <h2 className=" lg:block">Recommendations : </h2>
+    {
+     tmdb && tmdb.length < 3 && <h1 className="text-3xl">Recommendations</h1>
+    }
  
     <Carousel  className="sm:mx-0 sm:mt-32 " {...settings}>
-      {tmdb &&
+      {tmdb.length > 5 &&
         tmdb.map((movie) => (
           <Wrap key={movie.id} >
             <Link to={`/movie_details/${movie.id}/${motv}`}>
