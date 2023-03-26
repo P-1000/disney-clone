@@ -47,6 +47,7 @@ function Movie_Details(props) {
     const [data, setData] = useState([]);
     const [MovData , setMovData] = useState([])
    const [MovieName , setMovieName] = useState("TITLE")
+   const [MovieTime , setMovieTime] = useState(0)
    const [traiData , settraiData] = useState([])
    const videoRef = useRef(null);
 
@@ -95,6 +96,7 @@ function Movie_Details(props) {
       const {data} = movieRequest;
       setMovData(data)
       setMovieName(data.title)
+      setMovieTime(data.runtime)
       red(setTrailer({
         vidId: data.id,
       }))
@@ -104,6 +106,7 @@ function Movie_Details(props) {
       const {data} = movieRequest;
       setMovData(data)
       setMovieName(data.name)
+      setMovieTime(data.episode_run_time)
       red(setTrailer({
         vidId: data.id,
       }))
@@ -112,12 +115,10 @@ function Movie_Details(props) {
     }
     getMovieDetail()
 },[id]);
-
 //trailer ------___-------------@#$%^&*(*&^%$%^&*)
 const [tkey , setTkey] = useState('')
 useEffect(()=>{
   async function getVideos(props){
-  
   const apiR = await fetch(`https://api.themoviedb.org/3/${media_type !== "undefined" ? media_type : "movie"}/${tmdb}/videos?api_key=21958744bdcd83994642863edf06f583`)
   const res = await apiR.json();
   settraiData(res.results[5] || res.results[4]|| res.results[3] || res.results[2] || res.results[1] || res.results[0]  )
@@ -129,12 +130,7 @@ useEffect(()=>{
 
 },[tmdb,id,traiData])
 
-
-
-
-
 const wid = id;
-
 
 const over = MovData.overview;
 
@@ -148,6 +144,7 @@ if(md == undefined){
 const [ids , setids] = useState([]);
 
 let things;
+
 // push movie id to firebase
 const handleFir = () =>{  auth.onAuthStateChanged(async (user)=>{
   
@@ -172,6 +169,7 @@ const uid = user.uid
              movie_name : MovieName,
              backdrop_path :'https://image.tmdb.org/t/p/original' + MovData.backdrop_path,
              overview:over,
+              time:MovieTime,
            }).then(() => {
              toast.success(`${MovieName} Added to your watchlist`);
            })
@@ -259,7 +257,7 @@ getTR()
     
     <div className='w-full '>
 
-    {/* ------ for small screeen  ----- */}
+    {/* ------ for small screeen  ----- hero section backdrop and tailer  */}
 <div>
      {/* for small screen  */}
     
@@ -270,7 +268,7 @@ getTR()
                         <p className='text-lg pt-2 ml-8'>2hr1min &#8226; Action &#8226; U/A &#8226; Star Wars</p>
                         <p className='text-lg pt-2 ml-8 w-2/4  text-ellipsis overflow-hidden' style={{height:"120px"}}>{over}</p> */}
 
-                        <div className='flex  gap-2 ml-4  z-10 -top-14 absolute'>   
+                        <div className='flex  gap-2 ml-4  z-10 top-36 absolute'>   
                             <FaPlay className='text-xl mt-3' />
                             <div className='flex flex-col'>
                                 <p className='text-sm'>AVAILBLE ON </p>
@@ -279,11 +277,21 @@ getTR()
                         </div>
                       
                  </div>
-                 <img
+            {
+              isPlaying ? 
+               <iframe 
+          className='left-[350px] '
+           width="100%" height="230" src={`https://www.youtube.com/embed/${traiData.key}?autoplay=1&controls=0`}
+           ref={videoRef}
+           title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen> 
+           </iframe>
+              : 
+              <img 
             src={`https://image.tmdb.org/t/p/original${MovData.backdrop_path}`}
             alt="backgrop poster"
             className="w-full h-90  object-center object-cover rounded-lg absolute top-16 -z-10"
-          />
+          /> 
+            }
   </div>
 
         {/* -------- for large screen ------- */}
@@ -309,9 +317,9 @@ getTR()
             
                     {/* ----- movie details on hero image  ----- */}
                     <div >
-                         <h1 className='text-5xl mt-20 ml-10'>{MovieName}</h1>
+                         <h1 className='text-5xl mt-16 ml-10 w-9/12'>{MovieName}</h1>
                         <p className='text-lg pt-2 ml-10'>2hr1min &#8226; Action &#8226; U/A &#8226; Star Wars</p>
-                        <p className='text-lg pt-2 ml-10 w-2/4  text-ellipsis overflow-hidden' style={{height:"100px"}}>{over}</p>
+                        <p className='text-lg pt-2 ml-10 w-2/4  text-ellipsis overflow-hidden' style={{height:"120px"}}>{over}</p>
 
                         <div className='flex justify-between mt-12 mx-12 flex-row'> 
                         <div className='flex'>
@@ -422,11 +430,17 @@ getTR()
 {/* -------------  small screen details section ----------:  */}
 
 
-<div className='lg:hidden mt-56 '>
+{
+  !isPlaying && <div className='mt-56 lg:hidden'>
+
+</div>
+
+}
+<div className='lg:hidden  '>
 
 
 
-<div className='px-4'>
+<div className='px-4 pt-6'>
 <div className='w-full h-full m-0 p-0 flex justify-items-stretch relative' >
 <img
             src={`https://image.tmdb.org/t/p/original${MovData.poster_path}`}
@@ -440,7 +454,7 @@ getTR()
       <h3>2022  &#8226; U/A 13+ </h3>
       </div>
 </div>
-    <div className='h-20 mt-2 text-ellipsis overflow-hidden'>
+    <div className='h-24 mt-2 text-ellipsis overflow-hidden'>
             <p>{over}</p>
     </div>              
                   </div>
@@ -450,7 +464,8 @@ getTR()
         <button 
          onClick={()=>handleFir()}
          className='flex gap-2 shadow-lg rounded-sm pr-16 pl-10  px-8 py-3 ' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>  Watchlist</button>
-        <button className='flex gap-2 shadow-lg rounded-sm pr-16 pl-10  px-8 py-3' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>  Share</button>
+        <button onClick={pl}
+        className='flex gap-2 shadow-lg rounded-sm pr-16 pl-10  px-8 py-3' style={{backgroundColor : "#1c2438"}}><CgMathPlus size={20}/>  Play</button>
 </div>
                   <div className='mx-4  lg:hidden mb-0 p-0'>
               <Seasons id={wid} media_type={media_type} backdrop_path = {MovData.poster_path} />
@@ -459,10 +474,15 @@ getTR()
 
 
 <div>
+<div className='lg:hidden'>
+<h1 className='px-4 text-lg'>Similar</h1>
+<Recommendations movie_id = {wid} motv = {media_type}  />
+</div>
 <Cast id={id} mt={media_type}/>
 <div className='lg:hidden mt-0'>
 <Videos/>
 </div>
+
 </div>
 
   <div className='lg:hidden'>

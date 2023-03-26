@@ -56,7 +56,7 @@ const UpMovies = (props) => {
     <>
       <h2 className=" lg:block">Upcoming Movies</h2>
  
-    <Carousel className="sm:mx-0 sm:mt-32 " {...settings} dots={true}>
+    <Carousel className="sm:mx-0 sm:mt-32 " {...settings}>
       {tmdb &&
         tmdb.map((movie) => (
           <Wrap key={movie.id} >

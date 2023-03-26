@@ -61,6 +61,11 @@ export default function FixedBottomNavigation() {
             history.push('/search/Movies')
           }}
           label="Search" icon={<SearchIcon />} />
+           <BottomNavigationAction 
+          onClick={()=>{
+            history.push('/Stats')
+          }}
+          label="Stats" icon={<FavoriteIcon />} />
         </BottomNavigation>
       </Paper>
     </Box>

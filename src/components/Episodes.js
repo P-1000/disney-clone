@@ -90,14 +90,14 @@ export default function Episodes(props) {
 
      {
       loading === false &&
-       <div className='bg-white w-full '>
+       <div className='bg-black w-full pt-16 '>
         <div>
           <img  
           className='fixed object-contain w-full'
           src={Back_Url + backdrop.file_path} />
         </div>
-        <div className='bg-[#2b2c328f] w-full h-20 lg:h-[12%] absolute top-72 lg:top-[45%]'>
-        <div className='nameContainer absolute left-40 lg:left-80 pt-4'> 
+        <div className='bg-[#2b2c328f] w-full h-20 lg:h-[12%] absolute top-80 lg:top-[48%] bg-yellow-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20'>
+        <div className='nameContainer absolute left-40 lg:left-80 pt-4 '> 
                               <h1 className='text-xl lg:text-3xl w-full'>{name}</h1>
                               <h3 className='w-full'>{season.name || <Skeleton/> }</h3>
                     </div>

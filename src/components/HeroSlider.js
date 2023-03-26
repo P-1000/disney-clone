@@ -14,24 +14,93 @@ const ImgSlider = (props) => {
   };
   return (
     <Carousel className="pt-14" {...settings} dots={true}>
-      <Wrap>
-        <a>
-          <img src="https://disney-clone-woad.vercel.app/images/images/slider-scale.jpg" alt="" />
+
+      <Wrap className="hidden">
+        <a className="lg:h-80 h-44  overflow-hidden hidden lg:block">
+      <div className="-top-40 absolute -left-72 hidden lg:block">
+      <iframe 
+        className="lg:-top-56 "
+        width="1920" height="790" src="https://www.youtube.com/embed/wtEWYpP-dWU?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div className=" absolute left-0 -top-20   lg:hidden">
+      <iframe 
+        className=" "
+        width="400" height="320" src="https://www.youtube.com/embed/wtEWYpP-dWU?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      </a>
+      </Wrap>
+
+
+
+      <Wrap className="relative">
+      <div className="absolute">
+            <h1 className="text-4xl font-bold z-50 text-white text-left ml-10 mt-10">
+              The Falcon and the Winter Soldier
+            </h1>
+          </div>
+      <div
+            className="absolute z-10 w-full h-full"
+            style={{backgroundImage:
+                "linear-gradient(90deg, rgb(3, 11, 23) 18.95%, rgba(5, 18, 29) 30.3%, rgba(9, 22, 34, 1) 42.3%, rgba(19, 34, 34, 0.79) 58.3% , rgba(19, 34, 34, 0.79) 66.3%, rgba(34, 34, 34, 0.2) 100%)",
+                }}
+          />
+          
+        <a className="lg:h-80 h-44 overflow-hidden absolute">
+        
+      
+         
+          <img 
+          className="object-cover w-full h-full -z-50 "
+          src="https://disney-clone-woad.vercel.app/images/images/slider-badging.jpg" alt="" />
+       
         </a>
       </Wrap>
+      <Wrap className="hidden">
+      
+        <a className="lg:h-80 h-44  overflow-hidden hidden lg:block">
+    
+      <div className="-top-40 absolute -left-72 hidden lg:block">
+
+      <iframe 
+        className="lg:-top-56 "
+        width="1920" height="790" src="https://www.youtube.com/embed/wtEWYpP-dWU?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div className=" absolute left-0 -top-20   lg:hidden">
+      <iframe 
+        className=" "
+        width="400" height="320" src="https://www.youtube.com/embed/wtEWYpP-dWU?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      </a>
+      </Wrap>
+   
       <Wrap>
-        <a>
-          <img src="https://disney-clone-woad.vercel.app/images/images/slider-badging.jpg" alt="" />
+        <a className="lg:h-80 h-44">
+          <img 
+          className="object-cover w-full h-full"
+          src="https://disney-clone-woad.vercel.app/images/images/slider-badging.jpg" alt="" />
         </a>
       </Wrap>
-      <Wrap>
-        <a>
-          <img src="https://disney-clone-woad.vercel.app/images/images/slider-badging.jpg" alt="" />
-        </a>
+
+      <Wrap className="hidden">
+        <a className="lg:h-80 h-44  overflow-hidden hidden lg:block">
+      <div className="-top-40 absolute -left-72 hidden lg:block">
+      <iframe 
+        className="lg:-top-56 "
+        width="1920" height="790" src="https://www.youtube.com/embed/wtEWYpP-dWU?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div className=" absolute left-0 -top-20   lg:hidden">
+      <iframe 
+        className=" "
+        width="400" height="320" src="https://www.youtube.com/embed/wtEWYpP-dWU?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      </a>
       </Wrap>
+    
       <Wrap>
-        <a>
-          <img src="https://disney-clone-woad.vercel.app/images/images/slider-badging.jpg" alt="" />
+        <a className="lg:h-80 h-44">
+          <img 
+          className="object-cover w-full h-full"
+          src="https://disney-clone-woad.vercel.app/images/images/slider-badging.jpg" alt="" />
         </a>
       </Wrap>
     </Carousel>

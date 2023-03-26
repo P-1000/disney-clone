@@ -17,6 +17,7 @@ import styled from 'styled-components';
 import SwipeableEdgeDrawer from './mui'
 import { setWT , setMovCount  , setTvCount} from '../features/apiSlice/apiSlice';
 import { Dispatch } from 'react';
+import { async } from '@firebase/util';
 
 
 function Watched(props) {
@@ -37,39 +38,30 @@ function Watched(props) {
     const [mv , setMv] = useState({});
 let temp= 0;
 
+  const [hr, setHr] = useState([0]);
   async function fetchWatchlist(uid) {
     const watchlistRef = db.collection(`watchlist/${uid}/watchlist`);
     const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
-    const ids = [];
+    const ids = []
     querySnapshot.forEach(doc => {
       typ.push(doc.data().media_type);
       ids.push(doc.data().id);
+      // console.log(doc.data().time , "fuckyou")
+      // setHr([...hr , doc.data().time])
+      hr.push(doc.data().time)
+   //   console.log(doc.data().runtime || doc.data().episode_run_time)
+   //   setHr([...hr , doc.data().runtime])
     });
  let i =0;
-    const movieDataPromises = ids.map(async id => {
-     let m =  typ[i++]
-     if(m === 'movie'){
-      const response = await axios.get(`https://api.themoviedb.org/3/${m}/${id}?api_key=21958744bdcd83994642863edf06f583`);
-      temp = temp +  response.data.runtime
-      const total = temp;
-      setMtime(total)
-    }else{
-      const response = await axios.get(`https://api.themoviedb.org/3/${m}/${id}?api_key=21958744bdcd83994642863edf06f583`);
-      const pi = parseInt(response.data.episode_run_time)
-      const tmp = pi + ttime;
-      const tot = tmp;
-      setTtime(tot)
 
-    }
 
-    //  console.log(ttime)
-    setWatchTime(ttime + mtime)
-      return watchTime;
-    });
+   async function  movieDataPromises (){
+    setWatchTime(hr)
+   }
 
 
   
-    const movieData = await Promise.all(movieDataPromises);
+    const movieData = await movieDataPromises();
     return movieData;
   }
 
@@ -107,6 +99,12 @@ let count1 =0;
     tengen = count1;
     return count1;
   })
+
+
+
+
+
+
 
   function disWatchTime(){
     dispatch(setWT({

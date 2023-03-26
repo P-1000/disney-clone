@@ -83,7 +83,8 @@ const [tvd, settvd] = useState()
 
 
     <div className='px-4'>
-      <select className='text-black' value={selectedOption} onChange={handleSelectChange}>
+      <select className='text-black select w-full max-w-xs' value={selectedOption} onChange={handleSelectChange}>
+        <option disabled selected value> -- select an option -- </option>
         <option  value="movie">Movie</option>
         <option value="tv">TV</option>
       </select>
@@ -128,7 +129,7 @@ movieR &&   movieR.map((movie)=>(
 }
 function MovieComponent(props) {
   return <div>
-    <h1>Movie Component</h1>
+    <h1>Search Results For Movies </h1>
     <div className='grid lg:grid-cols-5 grid-cols-1 md:grid-cols-3 px-2 mx-4 gap-8 mt-6 pt-2' >
     {
       props.data && props.data.map((movie)=>(
@@ -159,11 +160,11 @@ function MovieComponent(props) {
 
 function TVComponent(props) {
   return <div>
-    <h1>Movies </h1>
+    <h1>Search Results for Tv</h1>
     <div className='grid lg:grid-cols-5 grid-cols-1 md:grid-cols-3 px-2 mx-4 gap-8 mt-6 pt-2' >
     {
       props.data && props.data.map((movie)=>(
-        <Link to={`/movie_details/${movie.id}/movie`} >
+        <Link to={`/movie_details/${movie.id}/tv`} >
         <div className="max-w-xs hover:scale-110 duration-300 ease-[cubic-bezier(0.39, 0.58, 0.57, 1)] transition-all  rounded-md shadow-sm hover:shadow-white bg-gray-900 text-gray-100">
        {
        movie.poster_path && <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="" className="object-cover  object-top w-full rounded-t-md h-72 dark:bg-gray-500" />    
@@ -171,7 +172,7 @@ function TVComponent(props) {
        }
         <div className="flex flex-col justify-between p-6 space-y-8">
         <div className="space-y-2">
-			<h2 className="text-xl font-semibold tracking-wide">{movie.title}</h2>
+			<h2 className="text-xl font-semibold tracking-wide">{movie.title || movie.name}</h2>
 			<p className="dark:text-gray-100 text-sm">Action , Adenventure , Sci-Fi</p>
 		</div>
     <button
