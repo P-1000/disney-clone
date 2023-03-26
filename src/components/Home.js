@@ -14,6 +14,7 @@ import Upcoming_Movies from './Upcoming_Movies';
 import UpMovies from './Upcoming_Movies';
 import TvTop from './TvTop';
 import Cast from './Cast';
+import GridCards from './GridCards';
 
 function Home() {
   const movies = useSelector(selectResults);
@@ -47,6 +48,11 @@ function Home() {
       <Movies/>
       <TvTop/>
       <UpMovies/>
+      <div className='mt-6'>
+      <h1 className='text-xl px-2 m-3'>By Genre :</h1>
+      <GridCards/>
+      </div>
+
       {/* <Cast/> */}
     </Container>
   )

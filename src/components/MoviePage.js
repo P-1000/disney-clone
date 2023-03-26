@@ -37,11 +37,28 @@ const [slider , setSlider] = useState([])
        const re =  getSlider()
       },[])
 
+      const [video , setVideo] = useState(false)
+
+      const [isPlaying, setIsPlaying] = useState(false);
+
+function pl(){
+  setIsPlaying(false)
+  if(video){
+    setVideo(false)
+    setIsPlaying(true)
+  }
+  else{
+    setVideo(true)
+    setIsPlaying(false)
+  }
+}
+
+
 
   return (
     <>
 
-    <div>
+    <div className='pt-2'>
     <div className="relative hidden w-full pt-16 lg:block lf-9 overflow-hidden rounded-lg divide-black"
           style={{ height: "100vh" }}>
    {/* content ----- */}
@@ -73,20 +90,27 @@ const [slider , setSlider] = useState([])
         </div>
         <div>
           <button className='px-8 py-2 mx-8 my-7 bg-orange-500 rounded-lg text-white'>Add to List</button>
-          <button className='px-8 py-2  my-7 bg-orange-500 rounded-lg text-white'>Watch Trailer</button>
+          <button 
+          onClick={pl}
+          className='px-8 py-2  my-7  bg-yellow-500 rounded-md bg-clip-padding backdrop-filter hover:backdrop-blur-sm backdrop-blur-sm bg-opacity-10 border border-orange-600 rounded-lg text-white'>Watch Trailer</button>
         </div>
 
           </div>
     <div
             className="absolute z-10 w-full h-full"
             style={{backgroundImage:
-                "linear-gradient(90deg, rgb(3, 11, 23) 18.95%, rgba(5, 18, 29) 30.3%, rgba(9, 22, 34, 1) 42.3%, rgba(34, 34, 34, 0.2) 100%)",
+                "linear-gradient(90deg, rgb(3, 11, 23) 18.95%, rgba(5, 18, 29) 30.3%, rgba(9, 22, 34, 1) 39.3%, rgba(34, 34, 34, 0.2) 100%)",
                 }}
           />
    {/* image ------ */}
-          <div className='left-60  h-full w-full object-cover absolute'>
-          {/* <img src='https://www.themoviedb.org/t/p/original/qjGrUmKW78MCFG8PTLDBp67S27p.jpg' /> */}
-          <iframe width="1920" height="740" src="https://www.youtube.com/embed/k_CxMefC7mA?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <div className=' absolute left-64   h-full w-full object-cover'>
+          {/* <img src='https://www.themoviedb.org/t/p/original/qjGrUmKW78MCFG8PTLDBp67S27p.jpg' />  */}
+          { video ? 
+              <iframe width="1890" height="1030" src="https://www.youtube.com/embed/IH1c1lEWFvM?autoplay=1&controls=0&amp;start=4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+     : <img src='https://www.themoviedb.org/t/p/original/qjGrUmKW78MCFG8PTLDBp67S27p.jpg' />
+          }
+         
+        
           </div>
 
     </div>

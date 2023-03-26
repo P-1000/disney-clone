@@ -24,6 +24,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Stats from "./components/Stats";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import GResults from "./components/GResults";
 
 function App() {
   return (
@@ -64,6 +65,9 @@ function App() {
          </Route>
          <Route path="/Stats">
           <Stats/>
+         </Route>
+         <Route path="/Genre/:id/:idt">
+          <GResults/>
          </Route>
          <Route path="/Persons/:id/:name">
           <Person/>
