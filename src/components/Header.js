@@ -7,6 +7,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import {AiOutlineSearch} from 'react-icons/ai'
 import { border, Box, Flex } from "@chakra-ui/react"
 import SearchBar from './SearchBar'
+import {AiFillHome} from 'react-icons/ai'
+import {AiOutlinePlus}  from 'react-icons/ai'
+import {VscDebugStart} from 'react-icons/vsc'
+import {BiStats} from 'react-icons/bi'
+import {MdMovie} from 'react-icons/md'
+import {BiSlideshow} from 'react-icons/bi'
+import {TbBrandDisney} from 'react-icons/tb'
+
 import {
     Popover,
     PopoverTrigger,
@@ -120,7 +128,8 @@ const ui = useSelector(sui)
 
   return (
     <Nav className='fixed  h-full w-full bg-purple-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10'>
-      <Logo src='https://disney-clone-woad.vercel.app/images/images/logo.svg' />
+      <Logo className='hidden lg:block' src='https://disney-clone-woad.vercel.app/images/images/logo.svg' />
+      <TbBrandDisney  className='lg:hidden text-3xl' />
       {
         !userName ?  (<Login onClick={signIn}>
             Login 
@@ -130,34 +139,34 @@ const ui = useSelector(sui)
             <a onClick={()=>{
                  history.push('/')
             }}>
-                <img src = './images/home-icon.svg'/>
+               <AiFillHome  className='mx-1 hidden lg:block'/>
                 <span>HOME</span>
             </a>
             <a>
-                <img src = './images/search-icon.svg'/>
+               <AiOutlineSearch className='mx-1 hidden lg:block'/>
                 <span>SEARCH</span>
             </a>
             <a onClick={()=>{
                  history.push('/myWatchlist')
             }}>
-                <img src = './images/watchlist-icon.svg'/>
+                <AiOutlinePlus className='mx-1 hidden lg:block'/>
                 <span>WATCHLIST</span>
             </a>
             <a onClick={()=>{
                  history.push('/Stats')
             }}
             >
-                <img src = './images/original-icon.svg'/>
+               <BiStats className='mx-1 hidden lg:block'/>
                 <span>STATS</span>
             </a>
             <a onClick={()=>{
                  history.push('/MOVIES')
             }}>
-                <img src = './images/movie-icon.svg'/>
+              <MdMovie className='mx-1 hidden lg:block'/>
                 <span>MOVIES</span>
             </a>
             <a>
-                <img src = './images/series-icon.svg'/>
+                <BiSlideshow className='mx-1 hidden lg:block'/>
                 <span>SERIES</span>
             </a>
             
@@ -184,8 +193,10 @@ const ui = useSelector(sui)
 
             <Profile className=''>
            <Popover>
+           
                 <PopoverTrigger>
-                          <Button style={child}>    
+                          <Button style={child}>  
+                           
                                   <Userimg  src={userPhoto } />
                           </Button>
                          </PopoverTrigger>

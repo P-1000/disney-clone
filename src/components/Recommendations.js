@@ -72,7 +72,7 @@ const Recommendations = (props) => {
   return (
     <>
     {
-     tmdb && tmdb.length < 3 && <h1 className="text-3xl">Recommendations</h1>
+     <h1 className="text-xl">Recommendations</h1>
     }
  
     <Carousel  className="sm:mx-0 sm:mt-32 " {...settings}>

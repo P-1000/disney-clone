@@ -298,7 +298,7 @@ getTR()
         <div className="mx-9 mb-10">
 
         <div
-          className="relative hidden w-full lg:block mr-9 lf-9 mt-8 overflow-hidden rounded-lg divide-black"
+          className="relative hidden w-full lg:block lf-9 mt-8 overflow-hidden rounded-lg divide-black"
           style={{ height: "28rem" }}
         >
           <div
