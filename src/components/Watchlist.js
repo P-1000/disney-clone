@@ -62,13 +62,22 @@ function Watchlist(props) {
   
   const wl_redux = ids.length
   useEffect(() => {
+
+    //garbage collection :
+    let isMounted = true;
+
+
     async function fetchData() {
       const ids = await fetchWatchlist(u);
       setIds(ids);
     }
 
-
     const watchlistData = fetchData();
+    
+    return () => {
+      isMounted = false;
+    }
+
   }, [u]);
 
 

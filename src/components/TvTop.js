@@ -53,12 +53,15 @@ const TvTop = (props) => {
 
 
   useEffect(()=>{
+    //garbage collection : 
+    let isMounted = true;
     async function getTv(){
         const top = await fetch('https://api.themoviedb.org/3/tv/top_rated?api_key=21958744bdcd83994642863edf06f583');
         const toptv = await top.json();
         setTmdb(toptv.results)
     }
     getTv()
+    return () => { isMounted = false };
   },[])
 
 

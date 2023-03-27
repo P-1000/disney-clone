@@ -28,6 +28,10 @@ function MoviePage() {
 const [slider , setSlider] = useState([])
 
       useEffect(()=>{
+
+        //garbage collection :
+        let isMounted = true;
+
         async function getSlider(){
           const req = await fetch('https://api.themoviedb.org/3/trending/all/day?api_key=21958744bdcd83994642863edf06f583')
          const res = await req.json()
@@ -35,6 +39,8 @@ const [slider , setSlider] = useState([])
           return res.results;
         }
        const re =  getSlider()
+       
+        return () => { isMounted = false; };
       },[])
 
       const [video , setVideo] = useState(false)

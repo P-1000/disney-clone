@@ -31,6 +31,8 @@ function SearchResults(props) {
 const [tvd, settvd] = useState()
 
   useEffect(() => {
+    //garbage collection
+    let isMounted = true;
     const fetchApi = async () => {
       const url = `https://api.themoviedb.org/3/search/movie?api_key=21958744bdcd83994642863edf06f583&query=${query}`;
       const url2 = `https://api.themoviedb.org/3/search/tv?api_key=21958744bdcd83994642863edf06f583&query=${query}`;
@@ -49,6 +51,9 @@ const [tvd, settvd] = useState()
       }
     };
     fetchApi();
+    return () => {
+      isMounted = false;
+    }
   }, [query]);
 
   const [selectedOption, setSelectedOption] = useState("movie");

@@ -15,7 +15,11 @@ const Moviecredits = (props) => {
     const {movC , mt} = props;
     const [data ,setData]=useState([]);
     useEffect(()=>{
+      //garbage collection :
+      let isMounted = true;
+
         setData(movC)
+        return () => { isMounted = false };
     },[movC]) 
     console.log(movC,"fuckyou")
   let settings = {

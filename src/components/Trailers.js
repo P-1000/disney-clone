@@ -62,6 +62,8 @@ const Videos = (props) => {
   const {id, media_type}  = params;
 
   useEffect(()=>{
+    //garbage collection : 
+    let isMounted = true;
     async function getVideos(props){
     
     const apiR = await fetch(`https://api.themoviedb.org/3/${media_type !== "undefined" ? media_type : "movie"}/${tmdb}/videos?api_key=21958744bdcd83994642863edf06f583`)
@@ -70,7 +72,7 @@ const Videos = (props) => {
   
   }
       getVideos()
-      
+      return () => { isMounted = false };
       
   },[tmdb,id])
   const [t , setT] = useState(traiData)

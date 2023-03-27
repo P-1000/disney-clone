@@ -47,9 +47,7 @@ const UpMovies = (props) => {
 
   const tmdb = useSelector(selectNewResults);
   const poster_url = "https://image.tmdb.org/t/p/original";
-  useEffect(()=>{
-    
-  },[])
+
 
   // &vote_average.gte=60.0&with_genres=Action
   return (

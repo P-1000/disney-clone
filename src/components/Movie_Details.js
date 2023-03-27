@@ -90,9 +90,11 @@ console.log(" sklajdf")
 // ## ---- setting movies details to state from redux --- ##
    useEffect(()=>{
   
+    const controller = new AbortController()
+    const { signal } = controller
     async function getMovieDetail(props){
       if(media_type == 'movie' || media_type== 'undefined'){
-      const movieRequest = await axios(`https://api.themoviedb.org/3/movie/${id}?api_key=21958744bdcd83994642863edf06f583`);
+      const movieRequest = await axios(`https://api.themoviedb.org/3/movie/${id}?api_key=21958744bdcd83994642863edf06f583` , { signal });
       const {data} = movieRequest;
       setMovData(data)
       setMovieName(data.title)
@@ -114,18 +116,27 @@ console.log(" sklajdf")
 
     }
     getMovieDetail()
+    return () => controller.abort()
 },[id]);
+
 //trailer ------___-------------@#$%^&*(*&^%$%^&*)
 const [tkey , setTkey] = useState('')
 useEffect(()=>{
+
+  //garbage collection : 
+  const controller = new AbortController()
+  const { signal } = controller
+
+
   async function getVideos(props){
-  const apiR = await fetch(`https://api.themoviedb.org/3/${media_type !== "undefined" ? media_type : "movie"}/${tmdb}/videos?api_key=21958744bdcd83994642863edf06f583`)
+  const apiR = await fetch(`https://api.themoviedb.org/3/${media_type !== "undefined" ? media_type : "movie"}/${tmdb}/videos?api_key=21958744bdcd83994642863edf06f583` , { signal })
   const res = await apiR.json();
   settraiData(res.results[5] || res.results[4] || res.results[1] || res.results[0]  )
   const yek = res.results[0]
   return yek.key
 }
     getVideos()
+    return () => controller.abort()
     
 
 },[tmdb,id])
@@ -150,9 +161,10 @@ const [currentUser, setCurrentUser] = useState(null);
 const [wids, setWids] = useState([]);
 
 useEffect(() => {
+  let didCancel = false;
   async function fetchWids() {
     const watchlistRef = firebase.firestore().collection('watchlist');
-
+   
     if (currentUser) {
       const querySnapshot = await watchlistRef.where('userid', '==', currentUser.uid).get();
       const wids = [];
@@ -166,6 +178,9 @@ useEffect(() => {
   }
 console.log("object")
   fetchWids();
+  return () => {
+    didCancel = true;
+  };
 }, []);
 
 useEffect(() => {
@@ -179,12 +194,19 @@ useEffect(() => {
 
 
 useEffect(() => {
+  //garbage collection :
+  let didCancel = false;
   // Check if the video has loaded and start autoplay
   if (videoRef.current && videoRef.current.readyState === 4) {
     videoRef.current.play();
   }
   console.log("error 1")
  
+  return () => {
+    didCancel = true;
+  }
+
+
 }, []);
 
 const [isPlaying, setIsPlaying] = useState(false);
@@ -205,6 +227,9 @@ function pl(){
 
 
 useEffect(() => {
+  //garbage collection :
+  let didCancel = false;
+  
 
   async function getTR(props){
     const request = fetch(`https://api.themoviedb.org/3/${media_type !== "undefined" ? media_type : "movie"}/${id}/videos?api_key=21958744bdcd83994642863edf06f583`)
@@ -212,6 +237,12 @@ useEffect(() => {
   //  console.log(res.results[0] , "test")
   }
 getTR()
+
+//garbage collection :
+  return () => {
+    didCancel = true;
+  }
+
 },[])
 
 const [dup , setDup] = useState([])

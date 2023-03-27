@@ -66,6 +66,9 @@ let temp= 0;
   }
 
   useEffect(() => {
+    //garbage collection : 
+    let isMounted = true;
+
     async function fetchData() {
       const ids = await fetchWatchlist(u);
       setIds(ids);
@@ -75,6 +78,7 @@ let temp= 0;
     const watchlistData = fetchData();
     // console.log(watchTime)
 
+    return () => { isMounted = false };
    
   }, [umd]);
 

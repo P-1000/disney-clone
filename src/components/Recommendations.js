@@ -54,6 +54,8 @@ const Recommendations = (props) => {
 
 
   useEffect(()=>{
+    // garbage collection : 
+    let isMounted = true;
     async function getTv(){
         const top = await fetch(`https://api.themoviedb.org/3/${motv}/${movie_id}/recommendations?api_key=21958744bdcd83994642863edf06f583`)
         const toptv = await top.json();
@@ -64,6 +66,7 @@ const Recommendations = (props) => {
     }
 
     getTv()
+    return () => { isMounted = false };
   },[movie_id])
 
 

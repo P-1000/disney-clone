@@ -9,10 +9,16 @@ const Web3Cards2 = () => {
   
   const [data , setData] = useState([])
   useEffect(() => {
+
+    //garbage collecton :
+    let isMounted = true;
+
     //popular movies fetch  from tmdb
     fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=21958744bdcd83994642863edf06f583')
     .then(res => res.json())
     .then(data => setData(data.results))
+
+    return () => { isMounted = false; };
   }, [])
 
 

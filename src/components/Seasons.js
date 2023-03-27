@@ -47,6 +47,8 @@ function Seasons(props) {
 const [tv, setTv] = useState({});
 const [season, setSeason] = useState([]);
         useEffect(()=>{
+          //garbage collection :
+          let isMounted = true;
             async function fetchData(){
 
                 const data = await fetch(`https://api.themoviedb.org/3/${media_type}/${tv_id}?api_key=21958744bdcd83994642863edf06f583&language=en-US`)
@@ -56,6 +58,7 @@ const [season, setSeason] = useState([]);
               
             }
             fetchData()
+            return () => { isMounted = false };
         },[tv_id])
 
 
