@@ -80,7 +80,7 @@ function Movie_Details(props) {
               }))
         }
     };
-
+console.log(" sklajdf")
     fetchData();
   }, []);
 
@@ -111,7 +111,7 @@ function Movie_Details(props) {
         vidId: data.id,
       }))
       }
-    
+
     }
     getMovieDetail()
 },[id]);
@@ -121,14 +121,14 @@ useEffect(()=>{
   async function getVideos(props){
   const apiR = await fetch(`https://api.themoviedb.org/3/${media_type !== "undefined" ? media_type : "movie"}/${tmdb}/videos?api_key=21958744bdcd83994642863edf06f583`)
   const res = await apiR.json();
-  settraiData(res.results[5] || res.results[4]|| res.results[3] || res.results[2] || res.results[1] || res.results[0]  )
+  settraiData(res.results[5] || res.results[4] || res.results[1] || res.results[0]  )
   const yek = res.results[0]
   return yek.key
 }
     getVideos()
     
 
-},[tmdb,id,traiData])
+},[tmdb,id])
 
 const wid = id;
 
@@ -145,42 +145,6 @@ const [ids , setids] = useState([]);
 
 let things;
 
-// push movie id to firebase
-const handleFir = () =>{  auth.onAuthStateChanged(async (user)=>{
-  
-const uid = user.uid
-  const watchlistRef = await db.collection(`watchlist/${user.uid}/watchlist/`);
-  const querySnapshot = await watchlistRef.where('uid', '==', 'wdiAUcpviqUfdvLiihpOjExtzcg1').get();
-  const ids = [];
-  querySnapshot.forEach(doc => {
-    ids.push(doc.data().id);
-  })
-
-    if(ids.includes(wid)){
-      toast.error("Already Exists in your watchlist")
-    }else{
-      if(user){
-        things =db.collection(`watchlist/${user.uid}/watchlist`)
-           things.add({
-             uid : user.uid,
-             id : wid,
-             cretedAt:serverTimestamp(),
-             media_type:md,
-             movie_name : MovieName,
-             backdrop_path :'https://image.tmdb.org/t/p/original' + MovData.backdrop_path,
-             overview:over,
-              time:MovieTime,
-           }).then(() => {
-             toast.success(`${MovieName} Added to your watchlist`);
-           })
-     }
-    }
-
-        
-
-  })
-
-}
 
 const [currentUser, setCurrentUser] = useState(null);
 const [wids, setWids] = useState([]);
@@ -200,16 +164,17 @@ useEffect(() => {
       console.log('No user is currently logged in.');
     }
   }
-
+console.log("object")
   fetchWids();
-}, [currentUser]);
+}, []);
 
 useEffect(() => {
   const unsubscribe = firebase.auth().onAuthStateChanged(user => {
     setCurrentUser(user);
   });
+  console.log("error 2")
   return unsubscribe;
-}, []);
+}, [wid]);
 
 
 
@@ -218,6 +183,7 @@ useEffect(() => {
   if (videoRef.current && videoRef.current.readyState === 4) {
     videoRef.current.play();
   }
+  console.log("error 1")
  
 }, []);
 
@@ -247,6 +213,44 @@ useEffect(() => {
   }
 getTR()
 },[])
+
+const [dup , setDup] = useState([])
+// push movie id to firebase
+const handleFir = () =>{  auth.onAuthStateChanged(async (user)=>{
+  
+const uid = user.uid
+const watchlistRef = db.collection(`watchlist/${uid}/watchlist/`);
+const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
+  querySnapshot.forEach(doc => {
+    ids.push(doc.data().id);
+    setDup([...dup , doc.data().id])
+  })
+
+    if(ids.includes(id)){
+      toast.error("Already Exists in your watchlist")
+    }else{
+      if(user){
+        things =db.collection(`watchlist/${user.uid}/watchlist`)
+           things.add({
+             uid : user.uid,
+             id : wid,
+             cretedAt:serverTimestamp(),
+             media_type:md,
+             movie_name : MovieName,
+             backdrop_path :'https://image.tmdb.org/t/p/original' + MovData.backdrop_path,
+             overview:over,
+              time:MovieTime,
+           }).then(() => {
+             toast.success(`${MovieName} Added to your watchlist`);
+           })
+     }
+    }
+
+        
+
+  })
+
+}
 
 
 {/* <img src={Back_Url + Movie.backdrop_path }/> */}
@@ -326,15 +330,21 @@ getTR()
                             <button 
                             onClick={pl}>
                             
+                            
+
+                            <div className='flex border border-orange-400 p-2 rounded-md'>
+                            {/* <FaPlay className='text-xl mt-1 mx-2' />  */}
                             {
-                              isPlaying ? <FaPlay className='text-2xl mt-3' /> : <FaPause  className='text-2xl mt-3' />
+                              isPlaying ? <FaPlay className='text-xl mt-1 mx-2' /> : <FaPause className='text-xl mt-1 mx-2' />
                             }
+                            <h1 className='text-lg'>Watch Trailer</h1>
+                            </div>
 
                             </button>
-                            <div className='flex flex-col'>
+                            {/* <div className='flex flex-col'>
                                 <p>AVAILBLE ON </p>
                                 <p>NETFLIX</p>
-                            </div>
+                            </div> */}
                             </div>
                             <div className='basis-1/2'>
                         <div className='firebase'>

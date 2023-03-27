@@ -66,10 +66,10 @@ function Watchlist(props) {
       const ids = await fetchWatchlist(u);
       setIds(ids);
     }
- 
+
 
     const watchlistData = fetchData();
-  }, [u,ids]);
+  }, [u]);
 
 
    dispatch(setWL({
@@ -195,10 +195,6 @@ let i =0;
           ))
         }
 
-        {/* {
-          deleted && <Notify  message='madda kudu' onDelete={handleDeleteProduct} />
-        } */}
-        
 
 
 

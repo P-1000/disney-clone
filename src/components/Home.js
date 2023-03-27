@@ -15,6 +15,7 @@ import UpMovies from './Upcoming_Movies';
 import TvTop from './TvTop';
 import Cast from './Cast';
 import GridCards from './GridCards';
+import Footer from './Footer';
 
 function Home() {
   const movies = useSelector(selectResults);
@@ -42,19 +43,22 @@ function Home() {
   
 
   return (
+    <>
     <Container>
       <ImgSlider/> 
       <Viewer/>
       <Movies/>
       <TvTop/>
       <UpMovies/>
-      <div className='mt-6'>
-      <h1 className='text-xl px-2 m-3'>By Genre :</h1>
+      <div className='mt-6 mb-6'>
+      <h1 className='text-xl px-2 m-3 '>By Genre :</h1>
       <GridCards/>
       </div>
-
+     
       {/* <Cast/> */}
     </Container>
+    <Footer/>
+    </>
   )
 }
 

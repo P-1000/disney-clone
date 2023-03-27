@@ -25,6 +25,8 @@ import Stats from "./components/Stats";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import GResults from "./components/GResults";
+import NotFound from "./components/Notfound";
+
 
 function App() {
   return (
@@ -39,6 +41,7 @@ function App() {
         classNames="fade"
         >
         <Switch>
+        
           <Route path="/movie_details/:id/:media_type">
                    <Movie_Details />
           </Route>
@@ -76,9 +79,11 @@ function App() {
                     <Home/>
 
          </Route>
+         <Route component={NotFound} />
         </Switch>
         </CSSTransition>
         </TransitionGroup>
+
         <div className="lg:hidden z-50">
         <FixedBottomNavigation/>
         </div>
