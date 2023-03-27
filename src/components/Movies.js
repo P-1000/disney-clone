@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import { selectResults } from "../features/apiSlice/apiSlice";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-
+import Skeleton from "react-loading-skeleton";
 
 
 
@@ -46,14 +46,29 @@ const Movies = (props) => {
 
   const tmdb = useSelector(selectResults);
   const poster_url = "https://image.tmdb.org/t/p/original";
+const [loading , setLoading] = useState(true)
+
+const timeoutId = setTimeout(() => {
+  setLoading(false);
+}, 100);
 
   
   return (
     <>
       <h2>Trending</h2>
- 
-    <Carousel {...settings}>
-      {tmdb &&
+ { loading &&
+     <div className="flex gap-4">
+     {
+        [...Array(10)].map((item, index) => (
+          <Skeleton key={index} width={200} height={300} />
+        ))
+
+     }
+     </div>
+ }
+
+     <Carousel {...settings}>
+      {tmdb && !loading &&
         tmdb.map((movie) => (
 
           <Wrap >
@@ -62,7 +77,7 @@ const Movies = (props) => {
             </Link>
           </Wrap>
         ))}
-    </Carousel>
+    </Carousel> 
     </>
   );
 };

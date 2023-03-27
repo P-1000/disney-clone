@@ -15,11 +15,10 @@ import { useHistory } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 
 
-
 // 
 // let mov = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=21958744bdcd83994642863edf06f583`);
-function SearchResults(props) {
-  const { query } = useParams();
+function GResults(props) {
+  const { query , id } = useParams();
   const [movieR , setmovieR] = useState()
   const history = useHistory();
   const poster_url = "https://image.tmdb.org/t/p/original";
@@ -31,11 +30,9 @@ function SearchResults(props) {
 const [tvd, settvd] = useState()
 
   useEffect(() => {
-    //garbage collection
-    let isMounted = true;
     const fetchApi = async () => {
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=21958744bdcd83994642863edf06f583&query=${query}`;
-      const url2 = `https://api.themoviedb.org/3/search/tv?api_key=21958744bdcd83994642863edf06f583&query=${query}`;
+      const url = `https://api.themoviedb.org/3/discover/movie?api_key=21958744bdcd83994642863edf06f583&with_genres=${id}`;
+      const url2 = `https://api.themoviedb.org/3/discover/tv?api_key=21958744bdcd83994642863edf06f583&with_genres=10759`;
       try {
         const response = await fetch(url);
         const response_Tv = await fetch(url2);
@@ -51,9 +48,6 @@ const [tvd, settvd] = useState()
       }
     };
     fetchApi();
-    return () => {
-      isMounted = false;
-    }
   }, [query]);
 
   const [selectedOption, setSelectedOption] = useState("movie");
@@ -80,10 +74,6 @@ const [tvd, settvd] = useState()
 
 
 
-
-
-
-
  <div className='pt-24 px-4'>
       <SearchBar handleSearch={handleSearch} />
     </div>
@@ -99,7 +89,7 @@ const [tvd, settvd] = useState()
     </div>
 
 
-    {/* <div className='grid lg:grid-cols-5 grid-cols-1 md:grid-cols-3 px-2 mx-4 gap-8 mt-6 pt-2' >
+    <div className='grid lg:grid-cols-5 grid-cols-1 md:grid-cols-3 px-2 mx-4 gap-8 mt-6 pt-2' >
 {
 
 movieR &&   movieR.map((movie)=>(
@@ -121,7 +111,7 @@ movieR &&   movieR.map((movie)=>(
  
   ))
 }
-</div> */}
+</div>
    
 
 
@@ -161,7 +151,6 @@ function MovieComponent(props) {
       ))
     }
     </div>
-   
   </div>;
 }
 
@@ -197,5 +186,5 @@ function TVComponent(props) {
 }
 
 
-export default SearchResults
+export default GResults
 

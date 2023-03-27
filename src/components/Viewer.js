@@ -17,7 +17,7 @@ function Viewer() {
             <img src='./images/viewers-starwars.png'/>
       </Warp>
       <Sprd>
-      <Warp>
+      <Warp className='hidden lg:block'>
             <img src='./images/viewers-national.png'/>
       </Warp>
       </Sprd>
@@ -34,7 +34,7 @@ const Container = styled.div`
     gap:25px;
     padding:30px 0 26px;
     @media only screen and (max-width: 479px){
-  grid-template-columns: repeat(5,minmax(0,1fr));
+  grid-template-columns: repeat(4,minmax(0,1fr));
   gap:5px;
   margin-top:10px;
   

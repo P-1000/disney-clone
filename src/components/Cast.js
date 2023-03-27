@@ -52,7 +52,6 @@ const Cast = (props) => {
   const poster_url = "https://image.tmdb.org/t/p/original";
 
 
-console.log(media_type)
   useEffect(()=>{
     async function getTv(){
 
@@ -75,7 +74,7 @@ if(mt == 'undefined'){
   }
 
 
-  console.log(tmdb)
+ // console.log(tmdb)
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>
@@ -86,7 +85,7 @@ if(mt == 'undefined'){
         tmdb.map((movie) => (
           <Wrap key={movie.id} 
           className='relative hover:w-full' >
-            <Link to={`/Persons/${movie.id}/${movie.name}`}>
+            <Link to={`/Persons/${movie.id}/${movie.name}#`}>
             <p className="absolute top-3/4 mt-16 pb-6 self-center text-center z-10 name-text px-4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-700 ">
             {movie.name}
             </p>

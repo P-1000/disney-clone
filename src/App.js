@@ -22,6 +22,11 @@ import Episodes from "./components/Episodes";
 import Person from "./components/Person";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Stats from "./components/Stats";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import GResults from "./components/GResults";
+import NotFound from "./components/Notfound";
+
 
 function App() {
   return (
@@ -36,6 +41,7 @@ function App() {
         classNames="fade"
         >
         <Switch>
+        
           <Route path="/movie_details/:id/:media_type">
                    <Movie_Details />
           </Route>
@@ -57,11 +63,14 @@ function App() {
          <Route path="/TV">
           <Tv/>
          </Route>
-         <Route path="/Episodes/:id/:sid">
+         <Route path="/Episodes/:id/:sid/:name">
           <Episodes/>
          </Route>
          <Route path="/Stats">
           <Stats/>
+         </Route>
+         <Route path="/Genre/:id/:idt">
+          <GResults/>
          </Route>
          <Route path="/Persons/:id/:name">
           <Person/>
@@ -70,13 +79,28 @@ function App() {
                     <Home/>
 
          </Route>
+         <Route component={NotFound} />
         </Switch>
         </CSSTransition>
         </TransitionGroup>
+
         <div className="lg:hidden z-50">
         <FixedBottomNavigation/>
         </div>
       </Router>
+
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+/>
         
     </div>
   );

@@ -54,12 +54,19 @@ const Recommendations = (props) => {
 
 
   useEffect(()=>{
+    // garbage collection : 
+    let isMounted = true;
     async function getTv(){
         const top = await fetch(`https://api.themoviedb.org/3/${motv}/${movie_id}/recommendations?api_key=21958744bdcd83994642863edf06f583`)
         const toptv = await top.json();
         setTmdb(toptv.results)
     }
+    if(tmdb.length <5){
+      setTmdb([])
+    }
+
     getTv()
+    return () => { isMounted = false };
   },[movie_id])
 
 
@@ -67,10 +74,12 @@ const Recommendations = (props) => {
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>
-      <h2 className=" lg:block">Recommendations : </h2>
+    {
+     <h1 className="text-xl">Recommendations</h1>
+    }
  
     <Carousel  className="sm:mx-0 sm:mt-32 " {...settings}>
-      {tmdb &&
+      {tmdb.length > 5 &&
         tmdb.map((movie) => (
           <Wrap key={movie.id} >
             <Link to={`/movie_details/${movie.id}/${motv}`}>

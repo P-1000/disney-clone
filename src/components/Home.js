@@ -14,6 +14,8 @@ import Upcoming_Movies from './Upcoming_Movies';
 import UpMovies from './Upcoming_Movies';
 import TvTop from './TvTop';
 import Cast from './Cast';
+import GridCards from './GridCards';
+import Footer from './Footer';
 
 function Home() {
   const movies = useSelector(selectResults);
@@ -24,6 +26,10 @@ function Home() {
  
 
   useEffect(()=>{
+
+    //garbage collection :
+    let isMounted = true;
+
     async function fetchData(){
       let mov = await fetch('https://api.themoviedb.org/3/trending/all/day?api_key=21958744bdcd83994642863edf06f583');
       let UpMov = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=21958744bdcd83994642863edf06f583&language=en-US&sort_by=popularity.desc&include=meida_type&include_video=false&page=1&primary_release_date.gte=1990-01-01&primary_release_date.lte=2020-12-31&vote_average.gte=6&with_genres=action')
@@ -35,20 +41,30 @@ function Home() {
    }));
     };
     const movData = fetchData();
-      
+    
+    return () => { isMounted = false; };
+
   },[])
 
   
 
   return (
+    <>
     <Container>
       <ImgSlider/> 
       <Viewer/>
       <Movies/>
       <TvTop/>
       <UpMovies/>
+      <div className='mt-6 mb-6'>
+      <h1 className='text-xl px-2 m-3 '>By Genre :</h1>
+      <GridCards/>
+      </div>
+     
       {/* <Cast/> */}
     </Container>
+    <Footer/>
+    </>
   )
 }
 

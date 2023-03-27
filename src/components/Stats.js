@@ -24,7 +24,7 @@ export default function Stats() {
     <div className='hidden'>
       <Watchlist />
     </div>
-    <div className='flex flex-wrap gap-6 mx-6 mt-8 px-6'>
+    <div className='flex flex-wrap gap-6 mx-6 mt-8 px-6 pt-20'>
     <Card sx={{ display: 'flex' }} className='px-6 py-4 gap-20 justify-self-center h-32 border rounded-3xl'>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 1 auto' }}>

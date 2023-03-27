@@ -17,6 +17,7 @@ import styled from 'styled-components';
 import SwipeableEdgeDrawer from './mui'
 import { setWT , setMovCount  , setTvCount} from '../features/apiSlice/apiSlice';
 import { Dispatch } from 'react';
+import { async } from '@firebase/util';
 
 
 function Watched(props) {
@@ -31,35 +32,43 @@ function Watched(props) {
     const [arr , setArr] = useState([])
     const [ids, setIds] = useState([]);
     const [typ , setTyp] = useState([]);
-
+    const [mtime , setMtime] = useState(0);
+    const [ttime , setTtime] = useState(0);
     const [watchTime , setWatchTime] = useState(0);
     const [mv , setMv] = useState({});
 let temp= 0;
+
+  const [hr, setHr] = useState([0]);
   async function fetchWatchlist(uid) {
     const watchlistRef = db.collection(`watchlist/${uid}/watchlist`);
     const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
-    const ids = [];
+    const ids = []
     querySnapshot.forEach(doc => {
       typ.push(doc.data().media_type);
       ids.push(doc.data().id);
+      // console.log(doc.data().time , "fuckyou")
+      // setHr([...hr , doc.data().time])
+      hr.push(doc.data().time)
+   //   console.log(doc.data().runtime || doc.data().episode_run_time)
+   //   setHr([...hr , doc.data().runtime])
     });
  let i =0;
-    const movieDataPromises = ids.map(async id => {
-     let m =  typ[i++]
-      const response = await axios.get(`https://api.themoviedb.org/3/${m}/${id}?api_key=21958744bdcd83994642863edf06f583`);
-      temp = temp +  response.data.runtime;
-      const total = temp;
-      setWatchTime(total)
-      
-      return total;
-    });
+
+
+   async function  movieDataPromises (){
+    setWatchTime(hr)
+   }
+
+
   
-    const movieData = await Promise.all(movieDataPromises);
-    console.log(movieData)
+    const movieData = await movieDataPromises();
     return movieData;
   }
 
   useEffect(() => {
+    //garbage collection : 
+    let isMounted = true;
+
     async function fetchData() {
       const ids = await fetchWatchlist(u);
       setIds(ids);
@@ -69,6 +78,7 @@ let temp= 0;
     const watchlistData = fetchData();
     // console.log(watchTime)
 
+    return () => { isMounted = false };
    
   }, [umd]);
 
@@ -93,7 +103,12 @@ let count1 =0;
     tengen = count1;
     return count1;
   })
-console.log(tengen)
+
+
+
+
+
+
 
   function disWatchTime(){
     dispatch(setWT({

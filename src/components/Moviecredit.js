@@ -1,13 +1,27 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectNewResults } from "../features/apiSlice/apiSlice";
+import { selectResults } from "../features/apiSlice/apiSlice";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import {useState , useEffect} from 'react'
+import Skeleton from "react-loading-skeleton";
 
-const UpMovies = (props) => {
+
+
+const Moviecredits = (props) => {
+    const {movC , mt} = props;
+    const [data ,setData]=useState([]);
+    useEffect(()=>{
+      //garbage collection :
+      let isMounted = true;
+
+        setData(movC)
+        return () => { isMounted = false };
+    },[movC]) 
+    console.log(movC,"fuckyou")
   let settings = {
     infinite: true,
     speed: 900,
@@ -41,29 +55,26 @@ const UpMovies = (props) => {
     ]
   };
 
-
-
-  const media_type = "movie"
-
-  const tmdb = useSelector(selectNewResults);
+  
   const poster_url = "https://image.tmdb.org/t/p/original";
 
-
-  // &vote_average.gte=60.0&with_genres=Action
+  
   return (
     <>
-      <h2 className=" lg:block">Upcoming Movies</h2>
- 
-    <Carousel className="sm:mx-0 sm:mt-32 " {...settings}>
-      {tmdb &&
-        tmdb.map((movie) => (
-          <Wrap key={movie.id} >
-            <Link to={`/movie_details/${movie.id}/movie`}>
+      <h2>Trending</h2>
+ <div>
+    <Carousel {...settings}>
+      {data &&
+        data.map((movie) => {
+           
+          return <Wrap >
+            <Link to={`/movie_details/${movie.id}/${mt}`}>
               <img src={poster_url + movie.poster_path}  alt={movie.title} />
             </Link>
           </Wrap>
-        ))}
+      })}
     </Carousel>
+    </div>
     </>
   );
 };
@@ -76,7 +87,6 @@ const Carousel = styled(Slider)`
     opacity: 0;
     height: 100%;
     width: 5vw;
-    z-index: 1;
     &:hover {
       opacity: 1;
       transition: opacity 0.2s ease 0s;
@@ -116,4 +126,4 @@ const Wrap = styled.div`
   }
 `;
 
-export default UpMovies;
+export default Moviecredits;
