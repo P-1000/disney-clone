@@ -86,19 +86,22 @@ console.log(" sklajdf")
 
 //const lp = data.file_path;
 //const logo_path = Back_Url + lp;
-
+// play video in next page :
+const [vimov , setVimov] = useState('')
 // ## ---- setting movies details to state from redux --- ##
    useEffect(()=>{
   
     const controller = new AbortController()
     const { signal } = controller
     async function getMovieDetail(props){
-      if(media_type == 'movie' || media_type== 'undefined'){
+      if(media_type == 'movie' || media_type == 'undefined'){
       const movieRequest = await axios(`https://api.themoviedb.org/3/movie/${id}?api_key=21958744bdcd83994642863edf06f583` , { signal });
       const {data} = movieRequest;
       setMovData(data)
       setMovieName(data.title)
       setMovieTime(data.runtime)
+      //setVimov with imdb id
+      setVimov(data.imdb_id)
       red(setTrailer({
         vidId: data.id,
       }))
@@ -283,6 +286,12 @@ const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
 
 }
 
+// play movie in next tab: 
+const handlePlay = () =>{
+  // open in new tab this url : https://vidsrc.me/embed/imdbId/
+  window.open(`https://vidsrc.me/embed/${vimov}/` , '_blank')
+}
+
 
 {/* <img src={Back_Url + Movie.backdrop_path }/> */}
   return (
@@ -352,7 +361,9 @@ const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
             
                     {/* ----- movie details on hero image  ----- */}
                     <div >
-                         <h1 className='text-5xl mt-16 ml-10 w-9/12'>{MovieName}</h1>
+                         <h1 
+                      onClick={handlePlay}
+                         className='text-5xl mt-16 ml-10 w-9/12 cursor-pointer'>{MovieName}</h1>
                         <p className='text-lg pt-2 ml-10'>2hr1min &#8226; Action &#8226; U/A &#8226; Star Wars</p>
                         <p className='text-lg pt-2 ml-10 w-2/4  text-ellipsis overflow-hidden' style={{height:"120px"}}>{over}</p>
 
