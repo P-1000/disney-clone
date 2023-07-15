@@ -315,8 +315,8 @@ const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
             {
               isPlaying ? 
                <iframe 
-          className='left-[350px] '
-           width="100%" height="230" src={`https://www.youtube.com/embed/${traiData.key}?autoplay=1&controls=0`}
+           className='left-[350px] '
+           width="100%" height="230" src={`https://www.youtube.com/embed/${traiData?.key}?autoplay=1&controls=0`}
            ref={videoRef}
            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen> 
            </iframe>
@@ -408,10 +408,11 @@ const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
             style={{left:"310px"}}
           /> */}
 {
-  video ?  <div className='absolute left-[488px] -top-[440px] -z-10'>
+ traiData?.key &&
+     video ?  <div className='absolute left-[488px] -top-[440px] -z-10'>
           <iframe 
           className='left-[350px] '
-           width="800" height="1330" src={`https://www.youtube.com/embed/${traiData.key}?autoplay=1&controls=0`}
+           width="800" height="1330" src={`https://www.youtube.com/embed/${traiData?.key}?autoplay=1&controls=0`}
            ref={videoRef}
            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen> 
            </iframe>

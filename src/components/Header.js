@@ -127,7 +127,7 @@ const ui = useSelector(sui)
     }
 
   return (
-    <Nav className='fixed  h-full w-full bg-purple-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10'>
+    <Nav className='fixed  z-50 h-full w-full bg-purple-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10'>
       <Logo className='hidden lg:block' src='https://disney-clone-woad.vercel.app/images/images/logo.svg' />
       <TbBrandDisney  className='lg:hidden text-3xl' />
       {
@@ -140,30 +140,30 @@ const ui = useSelector(sui)
                  history.push('/')
             }}>
                <AiFillHome  className='mx-1 hidden lg:block'/>
-                <span>HOME</span>
+                <span className='cursor-pointer'>HOME</span>
             </a>
             <a>
                <AiOutlineSearch className='mx-1 hidden lg:block'/>
-                <span>SEARCH</span>
+                <span className='cursor-pointer'>SEARCH</span>
             </a>
             <a onClick={()=>{
                  history.push('/myWatchlist')
             }}>
                 <AiOutlinePlus className='mx-1 hidden lg:block'/>
-                <span>WATCHLIST</span>
+                <span className='cursor-pointer'>WATCHLIST</span>
             </a>
             <a onClick={()=>{
                  history.push('/Stats')
             }}
             >
                <BiStats className='mx-1 hidden lg:block'/>
-                <span>STATS</span>
+                <span className='cursor-pointer'>STATS</span>
             </a>
             <a onClick={()=>{
                  history.push('/MOVIES')
             }}>
               <MdMovie className='mx-1 hidden lg:block'/>
-                <span>MOVIES</span>
+                <span className='cursor-pointer'>MOVIES</span>
             </a>
             <a>
                 <BiSlideshow className='mx-1 hidden lg:block'/>
@@ -204,7 +204,7 @@ const ui = useSelector(sui)
                          <PopoverContent className='bg-white-200'>
                         <PO>
                     <div className='z-50 '>
-                    <Button className='z-30 hover:bg-slate-200' p={8} style={parent1} onClick={()=>{
+                    <Button className='z-50 hover:bg-slate-200' p={8} style={parent1} onClick={()=>{
                         history.push('/profile')
                     }}>PROFILE</Button>
                      <PopoverBody>
