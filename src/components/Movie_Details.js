@@ -301,7 +301,7 @@ const handleMoviepl = () =>{
     <>
 
 <div className='page top-20 static pt-14'>
-    <div className='z-50 absolute'>
+    <div className='z-50 absolute hidden lg:block'>
     {
                       ismoviePl ? <div>
                       <Md/>
