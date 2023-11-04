@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-function Md(props) {
+function TvMd(props) {
   useEffect(() => {
     function enterFullScreen() {
       const video = document.getElementById('videoIframe');
@@ -18,6 +18,7 @@ function Md(props) {
   }, []);
 
   const { match } = props;
+  const {season, episode} = props;
 
   return (
     <div className="page top-20 static pt-14 w-full">
@@ -27,7 +28,7 @@ function Md(props) {
             width="100%"
             height="100%"
             allowFullScreen
-            src={`https://vidsrc.to/embed/movie/${match}`}
+            src={`https://vidsrc.to/embed/tv/${match}/${season}/${episode}`}
           >
           </iframe>
         </div>
@@ -36,4 +37,4 @@ function Md(props) {
   );
 }
 
-export default Md;
+export default TvMd;
