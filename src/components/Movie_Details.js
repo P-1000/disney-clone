@@ -304,7 +304,9 @@ const handleMoviepl = () =>{
     <div className='z-50 absolute hidden lg:block'>
     {
                       ismoviePl ? <div>
-                      <Md/>
+                      <Md
+                        match={id}
+                      />
                       </div> : null
                   }
     </div>
