@@ -25,7 +25,7 @@ const DHeroComponent = (props) => {
   //more like this logic bro :
 
   return (
-    <div>
+    <div className=" rounded-xl  py-8">
     <div>
     <PlayerModal 
     isOpen={isModalOpen} 
@@ -36,8 +36,8 @@ const DHeroComponent = (props) => {
     </div>
       <div className="mx-9 mb-4">
         <div
-          className="relative hidden w-full lg:block  lf-9 mt-8 overflow-hidden rounded-lg divide-black"
-          style={{ height: "28rem" }}
+          className="relative hidden w-full lg:block h-[30rem]   lf-9 mt-8 overflow-hidden rounded-lg divide-black"
+          // style={{ height: "28rem" }}
         >
           {/* gradient bro */}
           <div
@@ -53,28 +53,33 @@ const DHeroComponent = (props) => {
             <div>
               <h1
                 // onClick={handleMoviepl}
-                className="text-5xl mt-7 ml-10 w-6/12 text-extrabold"
+                className="text-[4rem] mt-6 ml-10 w-6/12 text-extrabold"
               >
-                {data.title}
+                {data.title || data.name}
               </h1>
 
-              <p className="text-lg pt-2 ml-10  w-fit">
-              {(data.runtime/60).toFixed(2)} hr 
-              &#8226; U/A &#8226; {data.vote_average}
+              <p className="text-lg -my-1 ml-10 mx-3  w-fit">
+              {/* { || data.number_of_episodes} hr     */}
+              {
+                type == "movie" ? (data.runtime/60).toFixed(2) + "hr" : data.number_of_episodes + " Eps"
+              } 
+              &#8226; U/A &#8226; {data.vote_average}  
+
+           
               </p>
-              <p   className="text-lg divide-x-2  ml-8 mt-2  w-6/12 text-ellipsis overflow-hidden">
+              <p   className="text-lg divide-x-2  ml-8 mt-4  w-6/12 text-ellipsis overflow-hidden">
               {data?.genres?.map((gen) => (
                 <span className=" font-bold px-2" key={gen.id}>{gen.name} </span>
               ))}
               </p>
               <p
-                className="text-lg pt-2 ml-10 w-6/12 text-ellipsis overflow-hidden"
+                className="text-lg pt-2 mt-3 ml-10 w-6/12 text-ellipsis overflow-hidden"
                 style={{ height: "120px" }}
               >
                {data.overview}
               </p>
 
-              <div className="flex justify-between mt-12 mx-12 flex-row">
+              <div className="flex justify-between  mx-10 py-2 flex-row">
                 <div className="flex">
                   {/* <button onClick={pl}>
                     <div className="flex border border-orange-400 p-2 rounded-md">
@@ -86,7 +91,7 @@ const DHeroComponent = (props) => {
                       <h1 className="text-lg">Watch Trailer</h1>
                     </div>
                   </button> */}
-                  <div>
+                  <div className="flex place-items-center py-4">
                     <button onClick={openModal}>
                       <div 
                       className="flex border bg-white/90 hover:bg-white transition-all 
@@ -96,10 +101,19 @@ const DHeroComponent = (props) => {
                       </div>
                     
                     </button>
+                    <button
+                      className="mx-4 flex flex-col  bg-gray-500/40 p-1 rounded-lg  place-items-center ">
+                   <div className="p-[2px]">
+                   <CgMathPlus size={36} />
+                   </div>
+                      {/* <p className="-mx-10" >
+                     Add to List
+                    </p> */}
+                    </button>
                   </div>
                 </div>
                 <div className="basis-1/2">
-                  <div className="firebase">
+                  {/* <div className="firebase">
                     <button
                       className="ml-3 flex flex-col place-items-center ">
                       <CgMathPlus size={26} />
@@ -108,7 +122,7 @@ const DHeroComponent = (props) => {
                     </p>
                     </button>
                   
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -141,8 +155,8 @@ const DHeroComponent = (props) => {
             // src="https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/jB48R2vubdLDXmDAbxM1yD9hNCk.jpg"
             src={`${Back_Url}${data.backdrop_path}`}
             alt="backgrop poster"
-            className="w-full h-full  object-contain object-center rounded-lg absolute"
-            style={{ left: "310px" }}
+            className="w-full h-full scale-110 left-64  object-contain  rounded-lg absolute"
+            // style={{ left: "250px"  }}
           />
         </div>
       </div>

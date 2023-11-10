@@ -5,6 +5,7 @@ import SliderMore from "./SliderMore";
 import { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import EpisodesList from "./Episodes/EpisodesList";
 
 const DetailsMain = (props) => {
   const { data, type } = props;
@@ -38,7 +39,9 @@ const DetailsMain = (props) => {
 
       {type === "movie" ? null : (
         <div>
-          <h1 className="px-4 mx-7 text-lg font-semibold">Episodes</h1>
+          <EpisodesList 
+          id={id}
+          />
         </div>
       )}
 
