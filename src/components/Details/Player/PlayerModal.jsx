@@ -1,12 +1,17 @@
 import React from "react";
 import { BsArrowLeft } from "react-icons/bs";
+import {motion } from "framer-motion";
 
 const PlayerModal = ({ isOpen, closeModal, id, type }) => {
   if (!isOpen) return null;
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
-      <div className="bg-gray-900 bg-opacity-30 backdrop-blur-lg shadow-xl w-full md:w-3/4 h-80 mb-10 lg:w-1/2 px-10 py-7 rounded-2xl relative">
+      <motion.div 
+      initial={{opacity:0 , y:200 , scale:0.3 }}
+      animate={{opacity:1 , y:0  , scale:1.5 }}
+      transition={{duration:0.3}}
+      className="bg-gray-900 bg-opacity-30 backdrop-blur-lg shadow-xl w-full md:w-3/4 h-80 mb-10 lg:w-1/2 px-10 py-7 rounded-2xl relative">
         <div className="relative h-0 pt-56">
           <div className="absolute z-50 top-8 left-2">
             <button
@@ -25,7 +30,11 @@ const PlayerModal = ({ isOpen, closeModal, id, type }) => {
             }}
           ></div>
           {type == "movie" ? (
-            <iframe
+            <motion.iframe
+            initial={{opacity:0 , y:100 , scale:0.3 }}
+            animate={{opacity:1 , y:0  , scale:1}}
+            transition={{duration:0.1}}
+
               src={`https://vidsrc.to/embed/movie/${id}`}
               title="vidsrc"
               allowFullScreen="true"
@@ -44,7 +53,7 @@ const PlayerModal = ({ isOpen, closeModal, id, type }) => {
             />
           )}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

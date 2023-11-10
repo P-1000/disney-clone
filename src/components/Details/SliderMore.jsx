@@ -3,9 +3,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 
 const SliderMore = (props) => {
+  const {type} = props;
   const {data} = props;
     let settings = {
         infinite: true,
@@ -46,11 +48,13 @@ const SliderMore = (props) => {
             data.map((item) => {
               return (
                 <Wrap key={item.id} >
-                  <a className='mx-2'>
+                 <Link to={`/in/${type}/${item.id}`}>
+                 <a className='mx-2'>
                     <img 
                     className='object-cover w-full h-full rounded-xl hover:scale-105 transition duration-200 ease-out'
                     src={`https://image.tmdb.org/t/p/original/${item.poster_path}`} alt={item.title} />
                   </a>
+                 </Link>
                 </Wrap>
               )
             }

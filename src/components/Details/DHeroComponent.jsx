@@ -22,11 +22,7 @@ const DHeroComponent = (props) => {
 
   const { data, type } = props;
 
-
-
-
   //more like this logic bro :
-
 
   return (
     <div>
@@ -40,7 +36,7 @@ const DHeroComponent = (props) => {
     </div>
       <div className="mx-9 mb-4">
         <div
-          className="relative hidden w-full lg:block lf-9 mt-8 overflow-hidden rounded-lg divide-black"
+          className="relative hidden w-full lg:block  lf-9 mt-8 overflow-hidden rounded-lg divide-black"
           style={{ height: "28rem" }}
         >
           {/* gradient bro */}
@@ -57,12 +53,12 @@ const DHeroComponent = (props) => {
             <div>
               <h1
                 // onClick={handleMoviepl}
-                className="text-5xl mt-16 ml-10 w-9/12 text-extrabold"
+                className="text-5xl mt-7 ml-10 w-6/12 text-extrabold"
               >
                 {data.title}
               </h1>
 
-              <p className="text-lg pt-2 ml-10">
+              <p className="text-lg pt-2 ml-10  w-fit">
               {(data.runtime/60).toFixed(2)} hr 
               &#8226; U/A &#8226; {data.vote_average}
               </p>
@@ -105,10 +101,7 @@ const DHeroComponent = (props) => {
                 <div className="basis-1/2">
                   <div className="firebase">
                     <button
-                      className="ml-3 flex flex-col place-items-center "
-                      //   value={id}
-                      //   onClick={() => handleFir()}
-                    >
+                      className="ml-3 flex flex-col place-items-center ">
                       <CgMathPlus size={26} />
                       <p className="-mx-10" >
                      Add to List
