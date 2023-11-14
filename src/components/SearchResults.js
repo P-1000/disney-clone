@@ -89,36 +89,36 @@ function SearchResults() {
     data.map((result) => (
       <Link to={`/in/${selectedOption}/${result.id}`} key={result.id}>
         <div className="max-w-xs hover:scale-110 duration-300 ease-[cubic-bezier(0.39, 0.58, 0.57, 1)] transition-all 
-             rounded-md shadow-sm mb-10 hover:shadow-white bg-blur backdrop-blur-md filter bg-gray-800/80 text-gray-100">
+             rounded-md overflow-hidden shadow-lg mb-10 hover:shadow-xl bg-gradient-to-br from-gray-800 to-gray-900 text-white">
           {result.poster_path ? (
             <img
               src={`${posterUrl}${result.poster_path}`}
               alt=""
-              className="object-cover w-full h-48 rounded-t-md"
+              className="object-cover w-full h-48"
             />
           ) : (
             <Skeleton height={192} />
           )}
-          <div className="flex flex-col justify-between p-6 space-y-4 h-72">
+          <div className="flex flex-col justify-between p-4 h-32 lg:h-40">
             <div className="space-y-2">
-              <h2 className="text-xl font-semibold tracking-wide">
+              <h2 className="text-md font-semibold tracking-wide">
                 {result.title || result.name}
               </h2>
               <p className="text-sm text-gray-300">
-                {result.runtime || result.episode_run_time} min
+                {result.runtime || result.episode_run_time || "47"} min
               </p>
             </div>
             <div className="flex items-center justify-between">
-              <p className="text-sm text-gray-300">
+              <p className="text-sm text-gray-300 py-3">
                 <span className="font-bold">{result.vote_average}</span>/10
               </p>
-              <button
+              {/* <button
                 onClick={() => console.log("Add to Watchlist")}
                 type="button"
-                className="px-3 py-2 text-sm font-semibold tracking-wide rounded-md bg-violet-100 text-gray-900"
+                className="px-3 py-2 text-sm font-semibold tracking-wide rounded-md bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring focus:border-purple-300"
               >
                 Add To Watchlist
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
