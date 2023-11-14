@@ -31,7 +31,7 @@ const EpisodesList = (props) => {
               onClick={() => openModal(season?.season_number)}
             >
               <img
-                src={`https://image.tmdb.org/t/p/w200${season.poster_path}`}
+                src={`https://image.tmdb.org/t/p/original/${season.poster_path}`}
                 alt={`Season ${season?.season_number} Poster`}
                 className="w-full h-52 object-cover rounded-md mb-4"
               />

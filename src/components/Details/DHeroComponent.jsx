@@ -40,7 +40,7 @@ const DHeroComponent = (props) => {
           <div className="relative w-full h-[32rem]  overflow-hidden rounded-lg divide-black">
             {/* Gradient overlay */}
             <div
-              className="absolute z-10 w-full h-full"
+              className="absolute z-10 w-[100vw] h-full"
               style={{
                 backgroundImage:
                   "linear-gradient(90deg, rgb(3, 11, 23) 18.95%, rgba(5, 18, 29) 30.3%, rgba(9, 22, 34, 1) 42.3%, rgba(19, 34, 34, 0.79) 58.3%, rgba(19, 34, 34, 0.79) 58.3%, rgba(34, 34, 34, 0.2) 100%)",
