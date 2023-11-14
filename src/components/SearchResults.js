@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useHistory, Link } from 'react-router-dom';
-import { FaFilm, FaTv } from 'react-icons/fa';
-import Skeleton from 'react-loading-skeleton';
-import SearchBar from './SearchBar';
+import React, { useState, useEffect } from "react";
+import { useParams, useHistory, Link } from "react-router-dom";
+import { FaFilm, FaTv } from "react-icons/fa";
+import Skeleton from "react-loading-skeleton";
+import SearchBar from "./SearchBar";
 
 function SearchResults() {
   const { query } = useParams();
   const [movieR, setMovieR] = useState();
   const [tvR, setTvR] = useState();
-  const [selectedOption, setSelectedOption] = useState('movie');
+  const [selectedOption, setSelectedOption] = useState("movie");
   const history = useHistory();
-  const posterUrl = 'https://image.tmdb.org/t/p/original';
+  const posterUrl = "https://image.tmdb.org/t/p/original";
 
   const handleSearch = (searchQuery) => {
     history.push(`/search/${searchQuery}`);
@@ -48,56 +48,84 @@ function SearchResults() {
 
   const ToggleSwitch = () => (
     <div className="flex items-center mx-7 space-x-2">
-    <button
-      className={`toggle-button ${selectedOption === 'movie' ? 'active' : ''}`}
-      onClick={() => setSelectedOption('movie')}
-    >
-      <div className={`toggle-label ${selectedOption === 'movie' ? 'active-label' : ''}`}>Movies</div>
-      <FaFilm className={`icon ${selectedOption === 'movie' ? 'active-icon' : ''}`} />
-    </button>
-    <button
-      className={`toggle-button ${selectedOption === 'tv' ? 'active' : ''}`}
-      onClick={() => setSelectedOption('tv')}
-    >
-      <div className={`toggle-label ${selectedOption === 'tv' ? 'active-label' : ''}`}>TV</div>
-      <FaTv className={`icon ${selectedOption === 'tv' ? 'active-icon' : ''}`} />
-    </button>
-  </div>
-  
+      <button
+        className={`toggle-button ${
+          selectedOption === "movie" ? "active" : ""
+        }`}
+        onClick={() => setSelectedOption("movie")}
+      >
+        <div
+          className={`toggle-label ${
+            selectedOption === "movie" ? "active-label" : ""
+          }`}
+        >
+          Movies
+        </div>
+        <FaFilm
+          className={`icon ${selectedOption === "movie" ? "active-icon" : ""}`}
+        />
+      </button>
+      <button
+        className={`toggle-button ${selectedOption === "tv" ? "active" : ""}`}
+        onClick={() => setSelectedOption("tv")}
+      >
+        <div
+          className={`toggle-label ${
+            selectedOption === "tv" ? "active-label" : ""
+          }`}
+        >
+          TV
+        </div>
+        <FaTv
+          className={`icon ${selectedOption === "tv" ? "active-icon" : ""}`}
+        />
+      </button>
+    </div>
   );
 
   const renderResults = (data) => (
-    <div className="grid lg:grid-cols-5 grid-cols-1 md:grid-cols-3 px-2 mx-4 gap-8 mt-6 pt-2">
-      {data &&
-        data.map((result) => (
-          <Link to={`/in/${selectedOption}/${result.id}`} key={result.id}>
-            <div className="max-w-xs hover:scale-110 duration-300 ease-[cubic-bezier(0.39, 0.58, 0.57, 1)] transition-all  rounded-md shadow-sm hover:shadow-white bg-gray-900 text-gray-100">
-              {result.poster_path ? (
-                <img
-                  src={`${posterUrl}${result.poster_path}`}
-                  alt=""
-                  className="object-cover object-top w-full rounded-t-md h-72 dark:bg-gray-500"
-                />
-              ) : (
-                <Skeleton height={300} />
-              )}
-              <div className="flex flex-col justify-between p-6 space-y-8">
-                <div className="space-y-2">
-                  <h2 className="text-xl font-semibold tracking-wide">{result.title || result.name}</h2>
-                  <p className="dark:text-gray-100 text-sm">Action, Adventure, Sci-Fi</p>
-                </div>
-                <button
-                  onClick={() => console.log('Add to Watchlist')}
-                  type="button"
-                  className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-violet-100 text-gray-900 z-50"
-                >
-                  Add To Watchlist
-                </button>
-              </div>
+<div className="grid lg:grid-cols-6 grid-cols-1 md:grid-cols-3 px-2 mx-4 gap-8 mt-6 pt-2">
+  {data &&
+    data.map((result) => (
+      <Link to={`/in/${selectedOption}/${result.id}`} key={result.id}>
+        <div className="max-w-xs hover:scale-110 duration-300 ease-[cubic-bezier(0.39, 0.58, 0.57, 1)] transition-all 
+             rounded-md shadow-sm mb-10 hover:shadow-white bg-blur backdrop-blur-md filter bg-gray-800/80 text-gray-100">
+          {result.poster_path ? (
+            <img
+              src={`${posterUrl}${result.poster_path}`}
+              alt=""
+              className="object-cover w-full h-48 rounded-t-md"
+            />
+          ) : (
+            <Skeleton height={192} />
+          )}
+          <div className="flex flex-col justify-between p-6 space-y-4 h-72">
+            <div className="space-y-2">
+              <h2 className="text-xl font-semibold tracking-wide">
+                {result.title || result.name}
+              </h2>
+              <p className="text-sm text-gray-300">
+                {result.runtime || result.episode_run_time} min
+              </p>
             </div>
-          </Link>
-        ))}
-    </div>
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-gray-300">
+                <span className="font-bold">{result.vote_average}</span>/10
+              </p>
+              <button
+                onClick={() => console.log("Add to Watchlist")}
+                type="button"
+                className="px-3 py-2 text-sm font-semibold tracking-wide rounded-md bg-violet-100 text-gray-900"
+              >
+                Add To Watchlist
+              </button>
+            </div>
+          </div>
+        </div>
+      </Link>
+    ))}
+</div>
+
   );
 
   return (
@@ -108,7 +136,9 @@ function SearchResults() {
 
       <div className="px-4">
         <ToggleSwitch />
-        {selectedOption === 'movie' ? renderResults(movieR) : renderResults(tvR)}
+        {selectedOption === "movie"
+          ? renderResults(movieR)
+          : renderResults(tvR)}
       </div>
     </>
   );
