@@ -50,14 +50,13 @@ const Container = styled.main`
   display: block;
 
   &:before {
-
-    background: url("../images/home-background.png") center center / cover
-      no-repeat fixed;
+    background: url("../images/home-background.png") center center / cover no-repeat fixed;
     content: "";
     position: absolute;
     inset: 0px;
     opacity: 1;
-    z-index: 500;
+    z-index: 0;  // Adjusted z-index value
     bottom: 0;
   }
 `;
+
