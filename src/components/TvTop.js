@@ -75,7 +75,7 @@ const TvTop = (props) => {
       {tmdb &&
         tmdb.map((movie) => (
           <Wrap key={movie.id} >
-            <Link to={`/movie_details/${movie.id}/tv`}>
+            <Link to={`/in/tv/${movie.id}`}>
               <img 
               className=" hover:scale-105 hover:rounded-lg hover:border-red-400 transition-all"
               src={poster_url + movie.poster_path}  alt={movie.title} />

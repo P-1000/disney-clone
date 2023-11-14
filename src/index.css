@@ -191,3 +191,30 @@ a {
 .closeIcon {
   @apply absolute top-2 right-2 cursor-pointer text-lg;
 }
+
+
+.toggle-button {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: #2c3e50; /* Change the background color to your preference */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-label {
+  margin-right: 8px;
+  font-size: 14px;
+  color: #95a5a6; /* Change the color to your preference */
+  transition: color 0.3s;
+}
+
+.active {
+  background-color: #3498db; /* Change the active background color to your preference */
+}
+
+.active-label {
+  color: #ecf0f1; /* Change the active label color to your preference */
+}

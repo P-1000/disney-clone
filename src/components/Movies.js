@@ -72,7 +72,7 @@ const timeoutId = setTimeout(() => {
         tmdb.map((movie) => (
 
           <Wrap >
-            <Link to={`/movie_details/${movie.id}/${movie.media_type}`}>
+            <Link to={`/in/${movie.media_type}/${movie.id}`}>
               <img src={poster_url + movie.poster_path}  alt={movie.title} />
             </Link>
           </Wrap>
