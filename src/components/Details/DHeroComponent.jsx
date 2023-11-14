@@ -34,9 +34,9 @@ const DHeroComponent = (props) => {
           type={type}
         />
       </div>
-      <div className="lg:mx-9 mb-4">
+      <div className="lg:mx-9  mb-4">
         {/* small screen? */}
-        <div className="lg:hidden mx-4 mb-4">
+        <div className="lg:hidden mb-4">
           <div className="relative w-full h-[32rem]  overflow-hidden rounded-lg divide-black">
             {/* Gradient overlay */}
             <div
@@ -47,7 +47,7 @@ const DHeroComponent = (props) => {
               }}
             />
 
-            <div className="absolute z-30 flex flex-col items-center justify-start gap-4 h-full text-center text-white">
+            <div className="absolute z-30 flex flex-col items-center justify-start gap-4 p-2 h-full text-center text-white">
               {/* Image at the top */}
               <img
                 src={`${Back_Url}${data.backdrop_path}`}
