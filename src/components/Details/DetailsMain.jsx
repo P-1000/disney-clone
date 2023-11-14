@@ -20,7 +20,7 @@ const DetailsMain = (props) => {
       )
       .then((res) => {
         setMorelike(res.data.results);
-        console.log(res.data.results);
+        // console.log(res.data.results);
       })
       .catch((err) => {
         console.log(err);
@@ -41,6 +41,7 @@ const DetailsMain = (props) => {
         <div>
           <EpisodesList 
           id={id}
+          data={data}
           />
         </div>
       )}

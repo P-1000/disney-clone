@@ -53,12 +53,11 @@ const DHeroComponent = (props) => {
             <div>
               <h1
                 // onClick={handleMoviepl}
-                className="text-[4rem] mt-6 ml-10 w-6/12 text-extrabold"
-              >
+                className="text-[3.2rem] mt-10 ml-12 w-6/12 text-extrabold">
                 {data.title || data.name}
               </h1>
 
-              <p className="text-lg -my-1 ml-10 mx-3  w-fit">
+              <p className="text-lg -my-1 ml-10 mx-10 px-2  w-fit">
               {/* { || data.number_of_episodes} hr     */}
               {
                 type == "movie" ? (data.runtime/60).toFixed(2) + "hr" : data.number_of_episodes + " Eps"
@@ -67,19 +66,19 @@ const DHeroComponent = (props) => {
 
            
               </p>
-              <p   className="text-lg divide-x-2  ml-8 mt-4  w-6/12 text-ellipsis overflow-hidden">
+              <p   className="text-lg divide-x-2  ml-8 mt-2 px-2  w-6/12 text-ellipsis overflow-hidden">
               {data?.genres?.map((gen) => (
                 <span className=" font-bold px-2" key={gen.id}>{gen.name} </span>
               ))}
               </p>
               <p
-                className="text-lg pt-2 mt-3 ml-10 w-6/12 text-ellipsis overflow-hidden"
+                className="text-lg pt-2 mt-3 ml-12 w-[48%] text-ellipsis overflow-hidden"
                 style={{ height: "120px" }}
               >
                {data.overview}
               </p>
 
-              <div className="flex justify-between  mx-10 py-2 flex-row">
+              <div className="flex justify-between  mx-12 py-2 flex-row">
                 <div className="flex">
                   {/* <button onClick={pl}>
                     <div className="flex border border-orange-400 p-2 rounded-md">
@@ -95,9 +94,9 @@ const DHeroComponent = (props) => {
                     <button onClick={openModal}>
                       <div 
                       className="flex border bg-white/90 hover:bg-white transition-all 
-                      hover:scale-105 text-gray-900 px-10 font-bold p-2 rounded-md">
+                      hover:scale-105 text-gray-900 px-14 font-bold p-2  rounded-md">
                         <FaPlay className="text-lg mt-1 mx-2" />  
-                        <h1 className="text-lg">Watch Now</h1>
+                        <h1 className="text-lg ">Watch Now</h1>
                       </div>
                     
                     </button>
