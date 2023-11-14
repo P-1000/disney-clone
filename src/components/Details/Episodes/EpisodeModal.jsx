@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaClock, FaStar, FaPlay } from "react-icons/fa";
 import { motion } from "framer-motion";
+import PlayEp from "./PlayEp"; // Import the PlayEp component
 
 const Skeleton = () => (
   <div className="animate-pulse bg-gray-300 h-4 w-2/3 mb-2 rounded-md"></div>
 );
 
-const PlayButton = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-    <div className="absolute inset-0  bg-black opacity-20 backdrop-filter backdrop-blur-lg "></div>
+const PlayButton = ({ onClick }) => (
+  <div
+    className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+    onClick={onClick}
+  >
+    <div className="absolute inset-0 bg-black opacity-20 backdrop-filter backdrop-blur-lg"></div>
     <FaPlay className="text-white text-4xl shadow-2xl" />
   </div>
 );
@@ -17,6 +21,7 @@ const PlayButton = () => (
 const EpisodeModal = ({ isOpen, closeModal, season, sid }) => {
   const [epData, setEpisodes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedEpisode, setSelectedEpisode] = useState(null);
 
   const getEpisodes = async () => {
     try {
@@ -38,6 +43,10 @@ const EpisodeModal = ({ isOpen, closeModal, season, sid }) => {
     }
   }, [isOpen, sid, season?.season_number]);
 
+  const handleEpisodeClick = (episode) => {
+    setSelectedEpisode(episode);
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -47,7 +56,10 @@ const EpisodeModal = ({ isOpen, closeModal, season, sid }) => {
         <div className="sticky -top-10 bg-gray-900/50 z-10 w-full">
           <button
             className="absolute top-4 p-2 right-4 text-white cursor-pointer hover:text-red-500"
-            onClick={closeModal}
+            onClick={() => {
+              closeModal();
+              setSelectedEpisode(null); // Reset selected episode when closing modal
+            }}
           >
             <AiOutlineClose size={24} />
           </button>
@@ -85,6 +97,7 @@ const EpisodeModal = ({ isOpen, closeModal, season, sid }) => {
               hover:bg-gray-900/30 hover:rounded-md hover:bg-clip-padding hover:backdrop-filter
                cursor-pointer relative group"
                 key={episode.id}
+                onClick={() => handleEpisodeClick(episode)}
               >
                 <div className="w-8/12">
                   <div className="p-5">
@@ -112,11 +125,13 @@ const EpisodeModal = ({ isOpen, closeModal, season, sid }) => {
                     className="w-full h-56 object-cover rounded-md mb-4"
                   />
                   <motion.div
-                  initial={{ opacity: 0 , scale: 1.8 }}
-                    animate={{ opacity: 1 , scale: 1 }}
+                    initial={{ opacity: 0, scale: 1.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6 }}
                   >
-                    <PlayButton />
+                    <PlayButton
+                      onClick={() => handleEpisodeClick(episode)}
+                    />
                   </motion.div>
                 </div>
               </div>
@@ -124,6 +139,16 @@ const EpisodeModal = ({ isOpen, closeModal, season, sid }) => {
           </div>
         )}
       </div>
+      {selectedEpisode && (
+        <PlayEp
+          isOpen={!!selectedEpisode}
+          closeModal={() => setSelectedEpisode(null)}
+          id={sid}
+          type="tv" // Assuming the type is always "tv" for episodes
+          season={season}
+          no={selectedEpisode.episode_number}
+        />
+      )}
     </div>
   );
 };
