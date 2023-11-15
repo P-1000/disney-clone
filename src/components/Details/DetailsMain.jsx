@@ -48,7 +48,7 @@ const DetailsMain = (props) => {
 
       <div>
         <div>
-          <h1 className="px-4 mx-7 text-lg font-semibold">More Like This</h1>
+          <h1 className="px-4 mx-6 text-lg font-semibold">More Like This</h1>
         </div>
         <div className="mx-7">
           <SliderMore type={type} data={morelike} />

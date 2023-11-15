@@ -123,7 +123,7 @@ const EpisodeModal = ({ isOpen, closeModal, season, sid }) => {
                   <img
                     src={`https://image.tmdb.org/t/p/original/${episode.still_path}`}
                     alt={`Episode ${episode.episode_number} Poster`}
-                    className="w-full h-44 sm:h-56 object-cover rounded-md mb-2 sm:mb-4"
+                    className="w-full h-44 sm:h-56 object-contain rounded-md mb-2 sm:mb-4"
                   />
                   <motion.div
                     initial={{ opacity: 0, scale: 1.8 }}
