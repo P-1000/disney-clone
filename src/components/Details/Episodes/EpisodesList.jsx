@@ -19,7 +19,7 @@ const EpisodesList = (props) => {
 
   return (
     <div className="mx-10">
-      <div className="bg-gray-900 bg-opacity-30 backdrop-blur-lg shadow-xl w-full h-auto mb-10 px-10 py-7 rounded-2xl overflow-x-auto">
+      <div className="bg-gray-900 bg-opacity-30 backdrop-blur-lg shadow-xl w-full h-auto mb-10 px-10 pt-7 rounded-2xl overflow-x-auto">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-white">Episodes</h1>
         </div>

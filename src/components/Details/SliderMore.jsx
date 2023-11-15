@@ -17,8 +17,10 @@ const SliderMore = (props) => {
   };
 
   return (
-    <div className="overflow-x-auto rounded-xl lg:px-10 lg:h-auto">
-      {/* <div className="bg-gray-900 bg-opacity-30 backdrop-blur-lg shadow-xl w-full h-auto mb-10 px-10 py-7 rounded-2xl overflow-x-auto"> */}
+    <div>
+      <h1>More Like This</h1>
+      <div className="overflow-x-auto rounded-xl lg:px-10 lg:h-auto">
+        {/* <div className="bg-gray-900 bg-opacity-30 backdrop-blur-lg shadow-xl w-full h-auto mb-10 px-10 py-7 rounded-2xl overflow-x-auto"> */}
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-white">{title}</h1>
         </div>
@@ -43,8 +45,9 @@ const SliderMore = (props) => {
             </div>
           ))}
         </div>
-      {/* </div> */}
-      {/* <SliderModal isOpen={isModalOpen} closeModal={closeModal} selectedItem={selectedItem} /> */}
+        {/* </div> */}
+        {/* <SliderModal isOpen={isModalOpen} closeModal={closeModal} selectedItem={selectedItem} /> */}
+      </div>
     </div>
   );
 };
