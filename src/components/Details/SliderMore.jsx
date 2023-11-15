@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // import SliderModal from "./SliderModal";
 
 const SliderMore = (props) => {
   const { data, title } = props;
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+console.log(data)
 
   const openModal = (item) => {
     setSelectedItem(item);
@@ -25,7 +28,8 @@ const SliderMore = (props) => {
         </div>
         <div className="flex space-x-2">
           {data.map((item) => (
-            <div
+           <Link to={`/in/${item.media_type}/${item.id}`}>
+           <div
               key={item.id}
               className="flex-shrink-0 hover:scale-105 transition-all
                 w-40 lg:w-52 h-[20rem] lg:h-[23rem]
@@ -45,6 +49,7 @@ const SliderMore = (props) => {
                 {item.episode_count ? `Episodes: ${item.episode_count}` : null}
               </p>
             </div>
+           </Link>
           ))}
         </div>
         {/* </div> */}

@@ -19,7 +19,7 @@ const EpisodesList = (props) => {
 
   return (
     <div className="mx-10">
-      <div className="bg-gray-900 bg-opacity-30 backdrop-blur-lg shadow-xl w-full h-auto mb-10 px-10 pt-7 rounded-2xl overflow-x-auto">
+      <div className="bg-gray-900 pb-6 bg-opacity-30 backdrop-blur-lg shadow-xl w-full h-auto mb-10 px-10 pt-7 rounded-2xl overflow-x-auto">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-white">Episodes</h1>
         </div>
@@ -27,7 +27,7 @@ const EpisodesList = (props) => {
           {data.seasons.map((season) => (
             <div
               key={season.id}
-              className="flex-shrink-0 hover:scale-105 transition-all transform duration-200 ease-linear cursor-pointer bg-gray-800 bg-opacity-60 p-3 m-1 rounded-md shadow-md relative"
+              className="flex-shrink-0  hover:scale-105 transition-all transform duration-200 ease-linear cursor-pointer bg-gray-800 bg-opacity-60 p-3 m-1 rounded-md shadow-md relative"
               onClick={() => openModal(season?.season_number)}
             >
               <img
