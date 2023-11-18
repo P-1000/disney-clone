@@ -55,7 +55,7 @@ const timeoutId = setTimeout(() => {
   
   return (
     <>
-      <h2>Trending</h2>
+      <h2 className="mx-2 mt-2 font-bold text-lg ">Trending</h2>
  { loading &&
      <div className="flex gap-4">
      {
@@ -71,11 +71,11 @@ const timeoutId = setTimeout(() => {
       {tmdb && !loading &&
         tmdb.map((movie) => (
 
-          <Wrap >
+          <div  className=" hover:scale-105 px-1 rounded-xl transition-all hover:shadow-lg">
             <Link to={`/in/${movie.media_type}/${movie.id}`}>
-              <img src={poster_url + movie.poster_path}  alt={movie.title} />
+              <img className="rounded-lg" src={poster_url + movie.poster_path}  alt={movie.title} />
             </Link>
-          </Wrap>
+          </div>
         ))}
     </Carousel> 
     </>
@@ -83,7 +83,6 @@ const timeoutId = setTimeout(() => {
 };
 
 const Carousel = styled(Slider)`
-  margin-top: 20px;
   width: 100%;
   height: 100%;
   & > button {
@@ -102,7 +101,7 @@ const Carousel = styled(Slider)`
 
 const Wrap = styled.div`
   border-radius: 4px;
-  cursor: pointer;
+  ${'' /* cursor: pointer;
   position: relative;
   a {
     border-radius: 5px;
@@ -126,7 +125,7 @@ const Wrap = styled.div`
       border: 1px solid rgba(249, 249, 249, 0.8);
       transition-duration: 350ms;
       transition-delay:100ms;
-    }
+    } */}
   }
 `;
 
