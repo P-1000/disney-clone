@@ -13,8 +13,10 @@ const PlayButton = ({ onClick }) => (
     className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
     onClick={onClick}
   >
-    <div className="absolute inset-0 bg-black opacity-20 backdrop-filter backdrop-blur-lg"></div>
-    <FaPlay className="text-white text-4xl shadow-2xl" />
+    {/* <div className="absolute inset-0 bg-black opacity-20 backdrop-filter backdrop-blur-lg"></div> */}
+    <div className=" hover:scale-105 transition-all bg-gray-900/20 backdrop-filter backdrop-blur-[3px] rounded-full p-4">
+      <FaPlay className="text-white text-4xl px-2 animate-pulse shadow-2xl" />
+    </div>
   </div>
 );
 
@@ -88,7 +90,7 @@ const EpisodeModal = ({ isOpen, closeModal, season, sid }) => {
             </div>
           ))
         ) : (
-          <div className="flex flex-col w-full p-2 divide-y-2 ">
+          <div className="flex flex-col w-full p-2 s ">
             {epData.map((episode) => (
               <div
                 className="flex lg:flex-nowrap flex-wrap-reverse  whitespace-pre-wrap gap-2 mt-2
