@@ -69,18 +69,18 @@ const TvTop = (props) => {
   // &vote_average.gte=60.0&with_genres=Action
   return (
     <>
-      <h2 className=" lg:block">Top Rated Show</h2>
+      <h2 className=" lg:block  mt-3 text-lg font-bold mb-1  mx-2">Top Rated Show</h2>
  
     <Carousel  className="sm:mx-0 sm:mt-32 " {...settings}>
       {tmdb &&
         tmdb.map((movie) => (
-          <Wrap key={movie.id} >
+          <div className="px-1   transition-all" key={movie.id} >
             <Link to={`/in/tv/${movie.id}`}>
               <img 
-              className=" hover:scale-105 hover:rounded-lg hover:border-red-400 transition-all"
+              className=" hover:scale-105 hover:rounded-lg rounded-lg hover:border-red-400 transition-all"
               src={poster_url + movie.poster_path}  alt={movie.title} />
             </Link>
-          </Wrap>
+          </div>
         ))}
     </Carousel>
     </>
@@ -88,7 +88,7 @@ const TvTop = (props) => {
 };
 
 const Carousel = styled(Slider)`
-  margin-top: 20px;
+  margin-top: 2px;
   width: 100%;
   height: 100%;
   & > button {
@@ -105,25 +105,25 @@ const Carousel = styled(Slider)`
 
 `;
 
-const Wrap = styled.div`
-  border-radius: 4px;
-  cursor: pointer;
-  position: relative;
-  a {
-    border-radius: 5px;
+// const Wrap = styled.div`
+//   border-radius: 4px;
+//   cursor: pointer;
+//   position: relative;
+//   a {
+//     border-radius: 5px;
   
-    cursor: pointer;
-    display: block;
-    position: relative;
-    padding: 4px;
+//     cursor: pointer;
+//     display: block;
+//     position: relative;
+//     padding: 4px;
 
-    img {
-      border-radius: 5px;
-      width: 100%;
-      height: 100%;
+//     img {
+//       border-radius: 5px;
+//       width: 100%;
+//       height: 100%;
 
-    }
-  }
-`;
+//     }
+//   }
+// `;
 
 export default TvTop;
