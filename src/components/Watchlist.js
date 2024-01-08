@@ -103,8 +103,6 @@ async function del(idToDelete){
 
   const redCollectionRef = await db.collection('watchlist').doc(u).collection('watchlist');
 
-                    // #delete matching document : 
-
   const query =  redCollectionRef.where('id', '==', idString);
  const qs = await query.get().then(querySnapshot => {
     querySnapshot.forEach(doc => {
@@ -117,6 +115,10 @@ async function del(idToDelete){
     })
   })
 
+  async function fetchData() {
+    const ids = await fetchWatchlist(u);
+    setIds(ids);
+  }
   
 
 }

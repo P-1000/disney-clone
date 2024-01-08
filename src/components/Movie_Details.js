@@ -29,6 +29,7 @@ import { selectVideos } from '../features/apiSlice/apiSlice';
 
 
 import Recommendations from './Recommendations';
+import Md from './MoviePlay';
 
 function Movie_Details(props) {
 
@@ -284,11 +285,31 @@ const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
 }
 
 
+// is movie paying
+
+const [ismoviePl , setismoviePl] = useState(false)
+
+const handleMoviepl = () =>{
+  setismoviePl(!ismoviePl)
+
+}
+
+
+
 {/* <img src={Back_Url + Movie.backdrop_path }/> */}
   return (
     <>
 
 <div className='page top-20 static pt-14'>
+    <div className='z-50 absolute hidden lg:block'>
+    {
+                      ismoviePl ? <div>
+                      <Md
+                        match={id}
+                      />
+                      </div> : null
+                  }
+    </div>
     
     <div className='w-full '>
 
@@ -303,13 +324,20 @@ const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
                         <p className='text-lg pt-2 ml-8'>2hr1min &#8226; Action &#8226; U/A &#8226; Star Wars</p>
                         <p className='text-lg pt-2 ml-8 w-2/4  text-ellipsis overflow-hidden' style={{height:"120px"}}>{over}</p> */}
 
-                        <div className='flex  gap-2 ml-4  z-10 top-36 absolute'>   
-                            <FaPlay className='text-xl mt-3' />
+                        <div
+                        onClick={handleMoviepl} 
+                         className='flex  gap-2 ml-4  z-10 top-36 absolute'>   
+                            <FaPlay className='text-2xl mt-3' />
                             <div className='flex flex-col'>
-                                <p className='text-sm'>AVAILBLE ON </p>
-                                <p className='text-sm'>NETFLIX</p>
+                                {/* <p className='text-sm'>AVAILBLE ON </p>
+                                <p className='text-sm'>NETFLIX</p> */}
                             </div>
                         </div>
+                   {
+                      ismoviePl ? <div>
+                      <Md/>
+                      </div> : null
+                   }
                       
                  </div>
             {
@@ -352,7 +380,10 @@ const querySnapshot = await watchlistRef.where('uid', '==', uid).get();
             
                     {/* ----- movie details on hero image  ----- */}
                     <div >
-                         <h1 className='text-5xl mt-16 ml-10 w-9/12'>{MovieName}</h1>
+                         <h1 
+                         onClick={handleMoviepl}
+                         className='text-5xl mt-16 ml-10 w-9/12'>{MovieName}</h1>
+              
                         <p className='text-lg pt-2 ml-10'>2hr1min &#8226; Action &#8226; U/A &#8226; Star Wars</p>
                         <p className='text-lg pt-2 ml-10 w-2/4  text-ellipsis overflow-hidden' style={{height:"120px"}}>{over}</p>
 

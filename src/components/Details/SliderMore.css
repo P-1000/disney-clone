@@ -1,0 +1,36 @@
+/* .slider-more {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .slick-slider {
+    display: flex;
+    overflow-x: auto;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .slick-slide {
+    margin: 0 10px;
+    width: 200px;
+    height: 300px;
+    background-color: #ccc;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .slick-slide {
+      width: 150px;
+      height: 250px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .slick-slide {
+      width: 100px;
+      height: 200px;
+    }
+  }
+   */

@@ -58,7 +58,7 @@ const UpMovies = (props) => {
       {tmdb &&
         tmdb.map((movie) => (
           <Wrap key={movie.id} >
-            <Link to={`/movie_details/${movie.id}/movie`}>
+            <Link to={`/in/movie/${movie.id}`}>
               <img src={poster_url + movie.poster_path}  alt={movie.title} />
             </Link>
           </Wrap>
